@@ -1,225 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Legal Suite — Dashboard</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Legal Suite — Dashboard</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
-  <style>
-    :root {
-      --rose: #E0BFB8;
-      --ivory: #F8F5F2;
-      --silver: #E6E2DD;
-      --ink: #1C1C1C;
-      --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    }
+<style>
+:root{
+  --rose:#E0BFB8;
+  --ivory:#F8F5F2;
+  --silver:#E6E2DD;
+  --ink:#1C1C1C;
+  --shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"Poppins",sans-serif;
+  display:flex;
+  height:100vh;
+  background:linear-gradient(135deg,var(--ivory),#f2efec);
+  color:var(--ink);
+  overflow:hidden;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+/* Sidebar */
+.sidebar{
+  width:260px;background:#fff;border-right:1px solid var(--silver);
+  display:flex;flex-direction:column;align-items:center;padding:20px 0;
+  box-shadow:var(--shadow);
+}
+.sidebar img{width:180px;margin-bottom:30px;}
+.nav-links{width:100%;display:flex;flex-direction:column;}
+.nav-links a{
+  color:var(--ink);text-decoration:none;padding:14px 20px;font-weight:500;
+  border-left:4px solid transparent;transition:.3s;
+}
+.nav-links a:hover,.nav-links a.active{
+  background:var(--rose);color:#fff;border-left-color:#b7958b;
+}
+.logout{
+  margin-top:auto;padding:14px 20px;width:100%;text-align:center;
+  background:#f3e3e1;color:#8c2b2b;font-weight:600;text-decoration:none;
+}
 
-    body {
-      font-family: "Poppins", sans-serif;
-      display: flex;
-      height: 100vh;
-      color: var(--ink);
-      background: linear-gradient(135deg, var(--ivory), #f2efec);
-      overflow: hidden;
-    }
+/* Main */
+.main{flex:1;padding:30px 40px;overflow-y:auto;position:relative;}
+header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;
+}
+header h1{font-family:"Playfair Display",serif;font-size:1.6rem;}
 
-    /* Sidebar */
-    .sidebar {
-      width: 260px;
-      background: #fff;
-      border-right: 1px solid var(--silver);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
-      box-shadow: var(--shadow);
-    }
+/* Profile area */
+.profile-container{display:flex;align-items:center;gap:10px;position:relative;}
+.profile-pic{
+  width:45px;height:45px;border-radius:50%;object-fit:cover;cursor:pointer;
+  border:2px solid var(--rose);transition:transform .2s;
+}
+.profile-pic:hover{transform:scale(1.05);}
+.user-name{font-weight:600;font-size:.95rem;color:var(--ink);}
+.dropdown-menu{
+  position:absolute;top:60px;right:0;background:#fff;border:1px solid var(--silver);
+  border-radius:10px;box-shadow:var(--shadow);width:190px;display:none;
+  flex-direction:column;z-index:100;
+}
+.dropdown-menu.active{display:flex;}
+.dropdown-menu a,input{
+  padding:12px 16px;color:var(--ink);text-decoration:none;font-size:.9rem;
+  border:none;background:none;text-align:left;
+}
+.dropdown-menu a:hover{background:var(--rose);color:#fff;}
+input[type="file"]{display:none;}
 
-    .sidebar img {
-      width: 180px;
-      margin-bottom: 30px;
-    }
+/* Tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+.tile{
+  background:#fff;border:1px solid var(--silver);border-radius:12px;
+  padding:25px;box-shadow:var(--shadow);cursor:pointer;transition:.3s;
+}
+.tile:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,.15);}
+.tile h3{font-size:1.1rem;margin-bottom:8px;}
 
-    .nav-links {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
+/* Sections */
+.section{display:none;animation:fadeIn .4s ease forwards;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-    .nav-links a {
-      color: var(--ink);
-      text-decoration: none;
-      padding: 14px 20px;
-      font-weight: 500;
-      border-left: 4px solid transparent;
-      transition: all 0.3s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      background: var(--rose);
-      color: #fff;
-      border-left-color: #b7958b;
-    }
-
-    .logout {
-      margin-top: auto;
-      padding: 14px 20px;
-      width: 100%;
-      text-align: center;
-      background: #f3e3e1;
-      color: #8c2b2b;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    /* Main Area */
-    .main {
-      flex: 1;
-      padding: 30px 40px;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    header {
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      font-family: "Playfair Display", serif;
-      font-size: 1.6rem;
-    }
-
-    /* Profile Menu */
-    .profile-container {
-      position: relative;
-    }
-
-    .profile-pic {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-      cursor: pointer;
-      border: 2px solid var(--rose);
-      transition: transform 0.2s ease;
-    }
-
-    .profile-pic:hover {
-      transform: scale(1.05);
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 55px;
-      right: 0;
-      background: #fff;
-      border: 1px solid var(--silver);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      width: 180px;
-      display: none;
-      flex-direction: column;
-      animation: fadeIn 0.2s ease;
-      z-index: 100;
-    }
-
-    .dropdown-menu.active {
-      display: flex;
-    }
-
-    .dropdown-menu a {
-      padding: 12px 16px;
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: background 0.3s ease;
-    }
-
-    .dropdown-menu a:hover {
-      background: var(--rose);
-      color: #fff;
-    }
-
-    /* Dashboard Tiles */
-    .tiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .tile {
-      background: #fff;
-      border: 1px solid var(--silver);
-      border-radius: 12px;
-      padding: 25px;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .tile:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-
-    .tile h3 {
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-    }
-
-    /* Section Animations */
-    .section {
-      display: none;
-      animation: fadeIn 0.4s ease forwards;
-    }
-    .section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* Vault */
-    .vault-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .vault-card {
-      background: #fff;
-      border: 1px solid var(--silver);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .vault-card h4 {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      border-bottom: 1px solid var(--silver);
-      padding-bottom: 6px;
-    }
-
-    .vault-card ul {
-      list-style: none;
-      font-size: 0.95rem;
-      color: #444;
-      padding-left: 10px;
-    }
-  </style>
+/* Vault cards */
+.vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:20px;}
+.vault-card{
+  background:#fff;border:1px solid var(--silver);border-radius:10px;
+  padding:20px;box-shadow:var(--shadow);
+}
+.vault-card h4{
+  font-size:1.05rem;margin-bottom:10px;border-bottom:1px solid var(--silver);
+  padding-bottom:6px;
+}
+.vault-card ul{list-style:none;font-size:.95rem;color:#444;padding-left:10px;}
+</style>
 </head>
 
 <body>
@@ -240,12 +119,14 @@
     <header>
       <h1>Welcome to The Legal Suite</h1>
 
-      <!-- Profile Picture Dropdown -->
+      <!-- Profile -->
       <div class="profile-container">
-        <img src="profile.png" alt="User Profile" class="profile-pic" id="profileBtn" />
+        <span class="user-name" id="userName">UserID123</span>
+        <img src="silhouette.png" alt="User Profile" class="profile-pic" id="profilePic" />
         <div class="dropdown-menu" id="dropdownMenu">
           <a href="#">View Profile</a>
-          <a href="#">Change Profile Picture</a>
+          <label for="uploadPhoto">Change Profile Picture</label>
+          <input type="file" id="uploadPhoto" accept="image/*" />
           <a href="#">Settings</a>
           <a href="#" onclick="logout()">Logout</a>
         </div>
@@ -255,26 +136,11 @@
     <!-- Overview -->
     <section id="overview" class="section active">
       <div class="tiles">
-        <div class="tile" data-section="appointments">
-          <h3>Consultations</h3>
-          <p>Schedule and review upcoming meetings.</p>
-        </div>
-        <div class="tile" data-section="vault">
-          <h3>JF Legal Vault</h3>
-          <p>Access all paralegal and case resources.</p>
-        </div>
-        <div class="tile" data-section="case">
-          <h3>Client Progress</h3>
-          <p>Track ongoing case milestones.</p>
-        </div>
-        <div class="tile" data-section="services">
-          <h3>Legal Services</h3>
-          <p>Request boutique legal assistance.</p>
-        </div>
-        <div class="tile" data-section="paralegal">
-          <h3>Ask Paralegal</h3>
-          <p>Chat or assign tasks to your paralegal team.</p>
-        </div>
+        <div class="tile" data-section="appointments"><h3>Consultations</h3><p>Schedule and review upcoming meetings.</p></div>
+        <div class="tile" data-section="vault"><h3>JF Legal Vault</h3><p>Access all paralegal and case resources.</p></div>
+        <div class="tile" data-section="case"><h3>Client Progress</h3><p>Track ongoing case milestones.</p></div>
+        <div class="tile" data-section="services"><h3>Legal Services</h3><p>Request boutique legal assistance.</p></div>
+        <div class="tile" data-section="paralegal"><h3>Ask Paralegal</h3><p>Chat or assign tasks to your paralegal team.</p></div>
       </div>
     </section>
 
@@ -283,99 +149,73 @@
       <h2>JF Legal Vault — Paralegal Admin Hub</h2>
       <p>Manage client files, tasks, deadlines, research, and billing records.</p>
       <div class="vault-grid">
-        <div class="vault-card">
-          <h4>Client Files</h4>
-          <ul>
-            <li>Upload & organize case documents</li>
-            <li>Access signed agreements</li>
-          </ul>
-        </div>
-
-        <div class="vault-card">
-          <h4>Court Deadlines</h4>
-          <ul>
-            <li>Track hearing and filing dates</li>
-            <li>Set reminders for submissions</li>
-          </ul>
-        </div>
-
-        <div class="vault-card">
-          <h4>Tasks & Assignments</h4>
-          <ul>
-            <li>Assign paralegal duties</li>
-            <li>Monitor task progress</li>
-          </ul>
-        </div>
-
-        <div class="vault-card">
-          <h4>Billing & Expenses</h4>
-          <ul>
-            <li>Record billable hours</li>
-            <li>Manage client expenses</li>
-          </ul>
-        </div>
+        <div class="vault-card"><h4>Client Files</h4><ul><li>Upload & organize case documents</li><li>Access signed agreements</li></ul></div>
+        <div class="vault-card"><h4>Court Deadlines</h4><ul><li>Track hearing and filing dates</li><li>Set reminders for submissions</li></ul></div>
+        <div class="vault-card"><h4>Tasks & Assignments</h4><ul><li>Assign paralegal duties</li><li>Monitor task progress</li></ul></div>
+        <div class="vault-card"><h4>Billing & Expenses</h4><ul><li>Record billable hours</li><li>Manage client expenses</li></ul></div>
       </div>
     </section>
 
-    <!-- Placeholder Sections -->
-    <section id="appointments" class="section">
-      <h2>Consultations</h2>
-      <p>Schedule and manage your appointments here.</p>
-    </section>
-
-    <section id="case" class="section">
-      <h2>Client Progress</h2>
-      <p>Monitor each case’s timeline, documents, and updates.</p>
-    </section>
-
-    <section id="services" class="section">
-      <h2>Legal Services</h2>
-      <p>Request additional legal support or file a new matter.</p>
-    </section>
-
-    <section id="paralegal" class="section">
-      <h2>Ask Paralegal</h2>
-      <p>Submit questions, assign tasks, or review paralegal updates.</p>
-    </section>
+    <section id="appointments" class="section"><h2>Consultations</h2><p>Schedule and manage your appointments here.</p></section>
+    <section id="case" class="section"><h2>Client Progress</h2><p>Monitor each case’s timeline, documents, and updates.</p></section>
+    <section id="services" class="section"><h2>Legal Services</h2><p>Request additional legal support or file a new matter.</p></section>
+    <section id="paralegal" class="section"><h2>Ask Paralegal</h2><p>Submit questions, assign tasks, or review paralegal updates.</p></section>
   </main>
 
-  <script>
-    // Handle section switching
-    const links = document.querySelectorAll('.nav-links a, .tile');
-    const sections = document.querySelectorAll('.section');
-
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = link.getAttribute('data-section');
-        if (!target) return;
-
-        sections.forEach(sec => sec.classList.remove('active'));
-        document.getElementById(target)?.classList.add('active');
-
-        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-        document.querySelector(`.nav-links a[data-section="${target}"]`)?.classList.add('active');
-      });
+<script>
+  // Navigation
+  const links=document.querySelectorAll('.nav-links a,.tile');
+  const sections=document.querySelectorAll('.section');
+  links.forEach(link=>{
+    link.addEventListener('click',e=>{
+      e.preventDefault();
+      const target=link.getAttribute('data-section');
+      if(!target)return;
+      sections.forEach(sec=>sec.classList.remove('active'));
+      document.getElementById(target)?.classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+      document.querySelector(`.nav-links a[data-section="${target}"]`)?.classList.add('active');
     });
+  });
 
-    // Profile dropdown toggle
-    const profileBtn = document.getElementById('profileBtn');
-    const dropdownMenu = document.getElementById('dropdownMenu');
+  // Profile dropdown toggle
+  const profilePic=document.getElementById('profilePic');
+  const dropdownMenu=document.getElementById('dropdownMenu');
+  const uploadPhoto=document.getElementById('uploadPhoto');
+  const userName=document.getElementById('userName');
 
-    profileBtn.addEventListener('click', () => {
-      dropdownMenu.classList.toggle('active');
-    });
+  // Load saved user & photo
+  const savedUser=JSON.parse(localStorage.getItem('loggedInUser'));
+  if(savedUser){
+    userName.textContent=savedUser.name||savedUser.email||"User";
+    if(savedUser.photo){profilePic.src=savedUser.photo;}
+  }
 
-    document.addEventListener('click', (e) => {
-      if (!profileBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
-        dropdownMenu.classList.remove('active');
-      }
-    });
-
-    function logout() {
-      localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
+  profilePic.addEventListener('click',()=>dropdownMenu.classList.toggle('active'));
+  document.addEventListener('click',e=>{
+    if(!profilePic.contains(e.target)&&!dropdownMenu.contains(e.target)){
+      dropdownMenu.classList.remove('active');
     }
-  </script>
+  });
+
+  // Upload new photo
+  uploadPhoto.addEventListener('change',e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=()=>{
+      profilePic.src=reader.result;
+      const user=JSON.parse(localStorage.getItem('loggedInUser'))||{};
+      user.photo=reader.result;
+      localStorage.setItem('loggedInUser',JSON.stringify(user));
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function logout(){
+    localStorage.removeItem("loggedInUser");
+    window.location.href="index.html";
+  }
+</script>
 </body>
 </html>
