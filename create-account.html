@@ -1,59 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Account — The Legal Suite</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+
   <style>
-    :root{--rose:#E0BFB8;--ivory:#F8F5F2;--silver:#E6E2DD;--ink:#1C1C1C}
-    body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--ivory),#F1EFEC);font-family:"Poppins",sans-serif}
-    #loader{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .6s}
-    #loader::after{content:"Loading…";color:#666;animation:fade 1.4s infinite}@keyframes fade{0%,100%{opacity:.35}50%{opacity:1}}
-    .card{width:360px;background:#fff;border:1px solid var(--silver);border-radius:14px;box-shadow:0 12px 26px rgba(0,0,0,.10);padding:28px}
-    h1{margin:0 0 12px;font-family:"Playfair Display",serif;font-size:1.3rem}
-    .eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.8rem;color:#6b6b6b}
-    input{width:100%;padding:12px;border:1px solid var(--silver);border-radius:10px;margin-top:12px;font-size:1rem}
-    input:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 4px rgba(224,191,184,.18)}
-    button{width:100%;margin-top:16px;padding:12px;border-radius:10px;border:1px solid var(--rose);background:linear-gradient(180deg,#fff,#FAF5F3);font-weight:600;cursor:pointer}
-    button:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(224,191,184,.24)}
-    a{display:inline-block;margin-top:12px;color:#333;text-decoration:none}
-    #msg{height:18px;margin-top:8px;color:red}
+    :root {
+      --rose: #E0BFB8;
+      --ivory: #F8F5F2;
+      --silver: #E6E2DD;
+      --ink: #1C1C1C;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, var(--ivory), #f1efec);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 40px;
+      width: min(400px, 90%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      max-width: 300px;
+      padding: 12px;
+      border: 1px solid var(--silver);
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(224,191,184,0.25);
+    }
+
+    button {
+      width: 100%;
+      max-width: 300px;
+      background: var(--rose);
+      border: none;
+      color: #fff;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover { background: #d3a6a0; }
+
+    a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    #msg {
+      height: 18px;
+      color: red;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
+
 <body>
-  <div id="loader"></div>
   <div class="card">
-    <div class="eyebrow">The Legal Suite</div>
     <h1>Create Account</h1>
     <div id="msg"></div>
-    <input id="name" type="text" placeholder="Full Name" required/>
-    <input id="email" type="email" placeholder="Email Address" required/>
-    <input id="password" type="password" placeholder="Password" required/>
+    <input id="name" type="text" placeholder="Full Name" required />
+    <input id="email" type="email" placeholder="Email Address" required />
+    <input id="password" type="password" placeholder="Password" required />
     <button onclick="createAccount()">Create Account</button>
-    <a href="login.html">Already have an account? Login</a>
+    <a href="login.html">← Back to Login</a>
   </div>
 
-  <script src="transition.js"></script>
   <script>
-    const loader = document.getElementById('loader');
-    window.addEventListener('load',()=> setTimeout(()=> loader.style.opacity=0,300));
+    function createAccount() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msg = document.getElementById("msg");
 
-    function createAccount(){
-      const name=document.getElementById('name').value.trim();
-      const email=document.getElementById('email').value.trim();
-      const password=document.getElementById('password').value.trim();
-      const msg=document.getElementById('msg');
+      if (!name || !email || !password) {
+        msg.textContent = "Please fill in all fields.";
+        return;
+      }
 
-      if(!name||!email||!password){ msg.textContent='Please fill in all fields.'; return; }
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      if (users.find(u => u.email === email)) {
+        msg.textContent = "An account with this email already exists.";
+        return;
+      }
 
-      const users=JSON.parse(localStorage.getItem('users')||'[]');
-      if(users.find(u=>u.email===email)){ msg.textContent='An account with this email already exists.'; return; }
+      users.push({ name, email, password, status: "new" });
+      localStorage.setItem("users", JSON.stringify(users));
 
-      users.push({name,email,password,status:"new"});
-      localStorage.setItem('users',JSON.stringify(users));
-      msg.style.color='green'; msg.textContent='Account created! Redirecting…';
-      setTimeout(()=> window.location.href='login.html', 1200);
+      msg.style.color = "green";
+      msg.textContent = "Account created! Redirecting...";
+      setTimeout(() => window.location.href = "login.html", 1200);
     }
   </script>
 </body>
