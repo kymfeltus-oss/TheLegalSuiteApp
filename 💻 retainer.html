@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Retainer Agreement · The Legal Suite</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --rose:#E0BFB8;
+  --lilac:#EEE6F2;
+  --ivory:#F8F5F2;
+  --ink:#1C1C1C;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  height:100%;
+  width:100%;
+  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
+  font-family:"Poppins",sans-serif;
+  color:var(--ink);
+  overflow-y:auto;
+  position:relative;
+  padding-bottom:60px;
+}
+
+/* Header */
+.header{
+  text-align:center;
+  margin:30px 0;
+}
+.logo{
+  width:380px;
+  max-width:90%;
+  margin-bottom:10px;
+}
+h2{
+  font-family:"Playfair Display",serif;
+  font-size:1.8rem;
+  color:#333;
+}
+
+/* Agreement Box */
+.agreement-box{
+  background:#fff;
+  margin:0 auto;
+  max-width:800px;
+  padding:40px 50px;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.1);
+  line-height:1.7;
+  color:#444;
+}
+.agreement-box h3{
+  font-family:"Playfair Display",serif;
+  font-size:1.3rem;
+  margin-bottom:10px;
+  color:#222;
+}
+
+/* Signature Section */
+.signature-section{
+  margin-top:40px;
+  text-align:center;
+}
+canvas{
+  border:2px dashed var(--rose);
+  border-radius:12px;
+  background:#fdfdfd;
+  width:100%;
+  max-width:500px;
+  height:150px;
+  margin:0 auto 10px;
+}
+button, .btn{
+  background:var(--rose);
+  color:#fff;
+  border:none;
+  padding:14px 40px;
+  border-radius:40px;
+  font-family:"Playfair Display",serif;
+  font-size:1.2rem;
+  text-decoration:none;
+  transition:all .3s ease;
+  cursor:pointer;
+}
+button:hover, .btn:hover{background:#d6a9a0;transform:translateY(-2px);}
+
+/* Responsive */
+@media(max-width:700px){
+  .agreement-box{padding:25px 20px;}
+  h2{font-size:1.5rem;}
+  .agreement-box h3{font-size:1.2rem;}
+  canvas{height:130px;}
+}
+</style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+    <h2>Retainer Agreement</h2>
+  </div>
+
+  <div class="agreement-box">
+    <h3>Legal Service Agreement</h3>
+    <p>
+      This agreement ("Agreement") is entered into between 
+      <strong>The Law Office of Jamie Feltus</strong> ("Firm") and 
+      <strong>[Client Name]</strong> ("Client") as of 
+      <strong>[Date]</strong>.
+    </p>
+
+    <p>
+      The Firm agrees to provide legal services to the Client for matters relating to 
+      <strong>[Service Type]</strong> under the terms outlined below.
+    </p>
+
+    <p>
+      The total retainer fee is based on your selected service tier:  
+      <strong>[Pricing Tier]</strong> — to be discussed and finalized during your consultation.  
+      The retainer fee will be credited toward all billable work on the Client’s case.  
+    </p>
+
+    <p>
+      By signing below, the Client acknowledges and agrees to the terms of this Agreement.
+    </p>
+
+    <div class="signature-section">
+      <h3>Client Signature</h3>
+      <canvas id="signature-pad"></canvas>
+      <button id="clear">Clear Signature</button>
+      <br><br>
+      <a href="payment.html" class="btn">Submit Agreement</a>
+    </div>
+  </div>
+
+<script>
+const canvas = document.getElementById('signature-pad');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+
+canvas.addEventListener('mousedown', e => {drawing = true; draw(e);});
+canvas.addEventListener('mouseup', () => drawing = false);
+canvas.addEventListener('mousemove', draw);
+
+canvas.addEventListener('touchstart', e => {drawing = true; draw(e.touches[0]);});
+canvas.addEventListener('touchend', () => drawing = false);
+canvas.addEventListener('touchmove', e => {draw(e.touches[0]); e.preventDefault();});
+
+function draw(e){
+  if(!drawing) return;
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#000';
+  ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+}
+
+document.getElementById('clear').addEventListener('click',()=>{
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+});
+</script>
+
+</body>
+</html>

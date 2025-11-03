@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Confirmation · The Legal Suite</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --rose:#E0BFB8;
+  --lilac:#EEE6F2;
+  --ivory:#F8F5F2;
+  --ink:#1C1C1C;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  height:100%;
+  width:100%;
+  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
+  font-family:"Poppins",sans-serif;
+  color:var(--ink);
+  overflow:hidden;
+  position:relative;
+}
+
+/* Background */
+body::before{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  height:110%;
+  background:url('jamie.png') no-repeat center bottom;
+  background-size:40%;
+  opacity:0.25;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Container */
+.container{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 5%;
+}
+
+.logo{
+  width:400px;
+  max-width:95%;
+  margin-bottom:20px;
+}
+
+h2{
+  font-family:"Playfair Display",serif;
+  font-size:1.8rem;
+  color:#333;
+  margin-bottom:20px;
+}
+
+p{
+  font-size:1rem;
+  color:#444;
+  max-width:480px;
+  line-height:1.6;
+  margin-bottom:30px;
+}
+
+/* Button */
+.btn{
+  background:var(--rose);
+  color:#fff;
+  border:none;
+  padding:14px 40px;
+  border-radius:40px;
+  font-family:"Playfair Display",serif;
+  font-size:1.2rem;
+  text-decoration:none;
+  transition:all .3s ease;
+}
+.btn:hover{background:#d6a9a0;transform:translateY(-2px);}
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+
+    <h2>Thank You for Completing Your Intake</h2>
+
+    <p>
+      We appreciate you taking the time to share your information.  
+      Our legal team will carefully review your submission and determine the best next steps for your case.  
+      Once reviewed, you’ll receive an email with a link to schedule your consultation via Zoom.
+    </p>
+
+    <a href="index.html" class="btn">Return to Home</a>
+  </div>
+</body>
+</html>
