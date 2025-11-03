@@ -26,24 +26,32 @@ html,body{
   position:relative;
 }
 
-/* -------- Background Image (Jamie) -------- */
-body::before{
-  content:"";
+/* -------- Background (Jamie) -------- */
+.background{
   position:absolute;
   bottom:0;
   left:50%;
   transform:translateX(-50%);
-  width:auto;
-  height:95%;
-  max-height:720px;
-  background:url('jamie.png') no-repeat center bottom;
-  background-size:contain;       /* ensures full-body scaling */
-  opacity:1;                     /* keep her clear, not faded */
-  pointer-events:none;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  overflow:hidden;
   z-index:0;
 }
 
-/* -------- Content -------- */
+.background img{
+  height:95%;
+  width:auto;
+  max-height:750px;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:none;
+  pointer-events:none;
+}
+
+/* -------- Foreground Content -------- */
 .wrapper{
   position:relative;
   z-index:2;
@@ -111,19 +119,13 @@ footer{
 
 /* -------- Responsive -------- */
 @media(max-width:900px){
-  body::before{
-    height:85%;
-    background-size:contain;
-  }
+  .background img{height:85%;}
   .logo{width:300px;}
   .tagline{font-size:1.1rem;margin-bottom:28px;}
   .btn{padding:12px 20px;font-size:.95rem;}
 }
 @media(max-width:700px){
-  body::before{
-    height:80%;
-    background-size:contain;
-  }
+  .background img{height:80%;}
   .logo{width:260px;}
   .tagline{font-size:1rem;}
 }
@@ -131,6 +133,12 @@ footer{
 </head>
 
 <body>
+  <!-- Jamie’s Background -->
+  <div class="background">
+    <img src="jamie.png" alt="Jamie Feltus, Esq.">
+  </div>
+
+  <!-- Main Content -->
   <div class="wrapper">
     <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
     <p class="tagline">Your Boutique Legal Experience</p>
