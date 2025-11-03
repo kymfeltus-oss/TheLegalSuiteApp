@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>The Legal Suite — Welcome</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -15,65 +15,62 @@
   --shadow:0 6px 14px rgba(0,0,0,.1);
 }
 
+/* Reset */
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{
-  height:100%;
-  width:100%;
+  min-height:100%;
   background:var(--ivory);
   font-family:"Poppins",sans-serif;
   color:var(--ink);
-  overflow:hidden;
 }
 
-/* ---------- Grid Layout ---------- */
+/* ---------- Layout ---------- */
 .wrapper{
-  height:calc(100vh - 30px); /* leaves space for footer */
-  width:100%;
   display:grid;
-  grid-template-columns: 38% 62%;
+  grid-template-columns:42% 58%;
   align-items:center;
-  position:relative;
+  min-height:calc(100vh - env(safe-area-inset-bottom));
+  width:100%;
+  padding-bottom:env(safe-area-inset-bottom);
 }
 
-/* ---------- Left (Jamie) ---------- */
+/* ---------- Left: Jamie ---------- */
 .left{
   display:flex;
   justify-content:center;
   align-items:flex-end;
-  background:var(--ivory);
-  overflow:visible;
-  padding-left:16px;
+  padding-left:20px;
+  overflow:visible;          /* allows natural edges */
+  background:transparent;    /* no background clipping */
 }
 .left img{
   width:auto;
   height:auto;
-  max-height:600px;          /* keep same size */
+  max-height:620px;          /* full visible body */
   object-fit:contain;
   object-position:center bottom;
   filter:none;
-  margin-left:20px;
-  margin-bottom:20px;        /* lifts her higher */
+  margin-left:15px;
+  margin-bottom:15px;        /* small lift off footer */
+  pointer-events:none;       /* avoid image blocking tap */
 }
 
-/* ---------- Right (Content) ---------- */
+/* ---------- Right: Text & Buttons ---------- */
 .right{
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;
+  justify-content:center;
   align-items:flex-start;
   text-align:left;
-  padding:0 8%;
-  transform:translateY(-6%); /* moves the block down slightly */
+  padding:0 10% 0 4%;
 }
 
-/* Logo */
 .logo{
   width:360px;
   max-width:90%;
-  margin-bottom:18px;
+  margin-bottom:14px;
 }
 
-/* Tagline */
 .tagline{
   font-family:"Playfair Display",serif;
   font-size:1.25rem;
@@ -81,13 +78,16 @@ html,body{
   letter-spacing:.07em;
   color:#444;
   margin-bottom:36px;
+  max-width:100%;
+  line-height:1.4;
 }
 
 /* Buttons */
 .buttons{
   display:flex;
-  flex-direction:row;
+  flex-wrap:nowrap;
   gap:20px;
+  flex-shrink:0;
 }
 .btn{
   border:1px solid var(--rose);
@@ -110,29 +110,24 @@ html,body{
 
 /* ---------- Footer ---------- */
 footer{
-  position:absolute;
-  bottom:8px;
-  left:50%;
-  transform:translateX(-50%);
   text-align:center;
   color:#666;
   font-size:.75rem;
   width:100%;
+  margin-top:8px;
 }
 
 /* ---------- Responsive ---------- */
 @media(max-width:900px){
-  .wrapper{grid-template-columns:40% 60%;}
-  .left img{max-height:520px;margin-bottom:18px;}
-  .right{transform:translateY(-8%);}
+  .wrapper{grid-template-columns:44% 56%;}
+  .left img{max-height:560px;margin-bottom:12px;}
   .logo{width:300px;}
   .tagline{font-size:1.1rem;margin-bottom:28px;}
   .btn{padding:12px 20px;font-size:.95rem;}
 }
 @media(max-width:700px){
-  .wrapper{grid-template-columns:36% 64%;}
-  .left img{max-height:500px;margin-left:10px;margin-bottom:15px;}
-  .right{transform:translateY(-10%);}
+  .wrapper{grid-template-columns:38% 62%;}
+  .left img{max-height:500px;margin-left:8px;}
   .logo{width:260px;}
   .tagline{font-size:1rem;}
 }
@@ -141,20 +136,20 @@ footer{
 
 <body>
   <div class="wrapper">
-    <!-- LEFT -->
-    <div class="left">
+    <!-- LEFT: Jamie -->
+    <section class="left">
       <img src="jamie.png" alt="Jamie Feltus, Esq.">
-    </div>
+    </section>
 
-    <!-- RIGHT -->
-    <div class="right">
+    <!-- RIGHT: Branding -->
+    <section class="right">
       <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
       <p class="tagline">Your Boutique Legal Experience</p>
       <div class="buttons">
         <a href="login.html" class="btn">Enter Legal Suite</a>
         <a href="create-account.html" class="btn">Create Account</a>
       </div>
-    </div>
+    </section>
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
