@@ -119,50 +119,38 @@ body{
 /* Footer */
 footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
 
-/* ---------- Vault Modal ---------- */
-.vault-modal{
+/* ---------- Shared Modal Styles ---------- */
+.modal{
   position:fixed;
   top:0;right:-100%;
-  width:100%;
-  max-width:650px;
-  height:100vh;
+  width:100%;max-width:650px;height:100vh;
   background:#fff;
   box-shadow:-5px 0 20px rgba(0,0,0,0.2);
   transition:right .6s ease;
   z-index:99;
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
 }
-.vault-modal.show{right:0;}
-.vault-header{
+.modal.show{right:0;}
+.modal-header{
   background:linear-gradient(90deg,var(--rose),var(--lilac));
-  padding:14px 20px;
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  padding:14px 20px;color:#fff;
+  display:flex;justify-content:space-between;align-items:center;
 }
-.vault-header h2{
-  font-family:"Playfair Display",serif;
-  font-size:1.3rem;
+.modal-header h2{font-family:"Playfair Display",serif;font-size:1.3rem;}
+.modal-header button{
+  background:none;border:none;color:#fff;
+  font-size:1.5rem;cursor:pointer;
 }
-.vault-header button{
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:1.5rem;
-  cursor:pointer;
-}
-.vault-content{
+.modal-content{
   padding:20px;
-  flex:1;
-  overflow-y:auto;
+  flex:1;overflow-y:auto;
 }
+
+/* Vault Styles */
 .upload-area{
   border:2px dashed var(--rose);
   border-radius:16px;
-  padding:20px;
-  text-align:center;
+  padding:20px;text-align:center;
   margin-bottom:30px;
 }
 .upload-area input[type="file"]{margin-top:10px;}
@@ -172,34 +160,49 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
   gap:16px;
 }
 .file-card{
-  background:#fdfdfd;
-  border:1px solid #eee;
-  border-radius:10px;
-  padding:16px;
+  background:#fdfdfd;border:1px solid #eee;
+  border-radius:10px;padding:16px;
   box-shadow:var(--shadow);
   text-align:left;
-  opacity:0;
-  transform:translateY(10px);
+  opacity:0;transform:translateY(10px);
   animation:fadeIn .5s forwards;
 }
 .file-card h4{
   font-family:"Playfair Display",serif;
-  margin-bottom:5px;
-  color:#222;
+  margin-bottom:5px;color:#222;
 }
 .file-card small{color:#777;}
 .file-card a{
-  display:inline-block;
-  margin-top:10px;
-  background:var(--rose);
-  color:#fff;
-  text-decoration:none;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:.85rem;
+  display:inline-block;margin-top:10px;
+  background:var(--rose);color:#fff;text-decoration:none;
+  padding:6px 14px;border-radius:20px;font-size:.85rem;
 }
 .file-card a:hover{background:#d6a9a0;}
 @keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
+
+/* Consultation Modal */
+.slot{
+  background:#fdfdfd;
+  border:1px solid #eee;
+  border-radius:10px;
+  padding:16px;
+  margin-bottom:15px;
+  box-shadow:var(--shadow);
+  text-align:left;
+}
+.slot strong{display:block;font-size:1.1rem;color:#222;}
+.slot p{font-size:.9rem;color:#555;margin:6px 0;}
+.slot a{
+  display:inline-block;
+  background:var(--rose);
+  color:#fff;
+  text-decoration:none;
+  padding:8px 16px;
+  border-radius:30px;
+  font-family:"Playfair Display",serif;
+  transition:background .3s ease;
+}
+.slot a:hover{background:#d6a9a0;}
 </style>
 </head>
 
@@ -224,7 +227,7 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
     <div class="card">
       <h3>Consultations</h3>
       <p>View or schedule your upcoming consultations and Zoom meetings.</p>
-      <a href="#">Open</a>
+      <a href="#" id="openConsult">Open</a>
     </div>
 
     <div class="card">
@@ -249,25 +252,19 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
 
   <!-- Vault Modal -->
-  <div class="vault-modal" id="vaultModal">
-    <div class="vault-header">
+  <div class="modal" id="vaultModal">
+    <div class="modal-header">
       <h2>JF Legal Vault</h2>
       <button id="closeVault">&times;</button>
     </div>
-    <div class="vault-content">
+    <div class="modal-content">
       <div class="upload-area">
         <form id="uploadForm">
           <label><strong>Upload a file:</strong></label><br>
           <input type="file" name="document" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
-          <button type="submit" style="
-            background:var(--rose);
-            color:#fff;border:none;
-            padding:10px 30px;border-radius:40px;
-            font-family:'Playfair Display',serif;
-            font-size:1rem;cursor:pointer;">Upload File</button>
+          <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Upload File</button>
         </form>
       </div>
-
       <div class="file-list" id="fileList">
         <div class="file-card">
           <h4>Sample Document</h4>
@@ -278,28 +275,60 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
     </div>
   </div>
 
+  <!-- Consultation Modal -->
+  <div class="modal" id="consultModal">
+    <div class="modal-header">
+      <h2>Consultations</h2>
+      <button id="closeConsult">&times;</button>
+    </div>
+    <div class="modal-content">
+      <h3 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Available Consultation Slots</h3>
+
+      <div class="slot">
+        <strong>Monday, March 10</strong>
+        <p>10:00 AM – 10:30 AM (CST)</p>
+        <a href="#">Schedule Zoom</a>
+      </div>
+
+      <div class="slot">
+        <strong>Tuesday, March 11</strong>
+        <p>2:00 PM – 2:30 PM (CST)</p>
+        <a href="#">Schedule Zoom</a>
+      </div>
+
+      <div class="slot">
+        <strong>Thursday, March 13</strong>
+        <p>1:00 PM – 1:30 PM (CST)</p>
+        <a href="#">Schedule Zoom</a>
+      </div>
+
+      <p style="color:#555;font-size:.9rem;margin-top:25px;">*All consultations will be confirmed via email once booked.</p>
+    </div>
+  </div>
+
 <script>
 /* Vault modal controls */
 const vaultModal = document.getElementById("vaultModal");
-const openVault = document.getElementById("openVault");
-const closeVault = document.getElementById("closeVault");
-openVault.addEventListener("click",(e)=>{e.preventDefault();vaultModal.classList.add("show");});
-closeVault.addEventListener("click",()=>vaultModal.classList.remove("show"));
+document.getElementById("openVault").addEventListener("click",(e)=>{e.preventDefault();vaultModal.classList.add("show");});
+document.getElementById("closeVault").addEventListener("click",()=>vaultModal.classList.remove("show"));
+
+/* Consult modal controls */
+const consultModal = document.getElementById("consultModal");
+document.getElementById("openConsult").addEventListener("click",(e)=>{e.preventDefault();consultModal.classList.add("show");});
+document.getElementById("closeConsult").addEventListener("click",()=>consultModal.classList.remove("show"));
 
 /* Simulated Upload Logic */
 const uploadForm = document.getElementById("uploadForm");
 const fileList = document.getElementById("fileList");
-
 uploadForm.addEventListener("submit",(e)=>{
   e.preventDefault();
   const file = uploadForm.querySelector('input[type="file"]').files[0];
   if(!file){alert("Please select a file first.");return;}
   const card=document.createElement("div");
   card.className="file-card";
-  card.innerHTML=`
-    <h4>${file.name}</h4>
-    <small>Uploaded: ${new Date().toLocaleDateString()}</small>
-    <a href="#">Download</a>`;
+  card.innerHTML=`<h4>${file.name}</h4>
+  <small>Uploaded: ${new Date().toLocaleDateString()}</small>
+  <a href="#">Download</a>`;
   fileList.prepend(card);
   uploadForm.reset();
 });
