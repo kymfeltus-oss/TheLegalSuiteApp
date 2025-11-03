@@ -181,28 +181,7 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
 @keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
 
 /* Consultation Modal */
-.slot{
-  background:#fdfdfd;
-  border:1px solid #eee;
-  border-radius:10px;
-  padding:16px;
-  margin-bottom:15px;
-  box-shadow:var(--shadow);
-  text-align:left;
-}
-.slot strong{display:block;font-size:1.1rem;color:#222;}
-.slot p{font-size:.9rem;color:#555;margin:6px 0;}
-.slot a{
-  display:inline-block;
-  background:var(--rose);
-  color:#fff;
-  text-decoration:none;
-  padding:8px 16px;
-  border-radius:30px;
-  font-family:"Playfair Display",serif;
-  transition:background .3s ease;
-}
-.slot a:hover{background:#d6a9a0;}
+.calendly-inline-widget{min-width:320px;height:600px;}
 </style>
 </head>
 
@@ -281,54 +260,45 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
       <h2>Consultations</h2>
       <button id="closeConsult">&times;</button>
     </div>
-    <div class="modal-content">
-      <h3 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Available Consultation Slots</h3>
+    <div class="modal-content" style="text-align:center;">
+      <h3 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Schedule Your Consultation</h3>
+      <p style="color:#555;font-size:.9rem;margin-bottom:20px;">
+        Use the calendar below to choose your preferred date and time.<br>
+        A Zoom link will be automatically generated and emailed to you.
+      </p>
 
-      <div class="slot">
-        <strong>Monday, March 10</strong>
-        <p>10:00 AM – 10:30 AM (CST)</p>
-        <a href="#">Schedule Zoom</a>
+      <!-- Calendly Integration -->
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/kymfeltus/consultation"
+           style="min-width:320px;height:600px;">
       </div>
-
-      <div class="slot">
-        <strong>Tuesday, March 11</strong>
-        <p>2:00 PM – 2:30 PM (CST)</p>
-        <a href="#">Schedule Zoom</a>
-      </div>
-
-      <div class="slot">
-        <strong>Thursday, March 13</strong>
-        <p>1:00 PM – 1:30 PM (CST)</p>
-        <a href="#">Schedule Zoom</a>
-      </div>
-
-      <p style="color:#555;font-size:.9rem;margin-top:25px;">*All consultations will be confirmed via email once booked.</p>
+      <script type="text/javascript"
+        src="https://assets.calendly.com/assets/external/widget.js"
+        async></script>
     </div>
   </div>
 
 <script>
 /* Vault modal controls */
-const vaultModal = document.getElementById("vaultModal");
+const vaultModal=document.getElementById("vaultModal");
 document.getElementById("openVault").addEventListener("click",(e)=>{e.preventDefault();vaultModal.classList.add("show");});
 document.getElementById("closeVault").addEventListener("click",()=>vaultModal.classList.remove("show"));
 
 /* Consult modal controls */
-const consultModal = document.getElementById("consultModal");
+const consultModal=document.getElementById("consultModal");
 document.getElementById("openConsult").addEventListener("click",(e)=>{e.preventDefault();consultModal.classList.add("show");});
 document.getElementById("closeConsult").addEventListener("click",()=>consultModal.classList.remove("show"));
 
 /* Simulated Upload Logic */
-const uploadForm = document.getElementById("uploadForm");
-const fileList = document.getElementById("fileList");
+const uploadForm=document.getElementById("uploadForm");
+const fileList=document.getElementById("fileList");
 uploadForm.addEventListener("submit",(e)=>{
   e.preventDefault();
-  const file = uploadForm.querySelector('input[type="file"]').files[0];
+  const file=uploadForm.querySelector('input[type="file"]').files[0];
   if(!file){alert("Please select a file first.");return;}
   const card=document.createElement("div");
   card.className="file-card";
-  card.innerHTML=`<h4>${file.name}</h4>
-  <small>Uploaded: ${new Date().toLocaleDateString()}</small>
-  <a href="#">Download</a>`;
+  card.innerHTML=`<h4>${file.name}</h4><small>Uploaded: ${new Date().toLocaleDateString()}</small><a href="#">Download</a>`;
   fileList.prepend(card);
   uploadForm.reset();
 });
