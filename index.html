@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Legal Suite — Welcome</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
@@ -11,102 +12,138 @@
   --rose:#E0BFB8;
   --ivory:#F8F5F2;
   --ink:#1C1C1C;
-  --shadow:0 6px 14px rgba(0,0,0,.1);
+  --shadow:0 6px 14px rgba(0,0,0,0.1);
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;background:var(--ivory);font-family:"Poppins",sans-serif;color:var(--ink);overflow:hidden}
+html,body{
+  height:100%;
+  width:100%;
+  background:var(--ivory);
+  font-family:"Poppins",sans-serif;
+  color:var(--ink);
+  overflow:hidden;
+}
 
-/* Split screen that NEVER stacks */
+/* Layout */
 .wrapper{
   display:grid;
-  grid-template-columns: 38% 62%;
+  grid-template-columns:42% 58%;
   align-items:center;
   height:100vh;
   width:100%;
-  gap:0;
-  padding:0 4%;
+  position:relative;
 }
 
-/* Left: Jamie */
+/* Left Image */
 .left{
-  height:100%;
   display:flex;
-  align-items:flex-end;
   justify-content:center;
+  align-items:flex-end;
   overflow:hidden;
+  background:var(--ivory);
 }
+
 .left img{
   width:auto;
-  height:82vh;                 /* fixed visual size */
-  max-height:680px;
+  height:90%;
+  max-height:740px;   /* let her breathe */
   object-fit:contain;
   object-position:center bottom;
   filter:drop-shadow(0 4px 8px rgba(0,0,0,.08));
+  margin-bottom:-30px; /* pull her up visually */
 }
 
-/* Right: centered block */
+/* Right Content */
 .right{
-  height:100%;
   display:flex;
-  align-items:center;          /* vertical center */
-  justify-content:flex-start;
-}
-.stack{
-  width:100%;
-  max-width:520px;
+  flex-direction:column;
+  justify-content:center; /* true vertical centering */
+  align-items:flex-start;
+  text-align:left;
+  padding:0 8%;
 }
 
+/* Logo and text */
 .logo{
-  width:360px;
+  width:380px;
   max-width:95%;
-  display:block;
-  margin:0 0 18px 0;
+  margin-bottom:16px;
 }
 
 .tagline{
   font-family:"Playfair Display",serif;
   font-size:1.25rem;
-  letter-spacing:.06em;
   text-transform:uppercase;
+  letter-spacing:.07em;
   color:#444;
-  margin:0 0 36px 0;
+  margin-bottom:40px;
 }
 
-/* Buttons side-by-side */
+/* Buttons side by side */
 .buttons{
   display:flex;
-  gap:16px;
+  flex-direction:row;
+  gap:20px;
   flex-wrap:nowrap;
 }
+
 .btn{
   border:1px solid var(--rose);
   background:#fff;
-  padding:14px 24px;
+  padding:14px 26px;
   border-radius:12px;
   font-weight:600;
   text-decoration:none;
   color:var(--ink);
-  box-shadow:var(--shadow);
-  min-width:160px;
   text-align:center;
-  transition:all .25s ease;
+  min-width:160px;
+  box-shadow:var(--shadow);
+  transition:all .3s ease;
 }
-.btn:hover{background:var(--rose);color:#fff;transform:translateY(-2px)}
+.btn:hover{
+  background:var(--rose);
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+/* Subtle blend on left edge */
+.left::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:41%;
+  width:8%;
+  height:100%;
+  background:linear-gradient(to right,rgba(248,245,242,0) 0%,var(--ivory) 100%);
+  pointer-events:none;
+}
 
 /* Footer */
 footer{
-  position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
-  font-size:.75rem; color:#666; text-align:center; width:100%;
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  color:#666;
+  font-size:.75rem;
+  width:100%;
 }
 
-/* Small phones: scale, but stay side-by-side */
-@media (max-width: 430px){
-  .wrapper{grid-template-columns: 42% 58%; padding:0 3%;}
-  .left img{height:70vh; max-height:580px;}
-  .logo{width:280px}
-  .tagline{font-size:1.05rem; margin-bottom:28px}
-  .btn{min-width:140px; padding:12px 18px; font-size:.95rem}
+/* Responsive scaling */
+@media(max-width:900px){
+  .wrapper{grid-template-columns:40% 60%;}
+  .left img{height:80%;margin-bottom:-20px;}
+  .logo{width:300px;}
+  .tagline{font-size:1.1rem;margin-bottom:30px;}
+  .btn{padding:12px 20px;font-size:.95rem;}
+}
+@media(max-width:700px){
+  .wrapper{grid-template-columns:38% 62%;}
+  .left img{height:72%;margin-bottom:-10px;}
+  .logo{width:260px;}
+  .tagline{font-size:1rem;}
 }
 </style>
 </head>
@@ -118,13 +155,11 @@ footer{
     </div>
 
     <div class="right">
-      <div class="stack">
-        <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
-        <p class="tagline">Your Boutique Legal Experience</p>
-        <div class="buttons">
-          <a href="login.html" class="btn">Enter Legal Suite</a>
-          <a href="create-account.html" class="btn">Create Account</a>
-        </div>
+      <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+      <p class="tagline">Your Boutique Legal Experience</p>
+      <div class="buttons">
+        <a href="login.html" class="btn">Enter Legal Suite</a>
+        <a href="create-account.html" class="btn">Create Account</a>
       </div>
     </div>
   </div>
