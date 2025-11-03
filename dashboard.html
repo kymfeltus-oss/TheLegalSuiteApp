@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Legal Suite — Client Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--rose:#E0BFB8;--ivory:#F8F5F2;--silver:#E6E2DD;--ink:#1C1C1C;--paper:#fff;--shadow:0 10px 22px rgba(0,0,0,.10)}
+    *{box-sizing:border-box}
+    body{margin:0;height:100vh;display:flex;background:linear-gradient(135deg,#FAFAF9,#F1EFEC);font-family:"Poppins",sans-serif;color:var(--ink);overflow:hidden}
+    #loader{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .6s}
+    #loader::after{content:"Opening The Legal Suite…";color:#666;animation:fade 1.4s infinite}@keyframes fade{0%,100%{opacity:.35}50%{opacity:1}}
+
+    /* Sidebar (light ivory) */
+    .sidebar{width:290px;min-width:290px;background:linear-gradient(180deg,var(--ivory),#F4F1ED);border-right:1px solid var(--silver);box-shadow:6px 0 18px rgba(0,0,0,.06);padding:26px 20px;display:flex;flex-direction:column;gap:14px}
+    .brand{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px;background:radial-gradient(circle,#fff 75%,transparent);border-radius:14px;box-shadow:0 5px 12px rgba(0,0,0,.05)}
+    .brand img{height:58px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.12))}
+    .brand h1{margin:0;font-family:"Playfair Display",serif;font-size:1.05rem;font-weight:600}
+    .brand small{color:#6c6c6c;letter-spacing:.05em}
+
+    .nav{display:flex;flex-direction:column;gap:8px}
+    .nav a{display:flex;align-items:center;padding:12px 14px;border-radius:10px;color:#2B2B2B;text-decoration:none;border:1px solid transparent;background:transparent;transition:.25s ease;font-weight:500}
+    .nav a:hover{background:#FFFFFFB3;border-color:var(--silver);box-shadow:var(--shadow)}
+    .nav a.active{background:#fff;border-color:var(--rose);box-shadow:0 8px 18px rgba(224,191,184,.35);position:relative}
+    .nav a.active::before{content:"";position:absolute;left:-6px;top:50%;transform:translateY(-50%);width:4px;height:60%;border-radius:8px;background:var(--rose);box-shadow:0 0 0 4px rgba(224,191,184,.15)}
+    .logout{margin-top:auto;background:linear-gradient(180deg,#fff,#F6F3F1);border:1px solid var(--silver);color:#7a2b2b}
+
+    /* Main content */
+    .main{flex:1;height:100%;overflow:auto;padding:26px 36px;background:
+      radial-gradient(1100px 600px at 120% -10%, rgba(224,191,184,.12), transparent 55%),
+      radial-gradient(900px 500px at -15% 110%, rgba(224,191,184,.10), transparent 55%),
+      linear-gradient(140deg, #FAF9F7, #F1EFEC 70%);
+    }
+    header.suite{background:linear-gradient(180deg,#fff,#FBFAF9);border:1px solid var(--silver);border-radius:14px;box-shadow:var(--shadow);padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+    .title{display:flex;flex-direction:column}
+    .title .eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#7b7b7b}
+    .title h2{margin:.25rem 0 0;font-family:"Playfair Display",serif;font-size:1.5rem}
+
+    .card{background:linear-gradient(180deg,#fff,#FBFAF9);border:1px solid var(--silver);border-radius:14px;box-shadow:var(--shadow);padding:22px;margin-bottom:18px;transition:.3s ease}
+    .card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.12)}
+    .card h3{margin:0 0 12px;font-family:"Playfair Display",serif;border-bottom:1px dashed var(--silver);padding-bottom:8px}
+
+    .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+    .tile{background:linear-gradient(180deg,#fff,#F6F3F1);border:1px solid var(--silver);border-radius:12px;padding:22px;box-shadow:var(--shadow);font-weight:600;cursor:pointer;transition:.25s}
+    .tile small{display:block;color:#6a6a6a;margin-top:6px}
+    .tile:hover{transform:translateY(-3px);border-color:var(--rose);box-shadow:0 14px 32px rgba(224,191,184,.35)}
+
+    input[type="text"],input[type="date"],input[type="file"],select,textarea{
+      width:100%;padding:10px 12px;border:1px solid var(--silver);border-radius:10px;margin-bottom:10px;font-size:.98rem}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 4px rgba(224,191,184,.18)}
+    button{background:#fff;border:1px solid var(--rose);border-radius:10px;padding:10px 16px;cursor:pointer;font-weight:600;box-shadow:0 10px 20px rgba(224,191,184,.22)}
+    button:hover{transform:translateY(-2px)}
+
+    footer{text-align:center;color:#757575;padding:14px 6px 24px}
+  </style>
+</head>
+<body>
+  <div id="loader"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="logo-transparent.png" alt="Legal Suite Logo"/>
+      <h1>The Legal Suite</h1>
+      <small>by The Law Office of Jamie Feltus</small>
+    </div>
+
+    <nav class="nav">
+      <a href="#" class="active" onclick="showSection('overview')">The Legal Suite</a>
+      <a href="#" onclick="showSection('appointments')">Consultations</a>
+      <a href="#" onclick="showSection('vault')">JF Legal Vault</a>
+      <a href="#" onclick="showSection('case')">Client Progress</a>
+      <a href="#" onclick="showSection('services')">Boutique Legal Services</a>
+      <a href="#" onclick="showSection('paralegal')">Ask Your Paralegal</a>
+      <a href="#" class="logout" onclick="logout()">Log Out</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <header class="suite">
+      <div class="title">
+        <span class="eyebrow">Client Portal</span>
+        <h2 id="welcome">Welcome</h2>
+      </div>
+      <span style="border:1px solid var(--rose);padding:4px 10px;border-radius:999px;font-size:.82rem;">Boutique Experience</span>
+    </header>
+
+    <!-- Overview -->
+    <section id="overview" class="card">
+      <h3>Quick Access</h3>
+      <div class="tiles">
+        <div class="tile" onclick="showSection('vault')">📂 JF Legal Vault<small>Store, organize & review documents.</small></div>
+        <div class="tile" onclick="showSection('services')">⚖️ Boutique Legal Services<small>Wills, Estate, Modifications, Enforcement.</small></div>
+        <div class="tile" onclick="showSection('case')">📈 Client Progress<small>Track milestones & next steps.</small></div>
+        <div class="tile" onclick="showSection('appointments')">📅 Consultations<small>Schedule and view dates.</small></div>
+        <div class="tile" onclick="showSection('paralegal')">💬 Ask Your Paralegal<small>Questions & guidance.</small></div>
+      </div>
+    </section>
+
+    <!-- JF Legal Vault -->
+    <section id="vault" class="card" style="display:none;">
+      <h3>JF Legal Vault</h3>
+      <input type="file" id="fileUpload"/>
+      <button onclick="uploadFile()">Upload Document</button>
+      <div id="fileList" style="margin-top:12px;"></div>
+    </section>
+
+    <!-- Client Progress -->
+    <section id="case" class="card" style="display:none;">
+      <h3>Client Progress</h3>
+      <p id="caseStatus">Your case is currently: <strong>Pending Review</strong></p>
+      <button onclick="updateCase()">Advance to Next Stage</button>
+    </section>
+
+    <!-- Boutique Legal Services -->
+    <section id="services" class="card" style="display:none;">
+      <h3>Request a Service</h3>
+      <select id="serviceType">
+        <option value="">Select a Service</option>
+        <option>Will Preparation</option>
+        <option>Estate Planning</option>
+        <option>Custody / Divorce</option>
+        <option>Insurance Claim</option>
+        <option>Modification / Enforcement</option>
+      </select>
+      <select id="professional">
+        <option value="">Assign To</option>
+        <option>Attorney</option>
+        <option>Paralegal</option>
+      </select>
+      <textarea id="serviceDetails" rows="4" placeholder="Describe your request…"></textarea>
+      <button onclick="submitServiceRequest()">Submit Request</button>
+      <p id="serviceMsg" style="margin-top:8px;font-weight:600;"></p>
+    </section>
+
+    <!-- Consultations -->
+    <section id="appointments" class="card" style="display:none;">
+      <h3>Consultations</h3>
+      <input type="date" id="apptDate"/>
+      <button onclick="addAppointment()">Add Consultation</button>
+      <ul id="apptList" style="margin-top:10px;"></ul>
+    </section>
+
+    <!-- Ask Your Paralegal -->
+    <section id="paralegal" class="card" style="display:none;">
+      <h3>Ask Your Paralegal</h3>
+      <textarea id="question" rows="3" placeholder="Type your question…"></textarea>
+      <button onclick="askParalegal()">Send</button>
+      <p id="paraResponse" style="margin-top:8px;"></p>
+    </section>
+
+    <footer>&copy; 2025 The Law Office of Jamie Feltus — The Legal Suite</footer>
+  </main>
+
+  <script src="transition.js"></script>
+  <script>
+    // Loader
+    const loader=document.getElementById('loader');
+    window.addEventListener('load',()=> setTimeout(()=> loader.style.opacity=0,300));
+
+    // Access control + welcome
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    const welcome = document.getElementById('welcome');
+    if(!user){ window.location.href='login.html'; }
+    else if(user.status==="new"){ window.location.href='intake.html'; }
+    else if(user.status==="intakeComplete"){ window.location.href='retainer.html'; }
+    else { welcome.textContent = `Welcome, ${user.name}`; }
+
+    // Nav
+    function showSection(id){
+      document.querySelectorAll('.card').forEach(c=> c.style.display='none');
+      document.getElementById(id).style.display='block';
+      document.querySelectorAll('.nav a').forEach(a=> a.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function logout(){ localStorage.removeItem('loggedInUser'); window.location.href='index.html'; }
+
+    // Vault
+    function uploadFile(){
+      const f=document.getElementById('fileUpload').files[0];
+      if(!f) return;
+      const row=document.createElement('div');
+      row.textContent=`${f.name} — ${new Date().toLocaleDateString()}`;
+      row.style.padding='10px'; row.style.border='1px solid var(--silver)'; row.style.borderRadius='10px'; row.style.marginTop='8px'; row.style.background='#fff';
+      document.getElementById('fileList').prepend(row);
+      document.getElementById('fileUpload').value='';
+    }
+
+    // Services
+    function submitServiceRequest(){
+      const type=document.getElementById('serviceType').value;
+      const pro=document.getElementById('professional').value;
+      const det=document.getElementById('serviceDetails').value.trim();
+      const msg=document.getElementById('serviceMsg');
+      if(!type||!pro||!det){ msg.style.color='#8c2b2b'; msg.textContent='Please complete all fields.'; return; }
+      const requests=JSON.parse(localStorage.getItem('serviceRequests')||'[]');
+      requests.push({user:user.name,email:user.email,type: type, professional:pro, details:det, date:new Date().toLocaleString(), status:"Pending Review"});
+      localStorage.setItem('serviceRequests',JSON.stringify(requests));
+      msg.style.color='#246b2c'; msg.textContent='Your request has been submitted.';
+      document.getElementById('serviceType').value='';
+      document.getElementById('professional').value='';
+      document.getElementById('serviceDetails').value='';
+    }
+
+    // Consultations
+    function addAppointment(){
+      const d=document.getElementById('apptDate').value;
+      if(!d) return;
+      const li=document.createElement('li');
+      li.textContent=`Consultation — ${new Date(d).toLocaleDateString()}`;
+      li.style.border='1px solid var(--silver)'; li.style.borderRadius='10px'; li.style.padding='10px'; li.style.background='#fff'; li.style.marginTop='8px';
+      document.getElementById('apptList').appendChild(li);
+      document.getElementById('apptDate').value='';
+    }
+
+    // Paralegal (simulated)
+    function askParalegal(){
+      const q=document.getElementById('question').value.trim();
+      const out=document.getElementById('paraResponse'); if(!q) return;
+      let a="I'll note that and update your file.";
+      if(q.toLowerCase().includes('status')) a="Your case is currently under attorney review.";
+      out.textContent=a; document.getElementById('question').value='';
+    }
+
+    // Progress
+    const stages=["Pending Review","Under Attorney Review","Awaiting Court Date","Filed","Closed"];
+    let stageIndex=0;
+    function updateCase(){
+      stageIndex=(stageIndex+1)%stages.length;
+      document.querySelector('#caseStatus strong').textContent=stages[stageIndex];
+    }
+  </script>
+</body>
+</html>
