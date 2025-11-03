@@ -15,7 +15,6 @@
   --ink:#1C1C1C;
   --shadow:0 4px 12px rgba(0,0,0,0.08);
 }
-
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
   font-family:"Poppins",sans-serif;
@@ -35,16 +34,14 @@ body{
   align-items:center;
   box-shadow:var(--shadow);
 }
-.header img{
-  width:180px;
-}
+.header img{width:180px;}
 .header h1{
   font-family:"Playfair Display",serif;
   font-size:1.4rem;
   color:#fff;
 }
 
-/* Welcome Banner */
+/* Banner */
 .banner{
   text-align:center;
   padding:24px 16px;
@@ -60,12 +57,9 @@ body{
   color:#333;
   font-size:1.5rem;
 }
-.banner p{
-  color:#666;
-  margin-top:6px;
-}
+.banner p{color:#666;margin-top:6px;}
 
-/* Status Bar */
+/* Status */
 .status{
   display:flex;
   justify-content:center;
@@ -82,12 +76,9 @@ body{
   text-align:center;
   color:#333;
 }
-.status-box span{
-  color:green;
-  font-weight:600;
-}
+.status-box span{color:green;font-weight:600;}
 
-/* Main Cards */
+/* Cards */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -104,20 +95,14 @@ body{
   text-align:center;
   transition:transform .3s ease;
 }
-.card:hover{
-  transform:translateY(-4px);
-}
+.card:hover{transform:translateY(-4px);}
 .card h3{
   font-family:"Playfair Display",serif;
   color:#222;
   font-size:1.2rem;
   margin-bottom:10px;
 }
-.card p{
-  font-size:.95rem;
-  color:#555;
-  margin-bottom:15px;
-}
+.card p{font-size:.95rem;color:#555;margin-bottom:15px;}
 .card a{
   display:inline-block;
   background:var(--rose);
@@ -129,26 +114,92 @@ body{
   font-size:1rem;
   transition:background .3s ease;
 }
-.card a:hover{
-  background:#d6a9a0;
-}
+.card a:hover{background:#d6a9a0;}
 
 /* Footer */
-footer{
-  text-align:center;
-  color:#666;
-  font-size:.75rem;
-  margin:30px 0 10px;
-}
+footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
 
-/* Responsive */
-@media(max-width:768px){
-  .header img{width:140px;}
-  .header h1{font-size:1.2rem;}
-  .banner h2{font-size:1.3rem;}
-  .status-box{font-size:.85rem;padding:10px 16px;}
-  .card h3{font-size:1.1rem;}
+/* ---------- Vault Modal ---------- */
+.vault-modal{
+  position:fixed;
+  top:0;right:-100%;
+  width:100%;
+  max-width:650px;
+  height:100vh;
+  background:#fff;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  transition:right .6s ease;
+  z-index:99;
+  display:flex;
+  flex-direction:column;
 }
+.vault-modal.show{right:0;}
+.vault-header{
+  background:linear-gradient(90deg,var(--rose),var(--lilac));
+  padding:14px 20px;
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.vault-header h2{
+  font-family:"Playfair Display",serif;
+  font-size:1.3rem;
+}
+.vault-header button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:1.5rem;
+  cursor:pointer;
+}
+.vault-content{
+  padding:20px;
+  flex:1;
+  overflow-y:auto;
+}
+.upload-area{
+  border:2px dashed var(--rose);
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+  margin-bottom:30px;
+}
+.upload-area input[type="file"]{margin-top:10px;}
+.file-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:16px;
+}
+.file-card{
+  background:#fdfdfd;
+  border:1px solid #eee;
+  border-radius:10px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  text-align:left;
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeIn .5s forwards;
+}
+.file-card h4{
+  font-family:"Playfair Display",serif;
+  margin-bottom:5px;
+  color:#222;
+}
+.file-card small{color:#777;}
+.file-card a{
+  display:inline-block;
+  margin-top:10px;
+  background:var(--rose);
+  color:#fff;
+  text-decoration:none;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:.85rem;
+}
+.file-card a:hover{background:#d6a9a0;}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 
@@ -169,15 +220,17 @@ footer{
     <div class="status-box">Payment: <span>Received</span></div>
   </div>
 
-  <div class="card">
-  <h3>JF Legal Vault</h3>
-  <p>Access your documents, signed agreements, and uploaded case files.</p>
-  <a href="vault.html">View Vault</a>
-</div>
+  <div class="cards">
+    <div class="card">
+      <h3>Consultations</h3>
+      <p>View or schedule your upcoming consultations and Zoom meetings.</p>
+      <a href="#">Open</a>
+    </div>
+
     <div class="card">
       <h3>JF Legal Vault</h3>
       <p>Access your documents, signed agreements, and uploaded case files.</p>
-      <a href="#">View Vault</a>
+      <a href="#" id="openVault">View Vault</a>
     </div>
 
     <div class="card">
@@ -194,6 +247,62 @@ footer{
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+
+  <!-- Vault Modal -->
+  <div class="vault-modal" id="vaultModal">
+    <div class="vault-header">
+      <h2>JF Legal Vault</h2>
+      <button id="closeVault">&times;</button>
+    </div>
+    <div class="vault-content">
+      <div class="upload-area">
+        <form id="uploadForm">
+          <label><strong>Upload a file:</strong></label><br>
+          <input type="file" name="document" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
+          <button type="submit" style="
+            background:var(--rose);
+            color:#fff;border:none;
+            padding:10px 30px;border-radius:40px;
+            font-family:'Playfair Display',serif;
+            font-size:1rem;cursor:pointer;">Upload File</button>
+        </form>
+      </div>
+
+      <div class="file-list" id="fileList">
+        <div class="file-card">
+          <h4>Sample Document</h4>
+          <small>Uploaded: March 1, 2025</small>
+          <a href="#">Download</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* Vault modal controls */
+const vaultModal = document.getElementById("vaultModal");
+const openVault = document.getElementById("openVault");
+const closeVault = document.getElementById("closeVault");
+openVault.addEventListener("click",(e)=>{e.preventDefault();vaultModal.classList.add("show");});
+closeVault.addEventListener("click",()=>vaultModal.classList.remove("show"));
+
+/* Simulated Upload Logic */
+const uploadForm = document.getElementById("uploadForm");
+const fileList = document.getElementById("fileList");
+
+uploadForm.addEventListener("submit",(e)=>{
+  e.preventDefault();
+  const file = uploadForm.querySelector('input[type="file"]').files[0];
+  if(!file){alert("Please select a file first.");return;}
+  const card=document.createElement("div");
+  card.className="file-card";
+  card.innerHTML=`
+    <h4>${file.name}</h4>
+    <small>Uploaded: ${new Date().toLocaleDateString()}</small>
+    <a href="#">Download</a>`;
+  fileList.prepend(card);
+  uploadForm.reset();
+});
+</script>
 </body>
 </html>
-
