@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Legal Suite · Dashboard</title>
+<title>The Legal Suite · Your Paralegal Assistant</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-:root {
+:root{
   --rose:#E0BFB8;
   --lilac:#EEE6F2;
   --ivory:#F8F5F2;
@@ -20,12 +20,10 @@ body{
   font-family:"Poppins",sans-serif;
   background:var(--ivory);
   color:var(--ink);
-  min-height:100vh;
   display:flex;
   flex-direction:column;
+  min-height:100vh;
 }
-
-/* Header */
 .header{
   background:linear-gradient(90deg,var(--rose),var(--lilac));
   padding:16px 24px;
@@ -41,51 +39,40 @@ body{
   color:#fff;
 }
 
-/* Banner */
-.banner{
-  text-align:center;
-  padding:24px 16px;
-  background:#fff;
-  box-shadow:var(--shadow);
-  border-radius:12px;
-  margin:20px auto;
+/* --- Paralegal Feed --- */
+.feed{
   width:90%;
   max-width:900px;
-}
-.banner h2{
-  font-family:"Playfair Display",serif;
-  color:#333;
-  font-size:1.5rem;
-}
-.banner p{color:#666;margin-top:6px;}
-
-/* Status */
-.status{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
-  margin:15px auto 25px;
-}
-.status-box{
   background:#fff;
-  border-radius:10px;
+  margin:20px auto;
+  padding:20px;
+  border-radius:12px;
   box-shadow:var(--shadow);
-  padding:12px 20px;
-  font-size:.95rem;
-  text-align:center;
+}
+.feed h2{
+  font-family:"Playfair Display",serif;
+  font-size:1.5rem;
+  margin-bottom:10px;
   color:#333;
 }
-.status-box span{color:green;font-weight:600;}
+.feed-item{
+  padding:12px 10px;
+  border-left:4px solid var(--rose);
+  background:#fafafa;
+  margin-bottom:10px;
+  border-radius:6px;
+}
+.feed-item strong{color:#222;}
+.feed-item small{display:block;color:#777;margin-top:4px;font-size:.8rem;}
 
-/* Cards */
+/* --- Dashboard Cards --- */
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:16px;
   width:90%;
   max-width:900px;
-  margin:0 auto;
+  margin:10px auto 30px;
 }
 .card{
   background:#fff;
@@ -116,180 +103,212 @@ body{
 }
 .card a:hover{background:#d6a9a0;}
 
-/* Footer */
 footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
 
-/* ---------- Shared Modal Styles ---------- */
+/* --- Modal (shared) --- */
 .modal{
-  position:fixed;
-  top:0;right:-100%;
-  width:100%;max-width:650px;height:100vh;
-  background:#fff;
-  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
-  transition:right .6s ease;
-  z-index:99;
-  display:flex;flex-direction:column;
+  position:fixed;top:0;right:-100%;
+  width:100%;max-width:700px;height:100vh;
+  background:#fff;box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  transition:right .6s ease;z-index:99;display:flex;flex-direction:column;
 }
 .modal.show{right:0;}
 .modal-header{
   background:linear-gradient(90deg,var(--rose),var(--lilac));
-  padding:14px 20px;color:#fff;
-  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px;color:#fff;display:flex;justify-content:space-between;align-items:center;
 }
 .modal-header h2{font-family:"Playfair Display",serif;font-size:1.3rem;}
 .modal-header button{
-  background:none;border:none;color:#fff;
-  font-size:1.5rem;cursor:pointer;
+  background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;
 }
-.modal-content{
-  padding:20px;
-  flex:1;overflow-y:auto;
-}
+.modal-content{padding:20px;flex:1;overflow-y:auto;}
 
-/* Vault Styles */
-.upload-area{
-  border:2px dashed var(--rose);
-  border-radius:16px;
-  padding:20px;text-align:center;
-  margin-bottom:30px;
+/* Case timeline */
+.timeline{
+  border-left:3px solid var(--rose);
+  padding-left:15px;margin-top:15px;
 }
-.upload-area input[type="file"]{margin-top:10px;}
-.file-list{
+.step{margin-bottom:12px;}
+.step strong{color:#222;}
+.step span{display:block;font-size:.9rem;color:#777;}
+
+/* Service cards */
+.services{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:16px;
+  gap:20px;
 }
-.file-card{
-  background:#fdfdfd;border:1px solid #eee;
-  border-radius:10px;padding:16px;
-  box-shadow:var(--shadow);
-  text-align:left;
-  opacity:0;transform:translateY(10px);
-  animation:fadeIn .5s forwards;
+.service{
+  background:#fdfdfd;border:1px solid #eee;border-radius:12px;
+  padding:20px;text-align:left;box-shadow:var(--shadow);
 }
-.file-card h4{
-  font-family:"Playfair Display",serif;
-  margin-bottom:5px;color:#222;
+.service h4{font-family:"Playfair Display",serif;color:#222;margin-bottom:6px;}
+.service p{font-size:.9rem;color:#555;margin-bottom:10px;}
+.service a{
+  display:inline-block;background:var(--rose);color:#fff;text-decoration:none;
+  padding:8px 16px;border-radius:30px;font-family:"Playfair Display",serif;font-size:.9rem;
 }
-.file-card small{color:#777;}
-.file-card a{
-  display:inline-block;margin-top:10px;
-  background:var(--rose);color:#fff;text-decoration:none;
-  padding:6px 14px;border-radius:20px;font-size:.85rem;
-}
-.file-card a:hover{background:#d6a9a0;}
-@keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
-
-/* Consultation Modal */
-.calendly-inline-widget{min-width:320px;height:600px;}
+.service a:hover{background:#d6a9a0;}
 </style>
 </head>
 
 <body>
   <div class="header">
     <img src="logo-transparent.png" alt="The Legal Suite Logo">
-    <h1>Client Portal</h1>
+    <h1>Your Paralegal Assistant</h1>
   </div>
 
-  <div class="banner">
-    <h2>Welcome, [Client Name]</h2>
-    <p>Your personalized Legal Suite dashboard</p>
-  </div>
+  <div class="feed">
+    <h2>Hi Jamie, here’s what I’ve been working on for you 👋</h2>
 
-  <div class="status">
-    <div class="status-box">Intake Form: <span>Complete</span></div>
-    <div class="status-box">Agreement: <span>Signed</span></div>
-    <div class="status-box">Payment: <span>Received</span></div>
+    <div class="feed-item">
+      <strong>✅ Retainer Signed</strong>
+      <small>Your retainer agreement was received and filed on March 3, 2025.</small>
+    </div>
+
+    <div class="feed-item">
+      <strong>📅 Consultation Scheduled</strong>
+      <small>Your consultation with Attorney Feltus is confirmed for March 10th at 10 AM CST.</small>
+    </div>
+
+    <div class="feed-item">
+      <strong>📂 Vault Update</strong>
+      <small>Your uploaded petition has been categorized under “Court Documents.”</small>
+    </div>
+
+    <div class="feed-item">
+      <strong>💡 Next Step</strong>
+      <small>Please upload your financial affidavit when ready.</small>
+    </div>
   </div>
 
   <div class="cards">
     <div class="card">
-      <h3>Consultations</h3>
-      <p>View or schedule your upcoming consultations and Zoom meetings.</p>
-      <a href="#" id="openConsult">Open</a>
+      <h3>My Cases</h3>
+      <p>Track your active cases and progress milestones.</p>
+      <a href="#" id="openCases">View Cases</a>
     </div>
 
     <div class="card">
       <h3>JF Legal Vault</h3>
-      <p>Access your documents, signed agreements, and uploaded case files.</p>
+      <p>Access and manage your legal documents.</p>
       <a href="#" id="openVault">View Vault</a>
     </div>
 
     <div class="card">
-      <h3>Client Progress</h3>
-      <p>Track updates, deadlines, and key milestones on your case.</p>
-      <a href="#">Track</a>
+      <h3>Consultations</h3>
+      <p>View and schedule your upcoming meetings.</p>
+      <a href="#" id="openConsult">Open</a>
     </div>
 
     <div class="card">
-      <h3>Billing & Payments</h3>
-      <p>Review invoices, payment history, and outstanding balances.</p>
-      <a href="#">View</a>
+      <h3>Legal Services</h3>
+      <p>Explore additional services your paralegal recommends.</p>
+      <a href="#" id="openServices">Explore</a>
     </div>
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
 
-  <!-- Vault Modal -->
+  <!-- Case Info Modal -->
+  <div class="modal" id="caseModal">
+    <div class="modal-header">
+      <h2>My Cases</h2>
+      <button id="closeCases">&times;</button>
+    </div>
+    <div class="modal-content">
+      <h3 style="font-family:'Playfair Display',serif;color:#333;">Custody of Minor Child</h3>
+      <div class="timeline">
+        <div class="step"><strong>✅ Retainer Signed</strong><span>March 3, 2025</span></div>
+        <div class="step"><strong>🟡 Petition Filed</strong><span>March 5, 2025</span></div>
+        <div class="step"><strong>⏳ Awaiting Hearing Date</strong><span>Expected March 15, 2025</span></div>
+      </div>
+      <p style="margin-top:15px;color:#555;">Next Step: Await court scheduling notice.</p>
+    </div>
+  </div>
+
+  <!-- Services Modal -->
+  <div class="modal" id="servicesModal">
+    <div class="modal-header">
+      <h2>Legal Services</h2>
+      <button id="closeServices">&times;</button>
+    </div>
+    <div class="modal-content">
+      <p style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Recommended for You:</p>
+      <div class="services">
+        <div class="service">
+          <h4>Estate Planning</h4>
+          <p>Prepare your will or living trust — recommended for clients with ongoing custody cases.</p>
+          <a href="intake-form.html">Request Assistance</a>
+        </div>
+
+        <div class="service">
+          <h4>Contract Review</h4>
+          <p>Need to review an agreement? Upload it in your Vault for a professional review.</p>
+          <a href="vault.html">Upload Contract</a>
+        </div>
+
+        <div class="service">
+          <h4>Modification / Enforcement</h4>
+          <p>Modify an existing custody or support order with paralegal assistance.</p>
+          <a href="intake-form.html">Start Request</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Existing Vault + Consultations Modals (reuse from previous build) -->
   <div class="modal" id="vaultModal">
     <div class="modal-header">
       <h2>JF Legal Vault</h2>
       <button id="closeVault">&times;</button>
     </div>
     <div class="modal-content">
+      <p style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Your Files</p>
       <div class="upload-area">
         <form id="uploadForm">
-          <label><strong>Upload a file:</strong></label><br>
-          <input type="file" name="document" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
-          <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Upload File</button>
+          <input type="file" required><br><br>
+          <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;">Upload</button>
         </form>
       </div>
-      <div class="file-list" id="fileList">
-        <div class="file-card">
-          <h4>Sample Document</h4>
-          <small>Uploaded: March 1, 2025</small>
-          <a href="#">Download</a>
-        </div>
-      </div>
+      <div id="fileList"></div>
     </div>
   </div>
 
-  <!-- Consultation Modal -->
   <div class="modal" id="consultModal">
     <div class="modal-header">
       <h2>Consultations</h2>
       <button id="closeConsult">&times;</button>
     </div>
     <div class="modal-content" style="text-align:center;">
-      <h3 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Schedule Your Consultation</h3>
       <p style="color:#555;font-size:.9rem;margin-bottom:20px;">
-        Use the calendar below to choose your preferred date and time.<br>
-        A Zoom link will be automatically generated and emailed to you.
+        Please note: A <strong>$250 consultation fee</strong> is required to confirm your booking.
       </p>
-
-      <!-- Calendly Integration -->
       <div class="calendly-inline-widget"
            data-url="https://calendly.com/kymfeltus/consultation"
            style="min-width:320px;height:600px;">
       </div>
-      <script type="text/javascript"
-        src="https://assets.calendly.com/assets/external/widget.js"
-        async></script>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </div>
 
 <script>
-/* Vault modal controls */
-const vaultModal=document.getElementById("vaultModal");
-document.getElementById("openVault").addEventListener("click",(e)=>{e.preventDefault();vaultModal.classList.add("show");});
-document.getElementById("closeVault").addEventListener("click",()=>vaultModal.classList.remove("show"));
+/* Open/Close modals */
+const modals = [
+  {openId:"openCases", modalId:"caseModal", closeId:"closeCases"},
+  {openId:"openVault", modalId:"vaultModal", closeId:"closeVault"},
+  {openId:"openConsult", modalId:"consultModal", closeId:"closeConsult"},
+  {openId:"openServices", modalId:"servicesModal", closeId:"closeServices"}
+];
+modals.forEach(({openId, modalId, closeId})=>{
+  const open=document.getElementById(openId);
+  const modal=document.getElementById(modalId);
+  const close=document.getElementById(closeId);
+  open.addEventListener("click",(e)=>{e.preventDefault();modal.classList.add("show");});
+  close.addEventListener("click",()=>modal.classList.remove("show"));
+});
 
-/* Consult modal controls */
-const consultModal=document.getElementById("consultModal");
-document.getElementById("openConsult").addEventListener("click",(e)=>{e.preventDefault();consultModal.classList.add("show");});
-document.getElementById("closeConsult").addEventListener("click",()=>consultModal.classList.remove("show"));
-
-/* Simulated Upload Logic */
+/* Vault upload simulation */
 const uploadForm=document.getElementById("uploadForm");
 const fileList=document.getElementById("fileList");
 uploadForm.addEventListener("submit",(e)=>{
@@ -297,8 +316,8 @@ uploadForm.addEventListener("submit",(e)=>{
   const file=uploadForm.querySelector('input[type="file"]').files[0];
   if(!file){alert("Please select a file first.");return;}
   const card=document.createElement("div");
-  card.className="file-card";
-  card.innerHTML=`<h4>${file.name}</h4><small>Uploaded: ${new Date().toLocaleDateString()}</small><a href="#">Download</a>`;
+  card.className="feed-item";
+  card.innerHTML=`📎 <strong>${file.name}</strong><small>Uploaded ${new Date().toLocaleDateString()}</small>`;
   fileList.prepend(card);
   uploadForm.reset();
 });
