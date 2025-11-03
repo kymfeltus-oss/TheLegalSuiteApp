@@ -44,15 +44,17 @@ html,body{
   background:var(--ivory);
 }
 
-.left img{
+.left img {
   width:auto;
-  height:78%;
-  max-height:640px;
+  height:70%;             /* smaller — shows full body */
+  max-height:620px;
   object-fit:contain;
   object-position:center bottom;
-  filter:drop-shadow(0 3px 6px rgba(0,0,0,0.05));
-  margin-bottom:-10px; /* lift Jamie slightly */
+  filter:none;            /* remove shadow/blur entirely */
+  margin-left:20px;       /* bring her slightly toward center */
+  margin-bottom:-5px;     /* minimal upward lift */
 }
+
 
 /* Right Content */
 .right{
