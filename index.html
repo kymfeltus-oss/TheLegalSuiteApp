@@ -10,7 +10,7 @@
 <style>
 :root {
   --rose:#E0BFB8;
-  --lilac:#EEE6F2;        /* slightly stronger lilac tone */
+  --lilac:#EEE6F2;
   --ivory:#F8F5F2;
   --ink:#1C1C1C;
   --shadow:0 6px 14px rgba(0,0,0,0.1);
@@ -27,7 +27,7 @@ html,body{
   position:relative;
 }
 
-/* Jamie background image */
+/* Jamie Background */
 body::before{
   content:"";
   position:absolute;
@@ -37,30 +37,31 @@ body::before{
   width:100%;
   height:100%;
   background:url('jamie.png') no-repeat center bottom;
-  background-size:contain;
+  background-size:45%;       /* smaller Jamie for balance */
   opacity:1;
   z-index:0;
   pointer-events:none;
 }
 
-/* Content */
+/* Wrapper Content */
 .wrapper{
   position:relative;
   z-index:2;
+  height:calc(100vh - 40px);
+  width:100%;
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;   /* move content higher */
+  justify-content:flex-start;
   align-items:center;
-  height:calc(100vh - 40px);
   text-align:center;
-  padding:0 5%;
-  transform:translateY(-6%);    /* lift all text/buttons above Jamie's head */
 }
 
+/* Logo + Tagline (upper section) */
 .logo{
-  width:380px;
+  width:360px;
   max-width:90%;
-  margin-bottom:14px;
+  margin-top:5%;
+  margin-bottom:10px;
 }
 
 .tagline{
@@ -69,14 +70,18 @@ body::before{
   text-transform:uppercase;
   letter-spacing:.07em;
   color:#444;
-  margin-bottom:40px;
+  margin-bottom:24px;
 }
 
-/* Buttons */
+/* Buttons (overlayed on Jamie’s torso) */
 .buttons{
   display:flex;
   flex-direction:row;
   gap:20px;
+  position:absolute;
+  bottom:22%;         /* places buttons under Jamie’s arms */
+  left:50%;
+  transform:translateX(-50%);
 }
 .btn{
   border:1px solid var(--rose);
@@ -112,17 +117,16 @@ footer{
 
 /* Responsive */
 @media(max-width:900px){
-  body::before{height:95%;background-size:contain;}
-  .wrapper{transform:translateY(-10%);}
-  .logo{width:320px;}
-  .tagline{font-size:1.1rem;margin-bottom:30px;}
-  .btn{padding:12px 20px;font-size:.95rem;}
+  body::before{background-size:55%;}
+  .logo{width:300px;margin-top:8%;}
+  .tagline{font-size:1.1rem;margin-bottom:20px;}
+  .buttons{bottom:24%;}
 }
 @media(max-width:700px){
-  body::before{height:100%;background-size:contain;}
-  .wrapper{transform:translateY(-12%);}
-  .logo{width:260px;}
-  .tagline{font-size:1rem;}
+  body::before{background-size:60%;}
+  .logo{width:260px;margin-top:10%;}
+  .tagline{font-size:1rem;margin-bottom:18px;}
+  .buttons{bottom:26%;}
 }
 </style>
 </head>
@@ -131,6 +135,7 @@ footer{
   <div class="wrapper">
     <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
     <p class="tagline">Your Boutique Legal Experience</p>
+
     <div class="buttons">
       <a href="login.html" class="btn">Enter Legal Suite</a>
       <a href="create-account.html" class="btn">Create Account</a>
