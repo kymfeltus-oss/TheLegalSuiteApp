@@ -40,7 +40,7 @@
     }
 
     .sidebar img {
-      width: 180px; /* Larger logo */
+      width: 180px;
       margin-bottom: 30px;
     }
 
@@ -83,15 +83,70 @@
       flex: 1;
       padding: 30px 40px;
       overflow-y: auto;
+      position: relative;
     }
 
     header {
       margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     header h1 {
       font-family: "Playfair Display", serif;
       font-size: 1.6rem;
+    }
+
+    /* Profile Menu */
+    .profile-container {
+      position: relative;
+    }
+
+    .profile-pic {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid var(--rose);
+      transition: transform 0.2s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 55px;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--silver);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      width: 180px;
+      display: none;
+      flex-direction: column;
+      animation: fadeIn 0.2s ease;
+      z-index: 100;
+    }
+
+    .dropdown-menu.active {
+      display: flex;
+    }
+
+    .dropdown-menu a {
+      padding: 12px 16px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--rose);
+      color: #fff;
     }
 
     /* Dashboard Tiles */
@@ -121,15 +176,21 @@
       margin-bottom: 8px;
     }
 
-    /* Vault Section */
-    .vault-section {
+    /* Section Animations */
+    .section {
       display: none;
+      animation: fadeIn 0.4s ease forwards;
     }
-
-    .vault-section.active {
+    .section.active {
       display: block;
     }
 
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Vault */
     .vault-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -158,7 +219,6 @@
       color: #444;
       padding-left: 10px;
     }
-
   </style>
 </head>
 
@@ -166,57 +226,68 @@
   <aside class="sidebar">
     <img src="logo-transparent.png" alt="The Legal Suite Logo" />
     <nav class="nav-links">
-      <a href="#" class="active" onclick="showSection('overview')">Dashboard</a>
-      <a href="#" onclick="showSection('appointments')">Consultations</a>
-      <a href="#" onclick="showSection('vault')">JF Legal Vault</a>
-      <a href="#" onclick="showSection('case')">Client Progress</a>
-      <a href="#" onclick="showSection('services')">Legal Services</a>
-      <a href="#" onclick="showSection('paralegal')">Ask Paralegal</a>
+      <a href="#" class="active" data-section="overview">Dashboard</a>
+      <a href="#" data-section="appointments">Consultations</a>
+      <a href="#" data-section="vault">JF Legal Vault</a>
+      <a href="#" data-section="case">Client Progress</a>
+      <a href="#" data-section="services">Legal Services</a>
+      <a href="#" data-section="paralegal">Ask Paralegal</a>
     </nav>
     <a href="#" class="logout" onclick="logout()">Logout</a>
   </aside>
 
   <main class="main">
-    <header><h1>Welcome to The Legal Suite</h1></header>
+    <header>
+      <h1>Welcome to The Legal Suite</h1>
 
-    <!-- Dashboard Tiles -->
-    <section id="overview" class="content-section">
+      <!-- Profile Picture Dropdown -->
+      <div class="profile-container">
+        <img src="profile.png" alt="User Profile" class="profile-pic" id="profileBtn" />
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="#">View Profile</a>
+          <a href="#">Change Profile Picture</a>
+          <a href="#">Settings</a>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Overview -->
+    <section id="overview" class="section active">
       <div class="tiles">
-        <div class="tile" onclick="showSection('appointments')">
+        <div class="tile" data-section="appointments">
           <h3>Consultations</h3>
           <p>Schedule and review upcoming meetings.</p>
         </div>
-        <div class="tile" onclick="showSection('vault')">
+        <div class="tile" data-section="vault">
           <h3>JF Legal Vault</h3>
           <p>Access all paralegal and case resources.</p>
         </div>
-        <div class="tile" onclick="showSection('case')">
+        <div class="tile" data-section="case">
           <h3>Client Progress</h3>
           <p>Track ongoing case milestones.</p>
         </div>
-        <div class="tile" onclick="showSection('services')">
+        <div class="tile" data-section="services">
           <h3>Legal Services</h3>
           <p>Request boutique legal assistance.</p>
         </div>
-        <div class="tile" onclick="showSection('paralegal')">
+        <div class="tile" data-section="paralegal">
           <h3>Ask Paralegal</h3>
           <p>Chat or assign tasks to your paralegal team.</p>
         </div>
       </div>
     </section>
 
-    <!-- JF Legal Vault -->
-    <section id="vault" class="vault-section">
+    <!-- Vault -->
+    <section id="vault" class="section">
       <h2>JF Legal Vault — Paralegal Admin Hub</h2>
-      <p>Manage client files, track tasks, log deadlines, and maintain research records.</p>
-
+      <p>Manage client files, tasks, deadlines, research, and billing records.</p>
       <div class="vault-grid">
         <div class="vault-card">
           <h4>Client Files</h4>
           <ul>
             <li>Upload & organize case documents</li>
             <li>Access signed agreements</li>
-            <li>Attach discovery materials</li>
           </ul>
         </div>
 
@@ -237,40 +308,69 @@
         </div>
 
         <div class="vault-card">
-          <h4>Research & Notes</h4>
-          <ul>
-            <li>Save legal research summaries</li>
-            <li>Log case references</li>
-          </ul>
-        </div>
-
-        <div class="vault-card">
           <h4>Billing & Expenses</h4>
           <ul>
             <li>Record billable hours</li>
             <li>Manage client expenses</li>
           </ul>
         </div>
-
-        <div class="vault-card">
-          <h4>Evidence & Exhibits</h4>
-          <ul>
-            <li>Catalog physical and digital exhibits</li>
-            <li>Attach supporting files</li>
-          </ul>
-        </div>
       </div>
+    </section>
+
+    <!-- Placeholder Sections -->
+    <section id="appointments" class="section">
+      <h2>Consultations</h2>
+      <p>Schedule and manage your appointments here.</p>
+    </section>
+
+    <section id="case" class="section">
+      <h2>Client Progress</h2>
+      <p>Monitor each case’s timeline, documents, and updates.</p>
+    </section>
+
+    <section id="services" class="section">
+      <h2>Legal Services</h2>
+      <p>Request additional legal support or file a new matter.</p>
+    </section>
+
+    <section id="paralegal" class="section">
+      <h2>Ask Paralegal</h2>
+      <p>Submit questions, assign tasks, or review paralegal updates.</p>
     </section>
   </main>
 
   <script>
-    function showSection(id) {
-      document.querySelectorAll('.content-section, .vault-section').forEach(sec => sec.style.display = 'none');
-      document.getElementById(id)?.style.display = 'block';
-      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-      const active = Array.from(document.querySelectorAll('.nav-links a')).find(a => a.textContent.trim().includes(id.charAt(0).toUpperCase()+id.slice(1)));
-      if(active) active.classList.add('active');
-    }
+    // Handle section switching
+    const links = document.querySelectorAll('.nav-links a, .tile');
+    const sections = document.querySelectorAll('.section');
+
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = link.getAttribute('data-section');
+        if (!target) return;
+
+        sections.forEach(sec => sec.classList.remove('active'));
+        document.getElementById(target)?.classList.add('active');
+
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        document.querySelector(`.nav-links a[data-section="${target}"]`)?.classList.add('active');
+      });
+    });
+
+    // Profile dropdown toggle
+    const profileBtn = document.getElementById('profileBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    profileBtn.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.remove('active');
+      }
+    });
 
     function logout() {
       localStorage.removeItem("loggedInUser");
