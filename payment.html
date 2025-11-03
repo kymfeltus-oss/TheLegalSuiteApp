@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Payment · The Legal Suite</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --rose:#E0BFB8;
+  --lilac:#EEE6F2;
+  --ivory:#F8F5F2;
+  --ink:#1C1C1C;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  height:100%;
+  width:100%;
+  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
+  font-family:"Poppins",sans-serif;
+  color:var(--ink);
+  overflow-y:auto;
+  position:relative;
+}
+
+/* Header */
+.header{
+  text-align:center;
+  margin:30px 0 20px;
+}
+.logo{
+  width:380px;
+  max-width:90%;
+  margin-bottom:10px;
+}
+h2{
+  font-family:"Playfair Display",serif;
+  font-size:1.8rem;
+  color:#333;
+}
+
+/* Pricing Section */
+.pricing{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin:20px auto 40px;
+  max-width:900px;
+  text-align:center;
+}
+
+.tier{
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.1);
+  width:260px;
+  padding:30px 25px;
+  transition:transform .3s ease;
+}
+.tier:hover{transform:translateY(-5px);}
+.tier h3{
+  font-family:"Playfair Display",serif;
+  font-size:1.4rem;
+  margin-bottom:10px;
+  color:#222;
+}
+.tier p{
+  font-size:.95rem;
+  color:#444;
+  line-height:1.5;
+  margin-bottom:20px;
+}
+.price{
+  font-family:"Playfair Display",serif;
+  font-size:1.3rem;
+  color:var(--rose);
+  margin-bottom:15px;
+}
+
+/* Payment Buttons */
+.pay-btn{
+  background:var(--rose);
+  color:#fff;
+  border:none;
+  padding:12px 30px;
+  border-radius:40px;
+  font-family:"Playfair Display",serif;
+  font-size:1.1rem;
+  text-decoration:none;
+  transition:background .3s ease;
+}
+.pay-btn:hover{background:#d6a9a0;}
+
+/* Footer */
+footer{
+  text-align:center;
+  color:#666;
+  font-size:.75rem;
+  margin-top:40px;
+}
+
+/* Responsive */
+@media(max-width:700px){
+  .tier{width:90%;}
+  h2{font-size:1.5rem;}
+}
+</style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+    <h2>Retainer Payment</h2>
+    <p style="font-size:1rem; color:#555;">Please select your agreed service tier to complete your retainer payment securely.</p>
+  </div>
+
+  <div class="pricing">
+    <div class="tier">
+      <h3>Standard</h3>
+      <p>For clients requiring limited-scope assistance and initial representation.</p>
+      <div class="price">$750</div>
+      <a href="#" class="pay-btn">Pay via Stripe</a>
+    </div>
+
+    <div class="tier">
+      <h3>Premium</h3>
+      <p>Full representation with detailed document review and personalized strategy.</p>
+      <div class="price">$1,500</div>
+      <a href="#" class="pay-btn">Pay via Stripe</a>
+    </div>
+
+    <div class="tier">
+      <h3>Executive</h3>
+      <p>Priority access, expedited services, and ongoing attorney consultations.</p>
+      <div class="price">$2,500</div>
+      <a href="#" class="pay-btn">Pay via Stripe</a>
+    </div>
+  </div>
+
+  <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+</body>
+</html>
