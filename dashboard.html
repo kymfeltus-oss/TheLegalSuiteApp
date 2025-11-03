@@ -3,219 +3,209 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Legal Suite — Dashboard</title>
+<title>The Legal Suite · Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-:root{
+:root {
   --rose:#E0BFB8;
+  --lilac:#EEE6F2;
   --ivory:#F8F5F2;
-  --silver:#E6E2DD;
   --ink:#1C1C1C;
-  --shadow:0 8px 20px rgba(0,0,0,0.08);
+  --shadow:0 4px 10px rgba(0,0,0,0.05);
 }
+
+/* Reset */
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
   font-family:"Poppins",sans-serif;
+  background:var(--ivory);
+  color:var(--ink);
   display:flex;
   height:100vh;
-  background:linear-gradient(135deg,var(--ivory),#f2efec);
-  color:var(--ink);
   overflow:hidden;
 }
 
 /* Sidebar */
 .sidebar{
-  width:260px;background:#fff;border-right:1px solid var(--silver);
-  display:flex;flex-direction:column;align-items:center;padding:20px 0;
+  background:white;
+  width:260px;
+  flex-shrink:0;
+  border-right:1px solid #eee;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 10px;
   box-shadow:var(--shadow);
 }
-.sidebar img{width:180px;margin-bottom:30px;}
-.nav-links{width:100%;display:flex;flex-direction:column;}
-.nav-links a{
-  color:var(--ink);text-decoration:none;padding:14px 20px;font-weight:500;
-  border-left:4px solid transparent;transition:.3s;
-}
-.nav-links a:hover,.nav-links a.active{
-  background:var(--rose);color:#fff;border-left-color:#b7958b;
-}
-.logout{
-  margin-top:auto;padding:14px 20px;width:100%;text-align:center;
-  background:#f3e3e1;color:#8c2b2b;font-weight:600;text-decoration:none;
+
+.sidebar img{
+  width:200px;
+  margin-bottom:20px;
 }
 
-/* Main */
-.main{flex:1;padding:30px 40px;overflow-y:auto;position:relative;}
-header{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;
+.menu{
+  width:100%;
 }
-header h1{font-family:"Playfair Display",serif;font-size:1.6rem;}
 
-/* Profile area */
-.profile-container{display:flex;align-items:center;gap:10px;position:relative;}
-.profile-pic{
-  width:45px;height:45px;border-radius:50%;object-fit:cover;cursor:pointer;
-  border:2px solid var(--rose);transition:transform .2s;
+.menu a{
+  display:block;
+  padding:14px 20px;
+  color:#111;
+  font-weight:500;
+  text-decoration:none;
+  border-radius:8px;
+  margin-bottom:5px;
+  transition:background .3s ease, color .3s ease;
 }
-.profile-pic:hover{transform:scale(1.05);}
-.user-name{font-weight:600;font-size:.95rem;color:var(--ink);}
-.dropdown-menu{
-  position:absolute;top:60px;right:0;background:#fff;border:1px solid var(--silver);
-  border-radius:10px;box-shadow:var(--shadow);width:190px;display:none;
-  flex-direction:column;z-index:100;
-}
-.dropdown-menu.active{display:flex;}
-.dropdown-menu a,input{
-  padding:12px 16px;color:var(--ink);text-decoration:none;font-size:.9rem;
-  border:none;background:none;text-align:left;
-}
-.dropdown-menu a:hover{background:var(--rose);color:#fff;}
-input[type="file"]{display:none;}
 
-/* Tiles */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
-.tile{
-  background:#fff;border:1px solid var(--silver);border-radius:12px;
-  padding:25px;box-shadow:var(--shadow);cursor:pointer;transition:.3s;
+.menu a:hover,
+.menu a.active{
+  background:var(--rose);
+  color:#fff;
 }
-.tile:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,.15);}
-.tile h3{font-size:1.1rem;margin-bottom:8px;}
 
-/* Sections */
-.section{display:none;animation:fadeIn .4s ease forwards;}
-.section.active{display:block;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+/* Main Content */
+.main{
+  flex:1;
+  overflow-y:auto;
+  padding:25px 30px;
+}
 
-/* Vault cards */
-.vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:20px;}
-.vault-card{
-  background:#fff;border:1px solid var(--silver);border-radius:10px;
-  padding:20px;box-shadow:var(--shadow);
+.main h1{
+  font-family:"Playfair Display",serif;
+  font-size:1.6rem;
+  margin-bottom:20px;
+  color:#111;
 }
-.vault-card h4{
-  font-size:1.05rem;margin-bottom:10px;border-bottom:1px solid var(--silver);
-  padding-bottom:6px;
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:15px;
 }
-.vault-card ul{list-style:none;font-size:.95rem;color:#444;padding-left:10px;}
+
+.card{
+  background:white;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  font-size:.95rem;
+}
+.card h3{
+  margin-bottom:10px;
+  font-size:1.1rem;
+  color:#111;
+}
+.card p{color:#444;line-height:1.5;}
+
+/* Footer */
+footer{
+  text-align:center;
+  color:#888;
+  font-size:.75rem;
+  margin-top:20px;
+}
+
+/* ---------- Responsive for Mobile ---------- */
+@media(max-width:768px){
+  body{
+    flex-direction:column;
+    overflow-y:auto;
+  }
+
+  .sidebar{
+    width:100%;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 15px;
+    border-bottom:1px solid #ddd;
+    box-shadow:none;
+  }
+
+  .sidebar img{
+    width:140px;
+    margin-bottom:0;
+  }
+
+  .menu{
+    display:flex;
+    overflow-x:auto;
+    width:100%;
+    justify-content:space-evenly;
+  }
+
+  .menu a{
+    flex:1;
+    text-align:center;
+    padding:10px;
+    font-size:.85rem;
+    white-space:nowrap;
+    margin:0 3px;
+  }
+
+  .main{
+    padding:20px;
+  }
+
+  .main h1{
+    text-align:center;
+    font-size:1.3rem;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
 <body>
-  <aside class="sidebar">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo" />
-    <nav class="nav-links">
-      <a href="#" class="active" data-section="overview">Dashboard</a>
-      <a href="#" data-section="appointments">Consultations</a>
-      <a href="#" data-section="vault">JF Legal Vault</a>
-      <a href="#" data-section="case">Client Progress</a>
-      <a href="#" data-section="services">Legal Services</a>
-      <a href="#" data-section="paralegal">Ask Paralegal</a>
+  <div class="sidebar">
+    <img src="logo-transparent.png" alt="The Legal Suite Logo">
+    <nav class="menu">
+      <a href="#" class="active">Dashboard</a>
+      <a href="#">Consultations</a>
+      <a href="#">JF Legal Vault</a>
+      <a href="#">Client Progress</a>
+      <a href="#">Legal Services</a>
+      <a href="#">Ask Paralegal</a>
     </nav>
-    <a href="#" class="logout" onclick="logout()">Logout</a>
-  </aside>
+  </div>
 
-  <main class="main">
-    <header>
-      <h1>Welcome to The Legal Suite</h1>
+  <div class="main">
+    <h1>Welcome to The Legal Suite</h1>
 
-      <!-- Profile -->
-      <div class="profile-container">
-        <span class="user-name" id="userName">UserID123</span>
-        <img src="silhouette.png" alt="User Profile" class="profile-pic" id="profilePic" />
-        <div class="dropdown-menu" id="dropdownMenu">
-          <a href="#">View Profile</a>
-          <label for="uploadPhoto">Change Profile Picture</label>
-          <input type="file" id="uploadPhoto" accept="image/*" />
-          <a href="#">Settings</a>
-          <a href="#" onclick="logout()">Logout</a>
-        </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Consultations</h3>
+        <p>Schedule and manage upcoming meetings and legal appointments.</p>
       </div>
-    </header>
 
-    <!-- Overview -->
-    <section id="overview" class="section active">
-      <div class="tiles">
-        <div class="tile" data-section="appointments"><h3>Consultations</h3><p>Schedule and review upcoming meetings.</p></div>
-        <div class="tile" data-section="vault"><h3>JF Legal Vault</h3><p>Access all paralegal and case resources.</p></div>
-        <div class="tile" data-section="case"><h3>Client Progress</h3><p>Track ongoing case milestones.</p></div>
-        <div class="tile" data-section="services"><h3>Legal Services</h3><p>Request boutique legal assistance.</p></div>
-        <div class="tile" data-section="paralegal"><h3>Ask Paralegal</h3><p>Chat or assign tasks to your paralegal team.</p></div>
+      <div class="card">
+        <h3>JF Legal Vault</h3>
+        <p>Access all paralegal documents, files, and case resources securely.</p>
       </div>
-    </section>
 
-    <!-- Vault -->
-    <section id="vault" class="section">
-      <h2>JF Legal Vault — Paralegal Admin Hub</h2>
-      <p>Manage client files, tasks, deadlines, research, and billing records.</p>
-      <div class="vault-grid">
-        <div class="vault-card"><h4>Client Files</h4><ul><li>Upload & organize case documents</li><li>Access signed agreements</li></ul></div>
-        <div class="vault-card"><h4>Court Deadlines</h4><ul><li>Track hearing and filing dates</li><li>Set reminders for submissions</li></ul></div>
-        <div class="vault-card"><h4>Tasks & Assignments</h4><ul><li>Assign paralegal duties</li><li>Monitor task progress</li></ul></div>
-        <div class="vault-card"><h4>Billing & Expenses</h4><ul><li>Record billable hours</li><li>Manage client expenses</li></ul></div>
+      <div class="card">
+        <h3>Client Progress</h3>
+        <p>Track ongoing case updates, milestones, and communications.</p>
       </div>
-    </section>
 
-    <section id="appointments" class="section"><h2>Consultations</h2><p>Schedule and manage your appointments here.</p></section>
-    <section id="case" class="section"><h2>Client Progress</h2><p>Monitor each case’s timeline, documents, and updates.</p></section>
-    <section id="services" class="section"><h2>Legal Services</h2><p>Request additional legal support or file a new matter.</p></section>
-    <section id="paralegal" class="section"><h2>Ask Paralegal</h2><p>Submit questions, assign tasks, or review paralegal updates.</p></section>
-  </main>
+      <div class="card">
+        <h3>Legal Services</h3>
+        <p>Request boutique family law, estate, or consultation services.</p>
+      </div>
 
-<script>
-  // Navigation
-  const links=document.querySelectorAll('.nav-links a,.tile');
-  const sections=document.querySelectorAll('.section');
-  links.forEach(link=>{
-    link.addEventListener('click',e=>{
-      e.preventDefault();
-      const target=link.getAttribute('data-section');
-      if(!target)return;
-      sections.forEach(sec=>sec.classList.remove('active'));
-      document.getElementById(target)?.classList.add('active');
-      document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-      document.querySelector(`.nav-links a[data-section="${target}"]`)?.classList.add('active');
-    });
-  });
+      <div class="card">
+        <h3>Ask Paralegal</h3>
+        <p>Submit legal questions or inquiries directly to your assigned paralegal.</p>
+      </div>
+    </div>
 
-  // Profile dropdown toggle
-  const profilePic=document.getElementById('profilePic');
-  const dropdownMenu=document.getElementById('dropdownMenu');
-  const uploadPhoto=document.getElementById('uploadPhoto');
-  const userName=document.getElementById('userName');
-
-  // Load saved user & photo
-  const savedUser=JSON.parse(localStorage.getItem('loggedInUser'));
-  if(savedUser){
-    userName.textContent=savedUser.name||savedUser.email||"User";
-    if(savedUser.photo){profilePic.src=savedUser.photo;}
-  }
-
-  profilePic.addEventListener('click',()=>dropdownMenu.classList.toggle('active'));
-  document.addEventListener('click',e=>{
-    if(!profilePic.contains(e.target)&&!dropdownMenu.contains(e.target)){
-      dropdownMenu.classList.remove('active');
-    }
-  });
-
-  // Upload new photo
-  uploadPhoto.addEventListener('change',e=>{
-    const file=e.target.files[0];
-    if(!file)return;
-    const reader=new FileReader();
-    reader.onload=()=>{
-      profilePic.src=reader.result;
-      const user=JSON.parse(localStorage.getItem('loggedInUser'))||{};
-      user.photo=reader.result;
-      localStorage.setItem('loggedInUser',JSON.stringify(user));
-    };
-    reader.readAsDataURL(file);
-  });
-
-  function logout(){
-    localStorage.removeItem("loggedInUser");
-    window.location.href="index.html";
-  }
-</script>
+    <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+  </div>
 </body>
 </html>
