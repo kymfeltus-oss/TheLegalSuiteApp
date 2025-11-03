@@ -46,26 +46,28 @@ html,body{
 
 .left img {
   width:auto;
-  height:70%;             /* smaller — shows full body */
-  max-height:620px;
+  height:65%;              /* smaller so full body shows */
+  max-height:580px;        /* keeps natural scale on mobile */
   object-fit:contain;
   object-position:center bottom;
-  filter:none;            /* remove shadow/blur entirely */
-  margin-left:20px;       /* bring her slightly toward center */
-  margin-bottom:-5px;     /* minimal upward lift */
+  filter:none;             /* removes blur edge */
+  margin-left:30px;        /* moves her a touch toward center */
+  margin-bottom:-5px;      /* lifts her up slightly */
 }
 
 
+
 /* Right Content */
-.right{
+.right {
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
   align-items:flex-start;
   text-align:left;
   padding:0 8%;
-  transform:translateY(-6%); /* move everything up */
+  transform:translateY(-12%);   /* moves everything up more */
 }
+
 
 /* Logo */
 .logo{
