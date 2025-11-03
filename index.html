@@ -8,18 +8,13 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
-  <!-- Cache busting -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-
   <style>
     :root {
       --rose: #E0BFB8;
       --lilac: rgba(220, 208, 230, 0.35);
       --ivory: #F8F5F2;
       --ink: #1C1C1C;
-      --shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+      --shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,88 +22,76 @@
     body {
       font-family: "Poppins", sans-serif;
       min-height: 100vh;
+      display: flex;
       background: linear-gradient(160deg, var(--ivory) 40%, #f1eef0 100%);
       color: var(--ink);
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
     }
 
-    /* ----------  Layout sections  ---------- */
-    .top-half {
-      height: 45vh;                /* fixed portion for image */
-      position: relative;
+    /* ---------- Left: Jamie Photo ---------- */
+    .left-side {
+      flex: 1;
       background: linear-gradient(180deg, var(--lilac), transparent),
                   linear-gradient(135deg, rgba(224,191,184,0.25), transparent);
-      animation: slideInLeft 1.2s ease forwards;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      animation: fadeIn 1.2s ease forwards;
       opacity: 0;
       overflow: hidden;
+      position: relative;
     }
 
-    .top-half img {
+    .left-side img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center bottom; /* shows full body */
     }
 
-    /* Fades photo into ivory background */
-    .top-half::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 90px;
-      background: linear-gradient(to bottom, rgba(248,245,242,0) 0%, var(--ivory) 100%);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-60px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
-    .bottom-half {
+    /* ---------- Right: Branding Area ---------- */
+    .right-side {
       flex: 1;
       background: var(--ivory);
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 8% 8% 10%;
-      text-align: center;
+      padding: 6% 8%;
+      text-align: left;
       animation: slideInRight 1.2s ease forwards;
       opacity: 0;
     }
 
-    /* ----------  Animations  ---------- */
-    @keyframes slideInLeft {
-      from { transform: translateX(-80px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
     @keyframes slideInRight {
-      from { transform: translateX(80px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from { opacity: 0; transform: translateX(60px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
-    /* ----------  Branding area  ---------- */
     .logo {
-      max-width: 240px;
-      width: 80%;
-      margin-bottom: 18px;
+      max-width: 220px;
+      margin-bottom: 14px;
       filter: drop-shadow(0 3px 6px rgba(0,0,0,0.12));
     }
 
     .tagline {
-      letter-spacing: 0.1em;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: #5f5f5f;
-      font-size: 0.9rem;
-      margin-bottom: 25px;
+      font-size: 1rem;
+      margin-bottom: 40px;
     }
 
-    /* ----------  Buttons  ---------- */
     .buttons {
       display: flex;
       flex-direction: column;
       gap: 14px;
-      width: 100%;
-      max-width: 300px;
+      max-width: 260px;
     }
 
     .btn {
@@ -118,9 +101,10 @@
       border-radius: 12px;
       cursor: pointer;
       font-weight: 600;
+      transition: all 0.3s ease;
       color: var(--ink);
       text-decoration: none;
-      transition: all 0.3s ease;
+      text-align: center;
       box-shadow: var(--shadow);
     }
 
@@ -133,30 +117,59 @@
     }
 
     footer {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       text-align: center;
       color: #666;
       font-size: 0.75rem;
-      padding-bottom: env(safe-area-inset-bottom);
     }
 
-    @media (min-width: 768px) {
-      .top-half { height: 50vh; }
-      .logo { max-width: 300px; }
-      .tagline { font-size: 1rem; }
-      .buttons { flex-direction: row; justify-content: center; }
-      .btn { flex: 1; }
+    /* ---------- Responsive for Phones ---------- */
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      .left-side {
+        flex: none;
+        height: 55vh;
+      }
+      .right-side {
+        flex: none;
+        height: 45vh;
+        align-items: center;
+        text-align: center;
+      }
+      .logo {
+        max-width: 180px;
+      }
+      .tagline {
+        font-size: 0.9rem;
+        margin-bottom: 28px;
+      }
+      .buttons {
+        width: 80%;
+        align-items: center;
+      }
+      .btn {
+        width: 100%;
+      }
+      footer {
+        position: relative;
+        transform: none;
+        margin-top: 12px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- Top: Jamie photo -->
-  <section class="top-half">
+  <!-- Left side: Jamie -->
+  <section class="left-side">
     <img src="jamie.png" alt="Jamie Feltus, Esq." />
   </section>
 
-  <!-- Bottom: Logo + Buttons -->
-  <section class="bottom-half">
+  <!-- Right side: Logo + Buttons -->
+  <section class="right-side">
     <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo" />
     <p class="tagline">Your Boutique Legal Experience</p>
     <div class="buttons">
