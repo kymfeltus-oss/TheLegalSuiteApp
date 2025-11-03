@@ -2,167 +2,187 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
 <title>The Legal Suite — Welcome</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-:root{
-  --rose:#E0BFB8;
-  --ivory:#F8F5F2;
-  --ink:#1C1C1C;
-  --shadow:0 8px 18px rgba(0,0,0,.1);
+:root {
+  --rose: #E0BFB8;
+  --ivory: #F8F5F2;
+  --ink: #1C1C1C;
+  --shadow: 0 8px 18px rgba(0,0,0,0.1);
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{
-  height:100%;
-  background:var(--ivory);
-  font-family:"Poppins",sans-serif;
-  color:var(--ink);
-  overflow:hidden;
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  background: var(--ivory);
+  font-family: "Poppins", sans-serif;
+  color: var(--ink);
+  overflow: hidden;
 }
 
-/* ---------- LAYOUT ---------- */
-.wrapper{
-  display:flex;
-  flex-direction:row;
-  align-items:center;
-  justify-content:space-between;
-  height:100%;
-  width:100%;
-  overflow:hidden;
+/* ---------- MAIN LAYOUT ---------- */
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding-right: env(safe-area-inset-right, 12px);
 }
 
-/* ---------- JAMIE IMAGE ---------- */
-.left{
-  position:relative;
-  flex:0 0 40%;             /* keep left small */
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(90deg,rgba(224,191,184,.15),transparent 70%);
+/* ---------- JAMIE PHOTO ---------- */
+.left {
+  flex: 0 0 37%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: linear-gradient(90deg, rgba(224,191,184,.1), transparent 70%);
+  overflow: hidden;
+  position: relative;
 }
-.left img{
-  width:auto;
-  height:90%;
-  object-fit:contain;
-  object-position:center bottom;
-  filter:drop-shadow(0 5px 10px rgba(0,0,0,.1));
+.left img {
+  width: 95%;
+  height: auto;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(0.9);
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,.08));
+  animation: slideInLeft 1.3s ease forwards;
+  opacity: 0;
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-100px) scale(0.9); opacity: 0; }
+  to { transform: translateX(0) scale(0.9); opacity: 1; }
 }
 
-/* subtle fade edge */
-.left::after{
-  content:"";
-  position:absolute;
-  top:0;right:0;
-  width:20%;
-  height:100%;
-  background:linear-gradient(to right,rgba(248,245,242,0) 0%,var(--ivory) 100%);
+/* Blend edge */
+.left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(248,245,242,0) 0%, var(--ivory) 100%);
 }
 
 /* ---------- RIGHT SIDE ---------- */
-.right{
-  flex:1;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:flex-start;
-  padding:5% 6%;
+.right {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 6% 8% 8% 4%;
 }
 
-.logo{
-  width:80%;
-  max-width:340px;
-  margin-bottom:18px;
+/* ---------- LOGO, TAGLINE, BUTTONS ---------- */
+.logo {
+  width: 85%;
+  max-width: 360px;
+  margin-bottom: 18px;
+  animation: fadeUp 1s ease 0.3s forwards;
+  opacity: 0;
+}
+@keyframes fadeUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.tagline{
-  font-family:"Playfair Display",serif;
-  font-size:1.2rem;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  color:#444;
-  margin-bottom:40px;
+.tagline {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #444;
+  margin-bottom: 35px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.5s forwards;
 }
 
-.buttons{
-  display:flex;
-  flex-direction:row;
-  gap:18px;
-  flex-wrap:wrap;
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.7s forwards;
 }
 
-.btn{
-  flex:1;
-  min-width:150px;
-  border:1px solid var(--rose);
-  background:#fff;
-  padding:14px 20px;
-  border-radius:12px;
-  text-align:center;
-  font-weight:600;
-  color:var(--ink);
-  text-decoration:none;
-  transition:all .3s ease;
-  box-shadow:var(--shadow);
+.btn {
+  flex: 1;
+  min-width: 150px;
+  border: 1px solid var(--rose);
+  background: #fff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--ink);
+  text-decoration: none;
+  transition: all .3s ease;
+  box-shadow: var(--shadow);
 }
-.btn:hover{
-  background:var(--rose);
-  color:#fff;
-  transform:translateY(-2px);
-  box-shadow:0 12px 24px rgba(0,0,0,.15);
-}
-
-footer{
-  position:absolute;
-  bottom:8px;
-  left:50%;
-  transform:translateX(-50%);
-  color:#666;
-  font-size:.75rem;
-  text-align:center;
-  width:100%;
+.btn:hover {
+  background: var(--rose);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.15);
 }
 
-/* ---------- TRUE MOBILE FIX ---------- */
-@media(max-width:768px){
-  .wrapper{
-    flex-direction:row;        /* keep horizontal */
+/* Footer */
+footer {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #666;
+  font-size: .75rem;
+  text-align: center;
+  width: 100%;
+}
+
+/* ---------- RESPONSIVE FIXES ---------- */
+@media (max-width: 900px) {
+  .wrapper {
+    flex-direction: row; /* Force horizontal on phones */
   }
-  .left{
-    flex:0 0 35%;
+  .left {
+    flex: 0 0 32%;
   }
-  .left img{
-    height:80%;
-    transform:scale(0.9);
+  .left img {
+    width: 100%;
+    height: auto;
+    transform: scale(0.85);
   }
-  .right{
-    flex:0 0 65%;
-    padding:8% 4%;
-    justify-content:flex-start;
-    align-items:flex-start;
+  .right {
+    flex: 0 0 68%;
+    padding: 8% 5% 8% 3%;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
-  .logo{
-    max-width:240px;
+  .logo {
+    max-width: 260px;
   }
-  .tagline{
-    font-size:1rem;
-    margin-bottom:28px;
+  .tagline {
+    font-size: 1.05rem;
+    margin-bottom: 30px;
   }
-  .buttons{
-    flex-direction:row;
-    gap:14px;
+  .buttons {
+    flex-direction: row;
+    gap: 12px;
   }
-  .btn{
-    flex:1;
-    min-width:120px;
-    font-size:.9rem;
-    padding:12px 14px;
+  .btn {
+    font-size: 0.9rem;
+    padding: 12px 16px;
   }
 }
 </style>
