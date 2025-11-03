@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Legal Suite — Welcome</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -18,113 +18,93 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{
   height:100%;
+  width:100%;
   background:var(--ivory);
   font-family:"Poppins",sans-serif;
   color:var(--ink);
   overflow:hidden;
 }
 
-/* Force absolute two-column layout */
+/* ---- Main Split ---- */
 .wrapper{
-  position:relative;
-  width:100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:center;
   height:100vh;
-  background:var(--ivory);
+  width:100%;
+  position:relative;
+  overflow:hidden;
 }
 
-/* --- Jamie Image --- */
-.jamie{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:42%;
-  max-width:500px;
-  height:auto;
-  z-index:1;
-  filter:drop-shadow(0 5px 8px rgba(0,0,0,0.08));
-  animation:slideInLeft 1.2s ease forwards;
-  opacity:0;
-}
-@keyframes slideInLeft{
-  from{transform:translateX(-100px);opacity:0;}
-  to{transform:translateX(0);opacity:1;}
-}
-
-/* Soft blend on right edge of photo */
-.wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:38%;
-  width:15%;
+/* ---- Left: Jamie ---- */
+.left{
+  flex:0 0 40%;
   height:100%;
-  background:linear-gradient(to right,rgba(248,245,242,0) 0%,var(--ivory) 100%);
-  pointer-events:none;
-  z-index:2;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  position:relative;
+}
+.left img{
+  height:90%;
+  width:auto;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,0.08));
 }
 
-/* --- Right content --- */
+/* ---- Right Content ---- */
 .right{
-  position:absolute;
-  top:50%;
-  right:8%;
-  transform:translateY(-50%);
-  text-align:left;
-  z-index:3;
+  flex:0 0 60%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:flex-start;
+  padding:8% 8%;
+  position:relative;
 }
 
 .logo{
-  width:360px;
-  max-width:85vw;
+  width:380px;
+  max-width:90%;
   margin-bottom:20px;
-  animation:fadeUp 1.2s ease .3s forwards;
-  opacity:0;
-}
-@keyframes fadeUp{
-  from{transform:translateY(40px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
 }
 
 .tagline{
   font-family:"Playfair Display",serif;
-  font-size:1.3rem;
+  font-size:1.4rem;
+  text-transform:uppercase;
   letter-spacing:.08em;
   color:#444;
-  margin-bottom:45px;
-  animation:fadeUp 1.2s ease .5s forwards;
-  opacity:0;
+  margin-bottom:50px;
 }
 
-/* --- Buttons side by side --- */
+/* ---- Buttons ---- */
 .buttons{
   display:flex;
-  gap:18px;
-  flex-wrap:nowrap;
-  animation:fadeUp 1.2s ease .7s forwards;
-  opacity:0;
+  flex-direction:row;
+  gap:20px;
 }
-
 .btn{
   border:1px solid var(--rose);
   background:#fff;
-  padding:14px 26px;
+  padding:16px 28px;
   border-radius:12px;
   font-weight:600;
   text-decoration:none;
   color:var(--ink);
-  text-align:center;
-  min-width:160px;
-  transition:all .3s ease;
   box-shadow:var(--shadow);
+  transition:all .3s ease;
 }
 .btn:hover{
   background:var(--rose);
   color:#fff;
   transform:translateY(-2px);
-  box-shadow:0 10px 22px rgba(0,0,0,0.15);
 }
 
-/* --- Footer --- */
+/* ---- Footer ---- */
 footer{
   position:absolute;
   bottom:10px;
@@ -136,30 +116,51 @@ footer{
   width:100%;
 }
 
-/* --- Responsive Mobile --- */
-@media(max-width:900px){
-  .jamie{
-    width:50%;
-    max-width:380px;
+/* ---- Mobile Fix (keep layout side by side but scale) ---- */
+@media(max-width:1024px){
+  .wrapper{
+    flex-direction:row;
+    align-items:center;
+    padding:0 3%;
+  }
+  .left{
+    flex:0 0 45%;
+  }
+  .left img{
+    height:80%;
   }
   .right{
-    right:5%;
-    top:55%;
-    transform:translateY(-50%);
+    flex:0 0 55%;
+    padding:10% 5% 5% 5%;
   }
   .logo{
-    width:300px;
+    width:320px;
+    margin-bottom:18px;
   }
   .tagline{
-    font-size:1.1rem;
+    font-size:1.15rem;
+    margin-bottom:35px;
   }
   .buttons{
-    flex-wrap:wrap;
-    justify-content:flex-start;
+    flex-direction:row;
+    gap:14px;
   }
   .btn{
-    min-width:140px;
+    padding:14px 22px;
     font-size:.95rem;
+  }
+}
+
+/* ---- Small Phones ---- */
+@media(max-width:700px){
+  .left img{
+    height:70%;
+  }
+  .logo{
+    width:260px;
+  }
+  .tagline{
+    font-size:1rem;
   }
 }
 </style>
@@ -167,18 +168,22 @@ footer{
 
 <body>
   <div class="wrapper">
-    <img src="jamie.png" alt="Jamie Feltus, Esq." class="jamie">
-    <div class="right">
+    <!-- Left -->
+    <section class="left">
+      <img src="jamie.png" alt="Jamie Feltus, Esq.">
+    </section>
+
+    <!-- Right -->
+    <section class="right">
       <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
       <p class="tagline">Your Boutique Legal Experience</p>
       <div class="buttons">
         <a href="login.html" class="btn">Enter Legal Suite</a>
         <a href="create-account.html" class="btn">Create Account</a>
       </div>
-    </div>
+    </section>
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
-  <script src="transition.js"></script>
 </body>
 </html>
