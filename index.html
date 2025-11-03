@@ -25,10 +25,10 @@ html,body{
   overflow:hidden;
 }
 
-/* Split layout */
+/* Split Layout */
 .wrapper{
   display:grid;
-  grid-template-columns:42% 58%;
+  grid-template-columns:40% 60%;
   align-items:center;
   height:100vh;
   width:100%;
@@ -46,46 +46,47 @@ html,body{
 
 .left img{
   width:auto;
-  height:88%;
-  max-height:720px;
+  height:78%;
+  max-height:640px;
   object-fit:contain;
   object-position:center bottom;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,.08));
-  margin-bottom:-20px; /* pull up image slightly */
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,0.05));
+  margin-bottom:-10px; /* lift Jamie slightly */
 }
 
 /* Right Content */
 .right{
   display:flex;
   flex-direction:column;
-  justify-content:flex-start; /* move upward */
+  justify-content:flex-start;
   align-items:flex-start;
   text-align:left;
   padding:0 8%;
-  transform:translateY(-8%); /* visually move entire section up */
+  transform:translateY(-6%); /* move everything up */
 }
 
-/* Logo and tagline */
+/* Logo */
 .logo{
   width:380px;
-  max-width:95%;
-  margin-bottom:14px;
+  max-width:90%;
+  margin-bottom:16px;
 }
 
+/* Tagline */
 .tagline{
   font-family:"Playfair Display",serif;
   font-size:1.25rem;
   text-transform:uppercase;
   letter-spacing:.07em;
   color:#444;
-  margin-bottom:38px;
+  margin-bottom:40px;
 }
 
 /* Buttons side by side */
 .buttons{
   display:flex;
   flex-direction:row;
-  gap:20px;
+  gap:18px;
 }
 .btn{
   border:1px solid var(--rose);
@@ -96,9 +97,9 @@ html,body{
   text-decoration:none;
   color:var(--ink);
   text-align:center;
+  min-width:160px;
   box-shadow:var(--shadow);
   transition:all .3s ease;
-  min-width:160px;
 }
 .btn:hover{
   background:var(--rose);
@@ -106,13 +107,13 @@ html,body{
   transform:translateY(-2px);
 }
 
-/* Soft fade edge */
+/* Fade divider to remove blur bleed */
 .left::after{
   content:"";
   position:absolute;
   top:0;
-  left:41%;
-  width:8%;
+  left:40%;
+  width:10%;
   height:100%;
   background:linear-gradient(to right,rgba(248,245,242,0) 0%,var(--ivory) 100%);
   pointer-events:none;
@@ -132,17 +133,17 @@ footer{
 
 /* Responsive Adjustments */
 @media(max-width:900px){
-  .wrapper{grid-template-columns:40% 60%;}
-  .left img{height:78%;margin-bottom:-10px;}
-  .right{transform:translateY(-10%);}
+  .wrapper{grid-template-columns:38% 62%;}
+  .left img{height:70%;margin-bottom:-10px;}
+  .right{transform:translateY(-8%);}
   .logo{width:300px;}
-  .tagline{font-size:1.1rem;margin-bottom:26px;}
+  .tagline{font-size:1.1rem;margin-bottom:28px;}
   .btn{padding:12px 20px;font-size:.95rem;}
 }
 @media(max-width:700px){
-  .wrapper{grid-template-columns:38% 62%;}
-  .left img{height:72%;}
-  .right{transform:translateY(-12%);}
+  .wrapper{grid-template-columns:36% 64%;}
+  .left img{height:68%;margin-bottom:-5px;}
+  .right{transform:translateY(-10%);}
   .logo{width:260px;}
   .tagline{font-size:1rem;}
 }
