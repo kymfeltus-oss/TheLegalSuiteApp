@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
 <title>The Legal Suite — Welcome</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-:root {
+:root{
   --rose:#E0BFB8;
   --ivory:#F8F5F2;
   --ink:#1C1C1C;
@@ -25,68 +26,67 @@ html,body{
   overflow:hidden;
 }
 
-/* ---- Main Split ---- */
+/* --- Container --- */
 .wrapper{
+  position:relative;
   display:flex;
   flex-direction:row;
   justify-content:space-between;
   align-items:center;
   height:100vh;
   width:100%;
-  position:relative;
-  overflow:hidden;
+  padding:0 5%;
 }
 
-/* ---- Left: Jamie ---- */
-.left{
-  flex:0 0 40%;
-  height:100%;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  position:relative;
-}
-.left img{
-  height:90%;
+/* --- Jamie on Left --- */
+.jamie{
+  height:90vh;
   width:auto;
+  max-height:700px;
   object-fit:contain;
-  object-position:center bottom;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,0.08));
+  object-position:bottom left;
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,0.1));
+  position:absolute;
+  bottom:0;
+  left:2%;
 }
 
-/* ---- Right Content ---- */
-.right{
-  flex:0 0 60%;
-  height:100%;
+/* --- Right Content --- */
+.content{
+  margin-left:auto;
+  width:55%;
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;
   align-items:flex-start;
-  padding:8% 8%;
-  position:relative;
+  justify-content:flex-start;
+  text-align:left;
+  padding-top:6%;
+  z-index:10;
 }
 
 .logo{
   width:380px;
   max-width:90%;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 .tagline{
   font-family:"Playfair Display",serif;
-  font-size:1.4rem;
+  font-size:1.35rem;
   text-transform:uppercase;
-  letter-spacing:.08em;
+  letter-spacing:.07em;
   color:#444;
   margin-bottom:50px;
 }
 
-/* ---- Buttons ---- */
+/* --- Buttons side by side --- */
 .buttons{
   display:flex;
   flex-direction:row;
   gap:20px;
+  flex-wrap:nowrap;
 }
+
 .btn{
   border:1px solid var(--rose);
   background:#fff;
@@ -97,70 +97,47 @@ html,body{
   color:var(--ink);
   box-shadow:var(--shadow);
   transition:all .3s ease;
+  font-size:1rem;
 }
 .btn:hover{
   background:var(--rose);
   color:#fff;
   transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(0,0,0,0.15);
 }
 
-/* ---- Footer ---- */
+/* --- Footer --- */
 footer{
   position:absolute;
   bottom:10px;
   left:50%;
   transform:translateX(-50%);
-  text-align:center;
   color:#666;
   font-size:.75rem;
+  text-align:center;
   width:100%;
 }
 
-/* ---- Mobile Fix (keep layout side by side but scale) ---- */
-@media(max-width:1024px){
-  .wrapper{
-    flex-direction:row;
-    align-items:center;
-    padding:0 3%;
+/* --- Mobile --- */
+@media(max-width:900px){
+  .jamie{
+    height:70vh;
+    left:-5%;
   }
-  .left{
-    flex:0 0 45%;
+  .content{
+    width:60%;
+    padding-top:12%;
   }
-  .left img{
-    height:80%;
-  }
-  .right{
-    flex:0 0 55%;
-    padding:10% 5% 5% 5%;
-  }
-  .logo{
-    width:320px;
-    margin-bottom:18px;
-  }
-  .tagline{
-    font-size:1.15rem;
-    margin-bottom:35px;
-  }
+  .logo{width:300px;}
+  .tagline{font-size:1.1rem;margin-bottom:35px;}
   .buttons{
-    flex-direction:row;
-    gap:14px;
+    flex-wrap:wrap;
   }
   .btn{
-    padding:14px 22px;
+    flex:1;
+    min-width:130px;
+    text-align:center;
     font-size:.95rem;
-  }
-}
-
-/* ---- Small Phones ---- */
-@media(max-width:700px){
-  .left img{
-    height:70%;
-  }
-  .logo{
-    width:260px;
-  }
-  .tagline{
-    font-size:1rem;
   }
 }
 </style>
@@ -168,20 +145,15 @@ footer{
 
 <body>
   <div class="wrapper">
-    <!-- Left -->
-    <section class="left">
-      <img src="jamie.png" alt="Jamie Feltus, Esq.">
-    </section>
-
-    <!-- Right -->
-    <section class="right">
-      <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+    <img src="jamie.png" alt="Jamie Feltus, Esq." class="jamie" />
+    <div class="content">
+      <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo" />
       <p class="tagline">Your Boutique Legal Experience</p>
       <div class="buttons">
         <a href="login.html" class="btn">Enter Legal Suite</a>
         <a href="create-account.html" class="btn">Create Account</a>
       </div>
-    </section>
+    </div>
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
