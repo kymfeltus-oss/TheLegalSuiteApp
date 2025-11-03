@@ -1,133 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Account — The Legal Suite</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Create Account · The Legal Suite</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
-  <style>
-    :root {
-      --rose: #E0BFB8;
-      --ivory: #F8F5F2;
-      --silver: #E6E2DD;
-      --ink: #1C1C1C;
-    }
+<style>
+:root {
+  --rose:#E0BFB8;
+  --lilac:#EEE6F2;
+  --ivory:#F8F5F2;
+  --ink:#1C1C1C;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  height:100%;
+  width:100%;
+  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
+  font-family:"Poppins",sans-serif;
+  color:var(--ink);
+  overflow:hidden;
+  position:relative;
+}
 
-    body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, var(--ivory), #f1efec);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+/* Background (Jamie faded) */
+body::before{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  height:110%;
+  background:url('jamie.png') no-repeat center bottom;
+  background-size:40%;
+  opacity:0.25;
+  pointer-events:none;
+  z-index:0;
+}
 
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      padding: 40px;
-      width: min(400px, 90%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      text-align: center;
-    }
+/* Form Container */
+.container{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 5%;
+}
 
-    h1 {
-      font-family: "Playfair Display", serif;
-      font-size: 1.5rem;
-      color: var(--ink);
-      margin-bottom: 10px;
-    }
+.logo{
+  width:400px;
+  max-width:95%;
+  margin-bottom:10px;
+}
 
-    input {
-      width: 100%;
-      max-width: 300px;
-      padding: 12px;
-      border: 1px solid var(--silver);
-      border-radius: 10px;
-      font-size: 1rem;
-    }
+h2{
+  font-family:"Playfair Display",serif;
+  font-size:1.6rem;
+  color:#444;
+  margin-bottom:30px;
+}
 
-    input:focus {
-      outline: none;
-      border-color: var(--rose);
-      box-shadow: 0 0 0 3px rgba(224,191,184,0.25);
-    }
+/* Form Box */
+.form-box{
+  background:#fff;
+  padding:35px 45px;
+  border-radius:20px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.1);
+  width:100%;
+  max-width:400px;
+  margin-bottom:25px;
+}
 
-    button {
-      width: 100%;
-      max-width: 300px;
-      background: var(--rose);
-      border: none;
-      color: #fff;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+input{
+  width:100%;
+  padding:12px 14px;
+  margin-bottom:18px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:1rem;
+  outline:none;
+}
+input:focus{border-color:var(--rose);}
 
-    button:hover { background: #d3a6a0; }
-
-    a {
-      text-decoration: none;
-      color: var(--ink);
-      font-size: 0.9rem;
-      margin-top: 6px;
-    }
-
-    #msg {
-      height: 18px;
-      color: red;
-      font-size: 0.9rem;
-    }
-  </style>
+/* Button */
+button{
+  width:100%;
+  background:var(--rose);
+  color:#fff;
+  border:none;
+  padding:14px;
+  border-radius:40px;
+  font-family:"Playfair Display",serif;
+  font-size:1.2rem;
+  cursor:pointer;
+  transition:background .3s ease;
+}
+button:hover{background:#d6a9a0;}
+</style>
 </head>
 
 <body>
-  <div class="card">
-    <h1>Create Account</h1>
-    <div id="msg"></div>
-    <input id="name" type="text" placeholder="Full Name" required />
-    <input id="email" type="email" placeholder="Email Address" required />
-    <input id="password" type="password" placeholder="Password" required />
-    <button onclick="createAccount()">Create Account</button>
-    <a href="login.html">← Back to Login</a>
+  <div class="container">
+    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+    <h2>Create Account</h2>
+
+    <div class="form-box">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <input type="password" placeholder="Create Password" required />
+      <a href="profile.html"><button type="button">Create Account</button></a>
+    </div>
   </div>
-
-  <script>
-    function createAccount() {
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const msg = document.getElementById("msg");
-
-      if (!name || !email || !password) {
-        msg.textContent = "Please fill in all fields.";
-        return;
-      }
-
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      if (users.find(u => u.email === email)) {
-        msg.textContent = "An account with this email already exists.";
-        return;
-      }
-
-      users.push({ name, email, password, status: "new" });
-      localStorage.setItem("users", JSON.stringify(users));
-
-      msg.style.color = "green";
-      msg.textContent = "Account created! Redirecting...";
-      setTimeout(() => window.location.href = "login.html", 1200);
-    }
-  </script>
 </body>
 </html>
