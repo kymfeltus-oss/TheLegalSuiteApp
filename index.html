@@ -1,154 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>The Legal Suite — Welcome</title>
+<style>
+  :root {
+    --rose: #E0BFB8;
+    --lilac: rgba(220, 208, 230, 0.35);
+    --ivory: #F8F5F2;
+    --ink: #1C1C1C;
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <style>
-    :root {
-      --rose: #E0BFB8;
-      --lilac: rgba(220, 208, 230, 0.35);  /* new subtle lilac overlay */
-      --ivory: #F8F5F2;
-      --ink: #1C1C1C;
-      --shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-    }
+  body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--ivory) 40%, #f1eef0 100%);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Split layout */
+  .top-half {
+    height: 45vh;                        /* Keep top section smaller */
+    position: relative;
+    background: linear-gradient(180deg, var(--lilac), transparent),
+                linear-gradient(135deg, rgba(224,191,184,0.25), transparent);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    animation: slideInLeft 1.3s ease forwards;
+    opacity: 0;
+    overflow: hidden;
+  }
 
-    body {
-      font-family: "Poppins", sans-serif;
-      height: 100vh;
-      overflow: hidden;
-      background: linear-gradient(160deg, var(--ivory) 40%, #f1eef0 100%);
-      color: var(--ink);
-      display: flex;
-      flex-direction: column;
-    }
+  @keyframes slideInLeft {
+    from { transform: translateX(-80px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
 
-    /* Split layout */
-    .top-half {
-      flex: 1;
-      background: linear-gradient(180deg, var(--lilac), transparent),
-                  linear-gradient(135deg, rgba(224,191,184,0.25), transparent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: slideInLeft 1.3s ease forwards;
-      opacity: 0;
-    }
-    @keyframes slideInLeft {
-      from { transform: translateX(-80px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
+  .top-half img {
+    width: 100%;
+    height: auto;                         /* Prevent overflow */
+    max-height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
 
-    .top-half img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
+  /* Gradient fade overlay under image */
+  .top-half::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(248,245,242,0) 0%, var(--ivory) 100%);
+  }
 
-    .bottom-half {
-      flex: 1;
-      background: var(--ivory);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 8% 8% 10%;
-      text-align: center;
-      animation: slideInRight 1.3s ease forwards;
-      opacity: 0;
-    }
-    @keyframes slideInRight {
-      from { transform: translateX(80px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
+  .bottom-half {
+    flex: 1;
+    background: var(--ivory);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6% 8% 10%;
+    text-align: center;
+    animation: slideInRight 1.3s ease forwards;
+    opacity: 0;
+  }
 
-    .logo {
-      max-width: 280px;
-      width: 70%;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
-    }
+  @keyframes slideInRight {
+    from { transform: translateX(80px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
 
-    .tagline {
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #5f5f5f;
-      font-size: 0.9rem;
-      margin-bottom: 25px;
-    }
+  .logo {
+    max-width: 240px;                   /* Slightly smaller for balance */
+    width: 80%;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+  }
 
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      width: 100%;
-      max-width: 300px;
-    }
+  .tagline {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5f5f5f;
+    font-size: 0.85rem;
+    margin-bottom: 22px;
+  }
 
-    .btn {
-      border: 1px solid var(--rose);
-      background: #fff;
-      padding: 14px 24px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      color: var(--ink);
-      text-decoration: none;
-      box-shadow: var(--shadow);
-    }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+  }
 
-    .btn:hover,
-    .btn:active {
-      background: var(--rose);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
+  .btn {
+    border: 1px solid var(--rose);
+    background: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
 
-    footer {
-      text-align: center;
-      color: #666;
-      font-size: 0.75rem;
-      padding-bottom: env(safe-area-inset-bottom);
-    }
+  .btn:hover,
+  .btn:active {
+    background: var(--rose);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
 
-    @media (min-width: 768px) {
-      .logo { max-width: 320px; }
-      .tagline { font-size: 1rem; }
-      .buttons { flex-direction: row; justify-content: center; }
-      .btn { flex: 1; }
-    }
-  </style>
-</head>
+  footer {
+    text-align: center;
+    color: #666;
+    font-size: 0.7rem;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 
-<body>
-  <!-- Top: Jamie hero image -->
-  <section class="top-half">
-    <img src="jamie.png" alt="Jamie Feltus, Esq.">
-  </section>
-
-  <!-- Bottom: Branding + Buttons -->
-  <section class="bottom-half">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo"/>
-    <p class="tagline">Your Boutique Legal Experience</p>
-    <div class="buttons">
-      <a href="login.html" class="btn">Enter Legal Suite</a>
-      <a href="create-account.html" class="btn">Create Account</a>
-    </div>
-  </section>
-
-  <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
-
-  <script src="transition.js"></script>
-</body>
-</html>
+  @media (min-width: 768px) {
+    .top-half { height: 50vh; }
+    .logo { max-width: 300px; }
+    .tagline { font-size: 1rem; }
+    .buttons { flex-direction: row; justify-content: center; }
+    .btn { flex: 1; }
+  }
+</style>
