@@ -51,9 +51,16 @@ body{
 }
 .feed h2{
   font-family:"Playfair Display",serif;
-  font-size:1.5rem;
-  margin-bottom:10px;
+  font-size:1.2rem;
   color:#333;
+  border-bottom:2px solid var(--rose);
+  padding-bottom:6px;
+  margin-bottom:8px;
+}
+.feed p.sub{
+  font-size:.95rem;
+  color:#555;
+  margin-bottom:12px;
 }
 .feed-item{
   padding:12px 10px;
@@ -159,25 +166,26 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
   </div>
 
   <div class="feed">
-    <h2>Hi Jamie, here’s what I’ve been working on for you 👋</h2>
+    <h2>Hi Jamie — Your Paralegal Assistant’s Updates</h2>
+    <p class="sub">Here’s what’s been happening with your case:</p>
 
     <div class="feed-item">
-      <strong>✅ Retainer Signed</strong>
+      <strong>Retainer Signed</strong>
       <small>Your retainer agreement was received and filed on March 3, 2025.</small>
     </div>
 
     <div class="feed-item">
-      <strong>📅 Consultation Scheduled</strong>
+      <strong>Consultation Scheduled</strong>
       <small>Your consultation with Attorney Feltus is confirmed for March 10th at 10 AM CST.</small>
     </div>
 
     <div class="feed-item">
-      <strong>📂 Vault Update</strong>
+      <strong>Vault Update</strong>
       <small>Your uploaded petition has been categorized under “Court Documents.”</small>
     </div>
 
     <div class="feed-item">
-      <strong>💡 Next Step</strong>
+      <strong>Next Step</strong>
       <small>Please upload your financial affidavit when ready.</small>
     </div>
   </div>
@@ -219,9 +227,9 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
     <div class="modal-content">
       <h3 style="font-family:'Playfair Display',serif;color:#333;">Custody of Minor Child</h3>
       <div class="timeline">
-        <div class="step"><strong>✅ Retainer Signed</strong><span>March 3, 2025</span></div>
-        <div class="step"><strong>🟡 Petition Filed</strong><span>March 5, 2025</span></div>
-        <div class="step"><strong>⏳ Awaiting Hearing Date</strong><span>Expected March 15, 2025</span></div>
+        <div class="step"><strong>Retainer Signed</strong><span>March 3, 2025</span></div>
+        <div class="step"><strong>Petition Filed</strong><span>March 5, 2025</span></div>
+        <div class="step"><strong>Awaiting Hearing Date</strong><span>Expected March 15, 2025</span></div>
       </div>
       <p style="margin-top:15px;color:#555;">Next Step: Await court scheduling notice.</p>
     </div>
@@ -245,7 +253,7 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
         <div class="service">
           <h4>Contract Review</h4>
           <p>Need to review an agreement? Upload it in your Vault for a professional review.</p>
-          <a href="vault.html">Upload Contract</a>
+          <a href="#" id="openVaultLink">Upload Contract</a>
         </div>
 
         <div class="service">
@@ -257,7 +265,7 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
     </div>
   </div>
 
-  <!-- Existing Vault + Consultations Modals (reuse from previous build) -->
+  <!-- Vault Modal -->
   <div class="modal" id="vaultModal">
     <div class="modal-header">
       <h2>JF Legal Vault</h2>
@@ -275,6 +283,7 @@ footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
     </div>
   </div>
 
+  <!-- Consultation Modal -->
   <div class="modal" id="consultModal">
     <div class="modal-header">
       <h2>Consultations</h2>
@@ -317,7 +326,7 @@ uploadForm.addEventListener("submit",(e)=>{
   if(!file){alert("Please select a file first.");return;}
   const card=document.createElement("div");
   card.className="feed-item";
-  card.innerHTML=`📎 <strong>${file.name}</strong><small>Uploaded ${new Date().toLocaleDateString()}</small>`;
+  card.innerHTML=`<strong>${file.name}</strong><small>Uploaded ${new Date().toLocaleDateString()}</small>`;
   fileList.prepend(card);
   uploadForm.reset();
 });
