@@ -1,165 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>The Legal Suite — Welcome</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>The Legal Suite — Welcome</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-<style>
-:root {
-  --rose:#E0BFB8;
-  --ivory:#F8F5F2;
-  --ink:#1C1C1C;
-  --shadow:0 8px 18px rgba(0,0,0,.12);
-}
+  <style>
+    :root {
+      --rose: #E0BFB8;
+      --ivory: #F8F5F2;
+      --ink: #1C1C1C;
+      --shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:"Poppins",sans-serif;
-  height:100vh;
-  background:var(--ivory);
-  color:var(--ink);
-  display:grid;
-  grid-template-columns:40% 60%;    /* left vs right proportion */
-  overflow:hidden;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Left image */
-.left{
-  position:relative;
-  overflow:hidden;
-}
-.left img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center bottom;
-  transform:scale(0.9);
-}
+    body {
+      font-family: "Poppins", sans-serif;
+      height: 100vh;
+      background: var(--ivory);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: 45% 55%;
+      overflow: hidden;
+    }
 
-/* Subtle blend edge */
-.left::after{
-  content:"";
-  position:absolute;
-  top:0; right:0;
-  width:30%; height:100%;
-  background:linear-gradient(to right,rgba(248,245,242,0) 0%,var(--ivory) 100%);
-}
+    /* Left: Jamie */
+    .left {
+      position: relative;
+      overflow: hidden;
+    }
 
-/* Right panel */
-.right{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:flex-start;
-  padding:8% 10%;
-}
-.logo{
-  max-width:280px;
-  margin-bottom:20px;
-  filter:drop-shadow(0 3px 6px rgba(0,0,0,.12));
-}
-.tagline{
-  font-family:"Playfair Display",serif;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  color:#5f5f5f;
-  font-size:1rem;
-  margin-bottom:40px;
-}
-.buttons{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  width:100%;
-  max-width:260px;
-}
-.btn{
-  border:1px solid var(--rose);
-  background:#fff;
-  padding:14px 22px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:600;
-  color:var(--ink);
-  text-decoration:none;
-  text-align:center;
-  transition:all .3s ease;
-  box-shadow:var(--shadow);
-}
-.btn:hover{background:var(--rose);color:#fff;transform:translateY(-2px);}
-footer{
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-  color:#666;
-  font-size:.75rem;
-  width:100%;
-}
+    .left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      transform: scale(0.85);
+    }
 
-/* Mobile layout */
-@media(max-width:768px){
-  body{
-    grid-template-columns:1fr;      /* stack, but keep proportions controlled */
-    grid-template-rows:50vh 50vh;
-  }
-  .left{
-    grid-row:1/2;
-    height:50vh;
-  }
-  .left img{
-    object-fit:contain;
-    object-position:center bottom;
-    transform:scale(0.95);
-  }
-  .right{
-    grid-row:2/3;
-    align-items:center;
-    text-align:center;
-    justify-content:flex-start;
-    padding:10% 8% 0;
-  }
-  .logo{
-    max-width:240px;
-  }
-  .tagline{
-    font-size:.9rem;
-    margin-bottom:24px;
-  }
-  .buttons{
-    align-items:center;
-  }
-  .btn{
-    width:85%;
-  }
-  footer{
-    position:relative;
-    transform:none;
-    margin-top:16px;
-  }
-}
-</style>
+    .left::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 25%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(248,245,242,0) 0%, var(--ivory) 100%);
+    }
+
+    /* Right content */
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 5% 8%;
+      position: relative;
+    }
+
+    .right-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      text-align: right;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .logo {
+      max-width: 300px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+    }
+
+    .tagline {
+      font-family: "Playfair Display", serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #5f5f5f;
+      font-size: 1rem;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .btn {
+      border: 1px solid var(--rose);
+      background: #fff;
+      padding: 14px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      text-align: center;
+      width: 100%;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      background: var(--rose);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #666;
+      font-size: 0.75rem;
+      width: 100%;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 55vh 45vh;
+      }
+
+      .left {
+        grid-row: 1/2;
+      }
+
+      .left img {
+        transform: scale(0.9);
+        object-fit: contain;
+        object-position: center bottom;
+      }
+
+      .right {
+        grid-row: 2/3;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 8% 6%;
+        text-align: center;
+      }
+
+      .right-inner {
+        align-items: center;
+        text-align: center;
+      }
+
+      .logo {
+        max-width: 220px;
+      }
+
+      .tagline {
+        font-size: 0.9rem;
+        margin-bottom: 22px;
+      }
+
+      .buttons {
+        align-items: center;
+        width: 100%;
+      }
+
+      .btn {
+        width: 85%;
+      }
+
+      footer {
+        position: relative;
+        transform: none;
+        margin-top: 10px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Left side: Jamie -->
   <section class="left">
     <img src="jamie.png" alt="Jamie Feltus, Esq.">
   </section>
 
+  <!-- Right side: Logo + Tagline + Buttons -->
   <section class="right">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
-    <p class="tagline">Your Boutique Legal Experience</p>
-    <div class="buttons">
-      <a href="login.html" class="btn">Enter Legal Suite</a>
-      <a href="create-account.html" class="btn">Create Account</a>
+    <div class="right-inner">
+      <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+      <p class="tagline">Your Boutique Legal Experience</p>
+      <div class="buttons">
+        <a href="login.html" class="btn">Enter Legal Suite</a>
+        <a href="create-account.html" class="btn">Create Account</a>
+      </div>
     </div>
   </section>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+
   <script src="transition.js"></script>
 </body>
 </html>
