@@ -1,193 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>JF Legal Vault · The Legal Suite</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-
 <style>
-:root{
-  --rose:#E0BFB8;
-  --lilac:#EEE6F2;
-  --ivory:#F8F5F2;
-  --ink:#1C1C1C;
-  --shadow:0 6px 14px rgba(0,0,0,0.1);
-}
+:root{--rose:#E0BFB8;--lilac:#EEE6F2;--ivory:#F8F5F2;--ink:#1C1C1C;--shadow:0 6px 14px rgba(0,0,0,0.1);--card:#fff;--header-h:64px;}
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{
-  min-height:100%;
-  width:100%;
-  background:linear-gradient(180deg,var(--lilac) 0%, var(--ivory) 100%);
-  font-family:"Poppins",sans-serif;
-  color:var(--ink);
-  overflow-x:hidden;
-  position:relative;
-}
-
-/* Background */
-body::before{
-  content:"";
-  position:absolute;
-  bottom:0;left:50%;transform:translateX(-50%);
-  width:100%;height:100%;
-  background:url('jamie.png') no-repeat center bottom;
-  background-size:45%;
-  opacity:0.15;pointer-events:none;z-index:0;
-}
-
-/* Container */
-.container{
-  position:relative;z-index:2;
-  padding:30px 5%;
-  max-width:1000px;margin:auto;text-align:center;
-}
-
-.logo{width:350px;margin-bottom:15px;}
-h2{font-family:"Playfair Display",serif;color:#333;font-size:1.8rem;margin-bottom:10px;}
-p.intro{font-size:1rem;color:#555;margin-bottom:30px;}
-
-/* Upload Area */
-.upload-area{
-  background:#fff;
-  border:2px dashed var(--rose);
-  border-radius:16px;
-  padding:30px;text-align:center;
-  color:#666;font-size:1rem;margin-bottom:40px;
-  box-shadow:var(--shadow);
-  transition:background .3s ease;
-}
+html,body{height:100%;overflow-x:hidden;}
+body{font-family:"Poppins",sans-serif;background:var(--ivory);color:var(--ink);}
+.app{min-height:100vh;display:grid;grid-template-columns:260px 1fr;grid-template-rows:auto 1fr;grid-template-areas:"header header" "sidebar main";}
+.header{grid-area:header;height:var(--header-h);background:#fff;border-bottom:3px solid var(--lilac);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;}
+.header .title{font-family:"Playfair Display",serif;font-size:1.3rem;color:#333;}
+.header .user{font-size:.9rem;color:#666}
+.sidebar{grid-area:sidebar;background:#fff;border-right:3px solid var(--lilac);box-shadow:var(--shadow);padding:0 10px 16px;position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));overflow-y:auto;}
+.brand{display:flex;align-items:center;justify-content:center;padding:16px 6px 12px;border-bottom:2px solid var(--lilac);position:sticky;top:0;background:#fff;z-index:2;}
+.brand img{width:150px;max-width:90%;}
+.nav{padding:12px 2px;display:flex;flex-direction:column;gap:8px;}
+.nav a{display:flex;align-items:center;gap:10px;text-decoration:none;color:#333;background:#fff;border:1px solid #eee;padding:8px 10px;border-radius:12px;transition:.25s;font-weight:500;}
+.nav a:hover{transform:translateX(4px);box-shadow:var(--shadow);}
+.nav .ico{width:1.25rem;flex-shrink:0;text-align:center;}
+.main{grid-area:main;padding:18px;}
+.panel{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:22px;}
+.upload-area{background:#fff;border:2px dashed var(--rose);border-radius:16px;padding:30px;text-align:center;color:#666;font-size:1rem;box-shadow:var(--shadow);transition:background .3s ease;margin-bottom:20px;}
 .upload-area:hover{background:#fdf8f8;}
-input[type="file"]{margin-top:10px;cursor:pointer;}
-
-/* Progress Bar */
-.progress-container{
-  width:100%;max-width:400px;margin:20px auto 10px;
-  background:#eee;border-radius:20px;overflow:hidden;display:none;
-}
-.progress-bar{
-  height:14px;width:0;background:var(--rose);transition:width .4s ease;
-}
-
-/* Notification */
-.notification{
-  position:fixed;top:20px;right:-400px;
-  background:var(--rose);color:#fff;padding:12px 24px;
-  border-radius:40px;font-family:"Playfair Display",serif;
-  font-size:1rem;box-shadow:var(--shadow);
-  transition:right .6s ease;z-index:99;
-}
-.notification.show{right:20px;}
-
-/* File List */
-.file-list{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-.file-card{
-  background:#fff;border-radius:12px;
-  padding:20px;box-shadow:var(--shadow);
-  text-align:left;opacity:0;transform:translateY(10px);
-  animation:fadeIn .6s forwards;
-}
-.file-card h4{font-family:"Playfair Display",serif;font-size:1.1rem;color:#222;margin-bottom:8px;}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+.file-card{background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:18px;text-align:left;}
+.file-card h4{font-family:"Playfair Display",serif;color:#222;margin-bottom:6px;}
 .file-card small{color:#777;display:block;margin-bottom:10px;}
-.file-card a{
-  display:inline-block;background:var(--rose);color:#fff;text-decoration:none;
-  padding:8px 16px;border-radius:30px;font-size:.9rem;transition:background .3s ease;
-}
+.file-card a{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;padding:8px 16px;border-radius:30px;font-family:"Playfair Display",serif;font-size:.9rem;}
 .file-card a:hover{background:#d6a9a0;}
-
-@keyframes fadeIn{
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* Footer */
-footer{text-align:center;color:#666;font-size:.75rem;margin:40px 0 10px;}
+footer{text-align:center;color:#666;font-size:.75rem;margin:30px 0 10px;}
+@media(max-width:900px){.app{grid-template-columns:90px 1fr;}.brand img{width:60px;}.nav a{justify-content:center;font-size:0;flex-direction:column;padding:10px 8px;}.nav a::after{content:attr(data-short);display:block;font-size:.7rem;color:#555;margin-top:2px;}}
 </style>
 </head>
-
 <body>
-  <div class="notification" id="notif">Upload Complete!</div>
+<div class="app">
+  <header class="header">
+    <div class="title">JF Legal Vault</div>
+    <div class="user"><a href="dashboard.html" style="text-decoration:none;color:#333;">← Back to Dashboard</a></div>
+  </header>
 
-  <div class="container">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
-    <h2>JF Legal Vault</h2>
-    <p class="intro">Securely upload, view, and download your legal documents.</p>
+  <aside class="sidebar">
+    <div class="brand"><img src="logo-transparent.png" alt="Logo"></div>
+    <nav class="nav">
+      <a href="dashboard.html" data-short="Home"><span class="ico">🏠</span> Back to Dashboard</a>
+      <a href="cases.html" target="_blank"><span class="ico">📁</span> My Cases</a>
+      <a href="vault.html" target="_blank" class="active"><span class="ico">🗄️</span> JF Legal Vault</a>
+      <a href="consult.html" target="_blank"><span class="ico">📅</span> Consultations</a>
+      <a href="services.html" target="_blank"><span class="ico">⚖️</span> Legal Services</a>
+      <a href="ai.html" target="_blank"><span class="ico">🤖</span> AI Assistant</a>
+      <a href="messages.html" target="_blank"><span class="ico">✉️</span> Messages</a>
+      <a href="payment.html" target="_blank"><span class="ico">💳</span> Payments</a>
+      <a href="profile.html" target="_blank"><span class="ico">👤</span> Profile</a>
+    </nav>
+  </aside>
 
-    <!-- Upload Section -->
-    <div class="upload-area">
-      <form id="uploadForm">
-        <label><strong>Upload a file:</strong></label><br>
-        <input type="file" name="document" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
-        <button type="submit" style="
-          background:var(--rose);
-          color:#fff;border:none;padding:10px 30px;
-          border-radius:40px;font-family:'Playfair Display',serif;
-          font-size:1rem;cursor:pointer;transition:background .3s ease;">Upload File</button>
-      </form>
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
+  <main class="main">
+    <div class="panel">
+      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">JF Legal Vault</h2>
+      <p style="color:#555;margin-bottom:20px;">Securely upload, view, and download your legal documents.</p>
+      <div class="upload-area">
+        <form id="uploadForm">
+          <label><strong>Upload a file:</strong></label><br>
+          <input type="file" name="document" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
+          <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Upload File</button>
+        </form>
+      </div>
+
+      <div class="files" id="fileList">
+        <div class="file-card">
+          <h4>Sample Document</h4>
+          <small>Uploaded: March 1, 2025</small>
+          <a href="#">Download</a>
+        </div>
       </div>
     </div>
-
-    <!-- File List -->
-    <div class="file-list" id="fileList">
-      <div class="file-card">
-        <h4>Sample Document</h4>
-        <small>Uploaded: March 1, 2025</small>
-        <a href="#">Download</a>
-      </div>
-    </div>
-  </div>
-
-  <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+    <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+  </main>
+</div>
 
 <script>
-const form = document.getElementById("uploadForm");
-const fileList = document.getElementById("fileList");
-const progressContainer = document.getElementById("progressContainer");
-const progressBar = document.getElementById("progressBar");
-const notif = document.getElementById("notif");
-
-form.addEventListener("submit", (e)=>{
-  e.preventDefault();
-  const file = form.querySelector('input[type="file"]').files[0];
-  if(!file){alert("Please select a file first.");return;}
-
-  progressContainer.style.display="block";
-  progressBar.style.width="0";
-
-  // Simulated upload progress
-  let progress = 0;
-  const interval = setInterval(()=>{
-    progress += 10;
-    progressBar.style.width = progress + "%";
-    if(progress>=100){
-      clearInterval(interval);
-      showNotification();
-      addFileCard(file.name);
-      form.reset();
-      progressContainer.style.display="none";
-    }
-  },150);
-});
-
-function addFileCard(name){
-  const card = document.createElement("div");
-  card.className = "file-card";
-  card.innerHTML = `
-    <h4>${name}</h4>
-    <small>Uploaded: ${new Date().toLocaleDateString()}</small>
-    <a href="#">Download</a>
-  `;
-  fileList.prepend(card);
-}
-
-function showNotification(){
-  notif.classList.add("show");
-  setTimeout(()=>notif.classList.remove("show"),2500);
+const uploadForm=document.getElementById("uploadForm");
+const fileList=document.getElementById("fileList");
+if(uploadForm){
+  uploadForm.addEventListener("submit",e=>{
+    e.preventDefault();
+    const file=uploadForm.querySelector('input[type="file"]').files[0];
+    if(!file){alert("Please select a file first.");return;}
+    const card=document.createElement("div");
+    card.className="file-card";
+    card.innerHTML=`<h4>${file.name}</h4><small>Uploaded ${new Date().toLocaleDateString()}</small><a href="#">Download</a>`;
+    fileList.prepend(card);
+    uploadForm.reset();
+  });
 }
 </script>
 </body>
