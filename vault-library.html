@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vault Library · The Legal Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css" />
+<script defer src="transition.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="title">Document Library</div>
+    <div class="user"><a href="dashboard.html" style="text-decoration:none;color:#333;">← Back to Dashboard</a></div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="brand"><img src="logo-transparent.png" alt="Logo" /></div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="ico">🏠</span> Dashboard</a>
+      <a class="active" href="vault-library.html"><span class="ico">🗄️</span> Vault Library</a>
+      <a href="vault-upload.html"><span class="ico">⬆️</span> Upload Docs</a>
+      <a href="cases.html"><span class="ico">📁</span> My Cases</a>
+      <a href="services.html"><span class="ico">⚖️</span> Legal Services</a>
+      <a href="subscription.html"><span class="ico">💼</span> Legal Access</a>
+      <a href="profile.html"><span class="ico">👤</span> Profile</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="panel">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:15px;">
+        <input id="searchInput" placeholder="Search documents…" style="flex:1;padding:10px;border-radius:8px;border:1px solid #ccc;" />
+        <select id="caseFilter" style="padding:10px;border-radius:8px;border:1px solid #ccc;">
+          <option value="">All Case Types</option>
+          <option>Divorce</option>
+          <option>Child Support</option>
+          <option>Will / Estate</option>
+        </select>
+        <select id="statusFilter" style="padding:10px;border-radius:8px;border:1px solid #ccc;">
+          <option value="">All Status</option>
+          <option>Pending</option>
+          <option>In Review</option>
+          <option>Filed</option>
+          <option>Signed</option>
+        </select>
+        <a href="vault-upload.html" style="background:var(--rose);color:#fff;padding:10px 24px;border-radius:30px;text-decoration:none;">+ Upload New</a>
+      </div>
+
+      <div id="fileContainer" class="files"></div>
+    </div>
+    <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+  </main>
+</div>
+
+<script>
+const files=[
+ {name:'Petition for Divorce',case:'Divorce',status:'Filed',date:'Feb 12 2025'},
+ {name:'Child Support Affidavit',case:'Child Support',status:'In Review',date:'Mar 4 2025'},
+ {name:'Last Will Document',case:'Will / Estate',status:'Signed',date:'Feb 20 2025'},
+ {name:'Financial Worksheet',case:'Divorce',status:'Pending',date:'Mar 2 2025'}
+];
+const cont=document.getElementById('fileContainer');
+function render(){
+  cont.innerHTML='';
+  const term=document.getElementById('searchInput').value.toLowerCase();
+  const cf=document.getElementById('caseFilter').value;
+  const sf=document.getElementById('statusFilter').value;
+  files.filter(f=>
+    (!term||f.name.toLowerCase().includes(term)) &&
+    (!cf||f.case===cf) &&
+    (!sf||f.status===sf)
+  ).forEach(f=>{
+    const card=document.createElement('div');
+    card.className='file-card';
+    card.innerHTML=`<h4>${f.name}</h4><small>${f.case} · ${f.status} · ${f.date}</small><a href="#">Download</a>`;
+    cont.appendChild(card);
+  });
+  if(!cont.innerHTML) cont.innerHTML='<p style="color:#777;">No documents match your filters.</p>';
+}
+['searchInput','caseFilter','statusFilter'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+render();
+</script>
+</body>
+</html>
