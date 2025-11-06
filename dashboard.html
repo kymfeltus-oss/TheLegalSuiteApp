@@ -8,342 +8,125 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-:root {
-  --rose:#E0BFB8;
-  --lilac:#EEE6F2;
-  --ivory:#F8F5F2;
-  --ink:#1C1C1C;
+:root{
+  --rose:#E0BFB8; --lilac:#EEE6F2; --ivory:#F8F5F2; --ink:#1C1C1C;
   --shadow:0 6px 14px rgba(0,0,0,0.1);
-  --card:#ffffff;
-  --header-h:64px;
+  --card:#ffffff; --header-h:64px;
 }
-
-/* Reset */
-* { box-sizing:border-box; margin:0; padding:0; }
-html,body { height:100%; width:100%; overflow-x:hidden; }
-body {
-  font-family:"Poppins",sans-serif;
-  background:var(--ivory);
-  color:var(--ink);
-}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;width:100%;overflow-x:hidden;}
+body{font-family:"Poppins",sans-serif;background:var(--ivory);color:var(--ink);}
 
 /* App Grid */
-.app {
-  min-height:100vh;
-  display:grid;
+.app{
+  min-height:100vh; display:grid;
   grid-template-columns:260px 1fr;
   grid-template-rows:auto 1fr;
-  grid-template-areas:
-    "header header"
-    "sidebar main";
+  grid-template-areas:"header header" "sidebar main";
 }
 
 /* Header */
-.header {
-  grid-area:header;
-  height:var(--header-h);
-  background:#fff;
-  border-bottom:3px solid var(--lilac);
-  padding:12px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  z-index:10;
+.header{
+  grid-area:header; height:var(--header-h); background:#fff;
+  border-bottom:3px solid var(--lilac); padding:12px 20px;
+  display:flex; justify-content:space-between; align-items:center;
+  position:sticky; top:0; z-index:10;
 }
-.header .title {
-  font-family:"Playfair Display",serif;
-  font-size:1.3rem;
-  color:#333;
-}
-.header .user { font-size:.9rem; color:#666; }
+.header .title{font-family:"Playfair Display",serif;font-size:1.3rem;color:#333;}
+.header .user{font-size:.9rem;color:#666;}
 
 /* Sidebar */
-.sidebar {
-  grid-area:sidebar;
-  background:#fff;
-  border-right:3px solid var(--lilac);
-  box-shadow:var(--shadow);
-  padding:0 10px 16px;
-  position:sticky;
-  top:var(--header-h);
-  align-self:start;
-  height:calc(100vh - var(--header-h));
-  overflow-y:auto;
+.sidebar{
+  grid-area:sidebar; background:#fff; border-right:3px solid var(--lilac);
+  box-shadow:var(--shadow); padding:0 10px 16px;
+  position:sticky; top:var(--header-h); align-self:start;
+  height:calc(100vh - var(--header-h)); overflow-y:auto;
 }
-.brand {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:16px 6px 12px;
-  border-bottom:2px solid var(--lilac);
-  position:sticky;
-  top:0;
-  background:#fff;
-  z-index:2;
+.brand{
+  display:flex; align-items:center; justify-content:center;
+  padding:16px 6px 12px; border-bottom:2px solid var(--lilac);
+  position:sticky; top:0; background:#fff; z-index:2;
 }
-.brand img {
-  width:150px;
-  max-width:90%;
-  height:auto;
+.brand img{width:150px; max-width:90%; height:auto;}
+.nav{padding:12px 2px; display:flex; flex-direction:column; gap:8px;}
+.nav a{
+  display:flex; align-items:center; gap:10px; text-decoration:none; color:#333;
+  background:#fff; border:1px solid #eee; padding:8px 10px; border-radius:12px;
+  transition:all .25s; font-weight:500; line-height:1.2; text-align:left;
+  word-break:break-word; white-space:normal;
 }
-
-.nav {
-  padding:12px 2px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.nav a {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:#333;
-  background:#fff;
-  border:1px solid #eee;
-  padding:8px 10px;
-  border-radius:12px;
-  transition:all .25s ease;
-  font-weight:500;
-  line-height:1.2;
-  text-align:left;
-  word-break:break-word;
-  white-space:normal;
-}
-.nav a:hover {
-  transform:translateX(4px);
-  box-shadow:var(--shadow);
-}
-.nav a.active {
-  background:var(--rose);
-  color:#fff;
-  border-color:transparent;
-}
-.nav .ico {
-  width:1.25rem;
-  flex-shrink:0;
-  text-align:center;
-  font-size:1.1rem;
-}
+.nav a:hover{transform:translateX(4px); box-shadow:var(--shadow);}
+.nav a.active{background:var(--rose); color:#fff; border-color:transparent;}
+.nav .ico{width:1.25rem; flex-shrink:0; text-align:center; font-size:1.1rem;}
 
 /* Main */
-.main {
-  grid-area:main;
-  padding:18px;
-  min-width:0;
-}
-.panel {
-  background:var(--card);
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  padding:20px;
-}
+.main{grid-area:main; padding:18px; min-width:0;}
+.panel{background:var(--card); border-radius:14px; box-shadow:var(--shadow); padding:20px;}
 
 /* Feed */
-.feed h2 {
-  font-family:"Playfair Display",serif;
-  font-size:1.25rem;
-  color:#333;
-  border-bottom:2px solid var(--rose);
-  padding-bottom:6px;
-  margin-bottom:8px;
+.feed h2{
+  font-family:"Playfair Display",serif; font-size:1.25rem; color:#333;
+  border-bottom:2px solid var(--rose); padding-bottom:6px; margin-bottom:8px;
 }
-.feed p.sub {
-  font-size:.95rem;
-  color:#555;
-  margin-bottom:12px;
-}
-.feed-item {
-  padding:14px 12px;
-  border-left:4px solid var(--rose);
-  background:#fafafa;
-  margin-bottom:10px;
-  border-radius:8px;
-}
-.feed-item strong { color:#222; }
-.feed-item small {
-  display:block;
-  color:#777;
-  margin-top:4px;
-  font-size:.85rem;
-}
+.feed p.sub{font-size:.95rem;color:#555;margin-bottom:12px;}
+.feed-item{padding:14px 12px; border-left:4px solid var(--rose); background:#fafafa; margin-bottom:10px; border-radius:8px;}
+.feed-item strong{color:#222;}
+.feed-item small{display:block;color:#777;margin-top:4px;font-size:.85rem;}
 
-/* Payment Modal */
-#paymentModal {
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.5);
-  backdrop-filter:blur(3px);
-  justify-content:center;
-  align-items:center;
-  z-index:999;
+/* Responsive */
+@media (max-width:900px){
+  .app{grid-template-columns:90px 1fr;}
+  .brand img{width:60px;}
+  .nav a{justify-content:center;font-size:0;padding:10px 8px;flex-direction:column;}
+  .nav a::after{content:attr(data-short);display:block;font-size:.7rem;color:#555;margin-top:2px;white-space:nowrap;}
 }
-.payment-box {
-  background:#fff;
-  border-radius:16px;
-  padding:30px;
-  max-width:400px;
-  width:90%;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  text-align:center;
-}
-.payment-box h3 {
-  font-family:'Playfair Display',serif;
-  color:#333;
-  margin-bottom:10px;
-}
-.payment-box input {
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-  border:1px solid #ccc;
-  border-radius:8px;
-}
-.payment-box button {
-  margin-top:10px;
-  background:var(--rose);
-  color:#fff;
-  border:none;
-  padding:10px 30px;
-  border-radius:40px;
-  font-family:'Playfair Display',serif;
-  font-size:1rem;
-  cursor:pointer;
-}
-.payment-box button:hover {
-  background:#d6a9a0;
-}
-
-/* Responsive Sidebar */
-@media (max-width:900px) {
-  .app { grid-template-columns:90px 1fr; }
-  .brand img { width:60px; }
-  .nav a {
-    justify-content:center;
-    font-size:0;
-    padding:10px 8px;
-    flex-direction:column;
-  }
-  .nav a::after {
-    content:attr(data-short);
-    display:block;
-    font-size:.7rem;
-    color:#555;
-    margin-top:2px;
-    white-space:nowrap;
-  }
-}
-@media (max-width:480px) {
-  .main { padding:12px; }
-  .header { padding:10px 12px; }
-  .header .title { font-size:1.1rem; }
+@media (max-width:480px){
+  .main{padding:12px;}
+  .header{padding:10px 12px;}
+  .header .title{font-size:1.1rem;}
 }
 </style>
 </head>
 
 <body>
 <div class="app">
+  <header class="header">
+    <div class="title">Dashboard</div>
+    <div class="user">Signed in as: <strong>User</strong></div>
+  </header>
 
-<header class="header">
-  <div class="title">Dashboard</div>
-  <div class="user">Signed in as: <strong>User</strong></div>
-</header>
+  <aside class="sidebar">
+    <div class="brand"><img src="logo-transparent.png" alt="The Legal Suite Logo"></div>
+    <nav class="nav">
+      <a href="#home" class="active" data-short="Home"><span class="ico">🏠</span> Home</a>
 
-<aside class="sidebar">
-  <div class="brand">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo">
-  </div>
-  <nav class="nav">
-    <a href="#home" class="active" data-short="Home"><span class="ico">🏠</span> Home</a>
-    <a href="#cases" data-short="Cases"><span class="ico">📁</span> My Cases</a>
-    <a href="#vault" data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
-    <a href="#consult" data-short="Consult"><span class="ico">📅</span> Consultations</a>
-    <a href="#services" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
-    <a href="#ai" data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
-    <a href="#messages" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
-    <a href="payment.html" data-short="Pay"><span class="ico">💳</span> Payments</a>
-    <a href="profile.html" data-short="Profile"><span class="ico">👤</span> Profile</a>
-  </nav>
-</aside>
+      <!-- Open modules in NEW TAB/WINDOW -->
+      <a href="cases.html"      target="_blank" rel="noopener" data-short="Cases"><span class="ico">📁</span> My Cases</a>
+      <a href="vault-module.html" target="_blank" rel="noopener" data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
+      <a href="consult.html"    target="_blank" rel="noopener" data-short="Consult"><span class="ico">📅</span> Consultations</a>
+      <a href="services.html"   target="_blank" rel="noopener" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
+      <a href="ai.html"         target="_blank" rel="noopener" data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
+      <a href="messages.html"   target="_blank" rel="noopener" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
+      <a href="payments-module.html" target="_blank" rel="noopener" data-short="Pay"><span class="ico">💳</span> Payments</a>
+      <a href="profile-module.html"  target="_blank" rel="noopener" data-short="Profile"><span class="ico">👤</span> Profile</a>
+    </nav>
+  </aside>
 
-<main class="main">
-<section id="home" class="panel feed">
-  <h2>Hi User — Your Paralegal Assistant’s Updates</h2>
-  <p class="sub">Here’s what’s been happening with your case:</p>
-  <div class="feed-item"><strong>Retainer Signed</strong><small>Your retainer agreement was received and filed on March 3, 2025.</small></div>
-  <div class="feed-item"><strong>Consultation Scheduled</strong><small>Your consultation with Attorney Feltus is confirmed for March 10th at 10 AM CST.</small></div>
-  <div class="feed-item"><strong>Vault Update</strong><small>Your uploaded petition has been categorized under “Court Documents.”</small></div>
-  <div class="feed-item"><strong>Next Step</strong><small>Please upload your financial affidavit when ready.</small></div>
-</section>
+  <main class="main">
+    <!-- HOME FEED ONLY lives on dashboard -->
+    <section id="home" class="panel feed">
+      <h2>Hi User — Your Paralegal Assistant’s Updates</h2>
+      <p class="sub">Here’s what’s been happening with your case:</p>
+      <div class="feed-item"><strong>Retainer Signed</strong><small>Your retainer agreement was received and filed on March 3, 2025.</small></div>
+      <div class="feed-item"><strong>Consultation Scheduled</strong><small>Your consultation with Attorney Feltus is confirmed for March 10th at 10 AM CST.</small></div>
+      <div class="feed-item"><strong>Vault Update</strong><small>Your uploaded petition has been categorized under “Court Documents.”</small></div>
+      <div class="feed-item"><strong>Next Step</strong><small>Please upload your financial affidavit when ready.</small></div>
+    </section>
 
-<section id="consult" class="panel" style="display:none;">
-  <h2 style="font-family:'Playfair Display',serif;margin-bottom:10px;">Consultations</h2>
-  <p style="color:#555;font-size:.95rem;margin-bottom:14px;">A <strong>$250 consultation fee</strong> is required to confirm your booking.</p>
-  <div class="calendly-inline-widget" data-url="https://calendly.com/kymfeltus/consultation" style="min-width:320px;height:600px;"></div>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <div style="text-align:center;margin-top:20px;">
-    <button id="openPaymentModal" style="background:var(--rose);color:#fff;border:none;padding:14px 36px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1.1rem;">Pay Consultation Fee</button>
-  </div>
-</section>
-
-<footer style="text-align:center;color:#666;font-size:.75rem;margin:14px 0 4px;">© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
-
-</main>
+    <footer style="text-align:center;color:#666;font-size:.75rem;margin:14px 0 4px;">
+      © 2025 The Law Office of Jamie Feltus · The Legal Suite
+    </footer>
+  </main>
 </div>
-
-<!-- Payment Modal -->
-<div id="paymentModal">
-  <div class="payment-box">
-    <h3>Pay Consultation Fee</h3>
-    <p>Amount Due: <strong>$250.00</strong></p>
-    <form id="mockPaymentForm">
-      <input type="text" placeholder="Cardholder Name" required>
-      <input type="text" placeholder="Card Number" required>
-      <div style="display:flex;gap:10px;">
-        <input type="text" placeholder="MM/YY" required style="flex:1;">
-        <input type="text" placeholder="CVC" required style="flex:1;">
-      </div>
-      <button type="submit">Submit Payment</button>
-    </form>
-    <p id="paymentMsg" style="margin-top:10px;font-weight:600;color:green;display:none;">Payment successful! Thank you.</p>
-    <button id="closePaymentModal" style="margin-top:10px;background:#999;color:#fff;border:none;padding:6px 18px;border-radius:30px;">Close</button>
-  </div>
-</div>
-
-<script>
-const routes=[...document.querySelectorAll('.nav a')].filter(a=>a.getAttribute('href').startsWith('#'));
-const panels=[...document.querySelectorAll('main section[id]')];
-function showPanel(id){
-  panels.forEach(p=>p.style.display=(p.id===id)?'block':'none');
-  routes.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
-}
-routes.forEach(a=>{
-  a.addEventListener('click',e=>{
-    const id=a.getAttribute('href').replace('#','');
-    e.preventDefault();showPanel(id);history.pushState(null,'','#'+id);
-  });
-});
-window.addEventListener('load',()=>{showPanel(location.hash.replace('#','')||'home');});
-
-const openPay=document.getElementById('openPaymentModal');
-const closePay=document.getElementById('closePaymentModal');
-const modalPay=document.getElementById('paymentModal');
-const formPay=document.getElementById('mockPaymentForm');
-const msgPay=document.getElementById('paymentMsg');
-if(openPay){openPay.onclick=()=>modalPay.style.display='flex';}
-if(closePay){closePay.onclick=()=>modalPay.style.display='none';}
-if(modalPay){modalPay.onclick=e=>{if(e.target===modalPay)modalPay.style.display='none';};}
-if(formPay){
-  formPay.onsubmit=e=>{
-    e.preventDefault();
-    msgPay.style.display='block';
-    setTimeout(()=>{msgPay.style.display='none';modalPay.style.display='none';alert('Mock payment processed successfully!');},2000);
-  };
-}
-</script>
 </body>
 </html>
