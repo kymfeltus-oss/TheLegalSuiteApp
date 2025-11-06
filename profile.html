@@ -1,151 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Profile Setup · The Legal Suite</title>
-
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Profile · The Legal Suite</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-
-<style>
-:root {
-  --rose:#E0BFB8;
-  --lilac:#EEE6F2;
-  --ivory:#F8F5F2;
-  --ink:#1C1C1C;
-}
-
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{
-  height:100%;
-  width:100%;
-  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
-  font-family:"Poppins",sans-serif;
-  color:var(--ink);
-  overflow:hidden;
-  position:relative;
-}
-
-/* Background (Jamie faded) */
-body::before{
-  content:"";
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  height:110%;
-  background:url('jamie.png') no-repeat center bottom;
-  background-size:38%;
-  opacity:0.25;
-  pointer-events:none;
-  z-index:0;
-}
-
-/* Form Container */
-.container{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 5%;
-}
-
-.logo{
-  width:400px;
-  max-width:95%;
-  margin-bottom:10px;
-}
-
-h2{
-  font-family:"Playfair Display",serif;
-  font-size:1.6rem;
-  color:#444;
-  margin-bottom:30px;
-}
-
-/* Form Box */
-.form-box{
-  background:#fff;
-  padding:35px 45px;
-  border-radius:20px;
-  box-shadow:0 8px 18px rgba(0,0,0,0.1);
-  width:100%;
-  max-width:450px;
-  margin-bottom:25px;
-  text-align:left;
-}
-
-label{
-  font-weight:500;
-  font-size:.95rem;
-  margin-bottom:6px;
-  display:block;
-  color:#333;
-}
-
-input, select{
-  width:100%;
-  padding:12px 14px;
-  margin-bottom:18px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:1rem;
-  outline:none;
-}
-input:focus, select:focus{border-color:var(--rose);}
-
-/* Button */
-.next-btn{
-  display:block;
-  width:100%;
-  background:var(--rose);
-  color:#fff;
-  border:none;
-  padding:14px;
-  border-radius:40px;
-  font-family:"Playfair Display",serif;
-  font-size:1.2rem;
-  text-align:center;
-  text-decoration:none;
-  transition:background .3s ease;
-}
-.next-btn:hover{background:#d6a9a0;}
-</style>
+<link rel="stylesheet" href="style.css" />
+<script defer src="transition.js"></script>
 </head>
-
 <body>
-  <div class="container">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
-    <h2>Complete Your Profile</h2>
+<div class="app">
+  <header class="header">
+    <div class="title">Profile</div>
+    <div class="user"><a href="dashboard.html" style="text-decoration:none;color:#333;">← Back to Dashboard</a></div>
+  </header>
 
-    <div class="form-box">
-      <form action="intake.html" method="get">
-        <label>Full Address</label>
-        <input type="text" placeholder="123 Main Street" required>
+  <aside class="sidebar">
+    <div class="brand"><img src="logo-transparent.png" alt="Logo"></div>
+    <nav class="nav">
+      <a href="dashboard.html" data-short="Home"><span class="ico">🏠</span> Back to Dashboard</a>
+      <a href="cases.html" target="_blank" rel="noopener" data-short="Cases"><span class="ico">📁</span> My Cases</a>
+      <a href="vault.html" target="_blank" rel="noopener" data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
+      <a href="consult.html" target="_blank" rel="noopener" data-short="Consult"><span class="ico">📅</span> Consultations</a>
+      <a href="services.html" target="_blank" rel="noopener" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
+      <a href="ai.html" target="_blank" rel="noopener" data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
+      <a href="messages.html" target="_blank" rel="noopener" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
+      <a href="payment.html" target="_blank" rel="noopener" data-short="Pay"><span class="ico">💳</span> Payments</a>
+      <a class="active" href="profile.html" target="_blank" rel="noopener" data-short="Profile"><span class="ico">👤</span> Profile</a>
+    </nav>
+  </aside>
 
-        <label>Date of Birth</label>
-        <input type="date" required>
-
-        <label>Select Legal Service</label>
-        <select required>
-          <option value="">Select Your Service</option>
-          <option>Divorce</option>
-          <option>Custody</option>
-          <option>Child Support</option>
-          <option>Estate Planning</option>
-          <option>Modification</option>
-          <option>Enforcement</option>
-          <option>Other</option>
-        </select>
-
-        <button type="submit" class="next-btn">Save Profile & Continue</button>
-      </form>
+  <main class="main">
+    <div class="panel placeholder">
+      <h2>Profile — Module Under Construction</h2>
+      <p>Add user details, settings, and preferences here.</p>
     </div>
-  </div>
+    <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+  </main>
+</div>
 </body>
 </html>
