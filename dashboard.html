@@ -1,61 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Legal Suite · Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css" />
-<script defer src="transition.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Securafin Studios • Hybrid Pro Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+  <script defer src="dashboard.js"></script>
 </head>
-<body>
-<div class="app">
-
-  <header class="header">
-    <div class="title">Dashboard</div>
-    <div class="user">Signed in as: <strong>User</strong></div>
+<body class="dash-body">
+  <div class="noise"></div>
+  <header class="dash-nav">
+    <a href="index.html" class="brand dash-brand">
+      <img src="assets/logo.png" class="brand-logo" alt="logo"/>
+      <span class="brand-name">Securafin<span class="accent"> Studios</span></span>
+    </a>
+    <nav class="dash-actions">
+      <button class="btn secondary small" id="themeToggle">Toggle Theme</button>
+      <button class="btn primary small" id="simulateBtn">Simulate Growth</button>
+    </nav>
   </header>
 
-  <aside class="sidebar">
-    <div class="brand"><img src="logo-transparent.png" alt="The Legal Suite Logo"></div>
-    <nav class="nav">
-      <a href="#home" class="active" data-short="Home"><span class="ico">🏠</span> Home</a>
-      <a href="cases.html" target="_blank" rel="noopener" data-short="Cases"><span class="ico">📁</span> My Cases</a>
-      <a href="vault.html" target="_blank" rel="noopener" data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
-      <a href="consult.html" target="_blank" rel="noopener" data-short="Consult"><span class="ico">📅</span> Consultations</a>
-      <a href="services.html" target="_blank" rel="noopener" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
-      <a href="ai.html" target="_blank" rel="noopener" data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
-      <a href="messages.html" target="_blank" rel="noopener" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
-      <a href="payment.html" target="_blank" rel="noopener" data-short="Pay"><span class="ico">💳</span> Payments</a>
-      <a href="profile.html" target="_blank" rel="noopener" data-short="Profile"><span class="ico">👤</span> Profile</a>
-    </nav>
-  </aside>
-
-  <main class="main">
-    <section id="home" class="panel feed">
-      <h2>Hi User — Your Paralegal Assistant’s Updates</h2>
-      <p class="sub">Here’s what’s been happening with your case:</p>
-
-      <div class="feed-item">
-        <strong>Retainer Signed</strong>
-        <small>Your retainer agreement was received and filed on March 3, 2025.</small>
-      </div>
-      <div class="feed-item">
-        <strong>Consultation Scheduled</strong>
-        <small>Your consultation with Attorney Feltus is confirmed for March 10th at 10 AM CST.</small>
-      </div>
-      <div class="feed-item">
-        <strong>Vault Update</strong>
-        <small>Your uploaded petition has been categorized under “Court Documents.”</small>
-      </div>
-      <div class="feed-item">
-        <strong>Next Step</strong>
-        <small>Please upload your financial affidavit when ready.</small>
-      </div>
+  <main class="dash-main">
+    <section class="kpis">
+      <div class="kpi glow-blue"><div class="kpi-label">Monthly Revenue</div><div class="kpi-value" data-kpi="mrr">$42,800</div></div>
+      <div class="kpi glow-green"><div class="kpi-label">Active Users</div><div class="kpi-value" data-kpi="users">4,230</div></div>
+      <div class="kpi glow-gold"><div class="kpi-label">Conversion Rate</div><div class="kpi-value" data-kpi="conv">7.8%</div></div>
+      <div class="kpi glow-pink"><div class="kpi-label">Net Promoter Score</div><div class="kpi-value" data-kpi="nps">72</div></div>
     </section>
-
-    <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+    <section class="panel chart-panel">
+      <h3 class="panel-title">Revenue & Growth Trends</h3>
+      <canvas id="revChart" width="900" height="400"></canvas>
+    </section>
   </main>
-</div>
 </body>
 </html>
