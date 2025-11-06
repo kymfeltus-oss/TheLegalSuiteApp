@@ -2,158 +2,132 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Login · The Legal Suite</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-:root {
+:root{
   --rose:#E0BFB8;
   --lilac:#EEE6F2;
   --ivory:#F8F5F2;
   --ink:#1C1C1C;
   --shadow:0 6px 14px rgba(0,0,0,0.1);
 }
-
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{
   height:100%;
   width:100%;
-  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
   font-family:"Poppins",sans-serif;
+  background:linear-gradient(180deg,var(--lilac)0%,var(--ivory)100%);
   color:var(--ink);
-  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
   position:relative;
+  overflow:hidden;
 }
 
-/* Background (Jamie faded) */
+/* faint background image */
 body::before{
   content:"";
   position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  height:110%;
-  background:url('jamie.png') no-repeat center bottom;
-  background-size:45%;
-  opacity:0.25;
-  pointer-events:none;
+  inset:0;
+  background:url("jamie.png") no-repeat center bottom/contain;
+  opacity:0.12;
   z-index:0;
+  pointer-events:none;
 }
 
-/* Container */
-.container{
+/* main login card */
+.login-box{
   position:relative;
   z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 5%;
-}
-
-/* Logo & Title */
-.logo{
-  width:420px;
-  max-width:95%;
-  margin-bottom:10px;
-}
-h2{
-  font-family:"Playfair Display",serif;
-  font-size:1.4rem;
-  color:#444;
-  letter-spacing:.04em;
-  margin-bottom:30px;
-}
-
-/* Form */
-.form-box{
   background:#fff;
-  padding:35px 45px;
-  border-radius:20px;
-  box-shadow:0 8px 18px rgba(0,0,0,0.1);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:40px 35px;
   width:100%;
-  max-width:400px;
+  max-width:420px;
+  text-align:center;
+}
+.login-box img{
+  width:200px;
+  max-width:80%;
+  margin-bottom:15px;
+}
+.login-box h1{
+  font-family:"Playfair Display",serif;
+  font-size:1.6rem;
+  color:#333;
   margin-bottom:25px;
 }
 
-input{
-  width:100%;
-  padding:12px 14px;
-  margin-bottom:18px;
+/* form */
+form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+input[type="email"], input[type="password"]{
+  padding:12px;
   border:1px solid #ccc;
   border-radius:8px;
   font-size:1rem;
-  outline:none;
-  transition:border-color .2s ease;
 }
-input:focus{ border-color:var(--rose); }
-
-/* Button */
 button{
-  display:block;
-  width:100%;
   background:var(--rose);
-  color:white;
+  color:#fff;
   border:none;
-  padding:14px;
   border-radius:40px;
+  padding:12px 30px;
   font-family:"Playfair Display",serif;
-  font-size:1.25rem;
+  font-size:1rem;
   cursor:pointer;
-  transition:all .3s ease;
-  text-decoration:none;
+  margin-top:10px;
+  transition:.3s;
 }
-button:hover{ background:#d6a9a0; transform:translateY(-2px); }
-
-/* Options */
-.options{
-  margin-top:15px;
-}
-.options a{
+button:hover{background:#d6a9a0;}
+a{
   color:var(--rose);
-  font-weight:500;
   text-decoration:none;
-  transition:color .3s ease;
-  font-family:"Playfair Display",serif;
+  font-size:.9rem;
 }
-.options a:hover{ color:#b88e85; }
+a:hover{text-decoration:underline;}
 
-/* Footer */
 footer{
   position:absolute;
   bottom:10px;
   left:50%;
   transform:translateX(-50%);
-  color:#666;
   font-size:.75rem;
-  text-align:center;
+  color:#666;
+}
+
+/* responsive */
+@media(max-width:600px){
+  .login-box{padding:30px 25px;}
+  .login-box h1{font-size:1.4rem;}
 }
 </style>
 </head>
 
 <body>
-  <div class="container">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
-    <h2>Welcome Back</h2>
+  <div class="login-box">
+    <img src="logo-transparent.png" alt="The Legal Suite Logo" />
+    <h1>Client Portal Login</h1>
+    <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+      <input type="email" placeholder="Email Address" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Sign In</button>
+    </form>
 
-    <div class="form-box">
-      <input type="email" placeholder="Email Address" />
-      <input type="password" placeholder="Password" />
-
-      <!-- This button now goes to the dashboard -->
-      <a href="dashboard.html">
-        <button type="button">Login</button>
-      </a>
-    </div>
-
-    <div class="options">
-      <p>Don’t have an account? <a href="create-account.html">Create Account</a></p>
-    </div>
+    <p style="margin-top:15px;font-size:.9rem;color:#555;">
+      Don’t have an account? <a href="#">Request Access</a>
+    </p>
+    <p style="margin-top:5px;font-size:.9rem;"><a href="#">Forgot Password?</a></p>
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
