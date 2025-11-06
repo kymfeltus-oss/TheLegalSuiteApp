@@ -17,25 +17,78 @@
   <aside class="sidebar">
     <div class="brand"><img src="logo-transparent.png" alt="Logo"></div>
     <nav class="nav">
-      <a href="dashboard.html" data-short="Home"><span class="ico">🏠</span> Back to Dashboard</a>
-      <a href="cases.html" target="_blank" rel="noopener" data-short="Cases"><span class="ico">📁</span> My Cases</a>
-      <a href="vault.html" target="_blank" rel="noopener" data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
-      <a href="consult.html" target="_blank" rel="noopener" data-short="Consult"><span class="ico">📅</span> Consultations</a>
-      <a href="services.html" target="_blank" rel="noopener" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
-      <a href="ai.html" target="_blank" rel="noopener" data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
-      <a class="active" href="messages.html" target="_blank" rel="noopener" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
-      <a href="payment.html" target="_blank" rel="noopener" data-short="Pay"><span class="ico">💳</span> Payments</a>
-      <a href="profile.html" target="_blank" rel="noopener" data-short="Profile"><span class="ico">👤</span> Profile</a>
+      <a href="dashboard.html"><span class="ico">🏠</span> Back to Dashboard</a>
+      <a href="cases.html" target="_blank"><span class="ico">📁</span> My Cases</a>
+      <a href="vault.html" target="_blank"><span class="ico">🗄️</span> JF Legal Vault</a>
+      <a href="consult.html" target="_blank"><span class="ico">📅</span> Consultations</a>
+      <a href="services.html" target="_blank"><span class="ico">⚖️</span> Legal Services</a>
+      <a href="ai.html" target="_blank"><span class="ico">🤖</span> AI Assistant</a>
+      <a class="active" href="messages.html" target="_blank"><span class="ico">✉️</span> Messages</a>
+      <a href="payment.html" target="_blank"><span class="ico">💳</span> Payments</a>
+      <a href="profile.html" target="_blank"><span class="ico">👤</span> Profile</a>
     </nav>
   </aside>
 
   <main class="main">
-    <div class="panel placeholder">
-      <h2>Messages — Module Under Construction</h2>
-      <p>Add Inbox/Outbox, threads, and compose here.</p>
+    <div class="panel">
+      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Messages</h2>
+      <div class="tabs" style="margin-bottom:10px;">
+        <button id="inboxBtn" style="padding:8px 16px;border:none;border-radius:8px;background:var(--rose);color:#fff;cursor:pointer;">Inbox</button>
+        <button id="outboxBtn" style="padding:8px 16px;border:none;border-radius:8px;background:#ccc;color:#333;cursor:pointer;">Outbox</button>
+      </div>
+
+      <div id="messageList" style="margin-bottom:20px;"></div>
+
+      <h3 style="font-family:'Playfair Display',serif;margin-bottom:10px;">Compose Message</h3>
+      <form id="msgForm">
+        <input type="text" id="to" placeholder="To (email)" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+        <input type="text" id="subject" placeholder="Subject" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+        <textarea id="body" placeholder="Write your message..." required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;height:120px;"></textarea>
+        <button type="submit" style="margin-top:10px;background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;cursor:pointer;">Send</button>
+      </form>
     </div>
     <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
   </main>
 </div>
+
+<script>
+const inboxKey='inbox';const outboxKey='outbox';
+const list=document.getElementById('messageList');
+const inboxBtn=document.getElementById('inboxBtn');
+const outboxBtn=document.getElementById('outboxBtn');
+let showing='inbox';
+
+function render(){
+  list.innerHTML='';
+  const data=JSON.parse(localStorage.getItem(showing)||'[]');
+  if(!data.length){list.innerHTML='<p style="color:#777;">No messages yet.</p>';return;}
+  data.slice().reverse().forEach(m=>{
+    const div=document.createElement('div');
+    div.style.borderLeft='4px solid var(--rose)';
+    div.style.background='#fafafa';
+    div.style.padding='10px';
+    div.style.borderRadius='8px';
+    div.style.marginBottom='10px';
+    div.innerHTML=`<strong>${m.subject}</strong><br><small>${m.date}</small><p>${m.body}</p>`;
+    list.appendChild(div);
+  });
+}
+inboxBtn.onclick=()=>{showing='inbox';inboxBtn.style.background='var(--rose)';outboxBtn.style.background='#ccc';render();}
+outboxBtn.onclick=()=>{showing='outbox';outboxBtn.style.background='var(--rose)';inboxBtn.style.background='#ccc';render();}
+document.getElementById('msgForm').onsubmit=e=>{
+  e.preventDefault();
+  const to=document.getElementById('to').value,sub=document.getElementById('subject').value,bod=document.getElementById('body').value;
+  const now=new Date().toLocaleString();
+  const out=JSON.parse(localStorage.getItem(outboxKey)||'[]');
+  out.push({subject:sub,body:bod,to,from:'You',date:now});
+  localStorage.setItem(outboxKey,JSON.stringify(out));
+  const inbox=JSON.parse(localStorage.getItem(inboxKey)||'[]');
+  inbox.push({subject:sub,body:bod,from:'You',to, date:now});
+  localStorage.setItem(inboxKey,JSON.stringify(inbox));
+  alert('Message sent!');
+  e.target.reset();
+};
+render();
+</script>
 </body>
 </html>
