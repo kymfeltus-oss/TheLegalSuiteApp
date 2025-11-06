@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About Jamie Feltus · The Legal Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css" />
+<script defer src="transition.js"></script>
+<style>
+body{
+  background:linear-gradient(180deg,var(--lilac)0%,var(--ivory)100%);
+  font-family:"Poppins",sans-serif;
+  color:var(--ink);
+  line-height:1.6;
+}
+.main-section{
+  max-width:900px;
+  margin:60px auto;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:40px;
+}
+.hero{
+  text-align:center;
+  margin-bottom:30px;
+}
+.hero img{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom:15px;
+}
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:2rem;
+  color:#333;
+}
+.hero p{
+  color:#555;
+  font-size:1rem;
+  max-width:700px;
+  margin:10px auto;
+}
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+.service{
+  background:#fafafa;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+.service h3{
+  font-family:"Playfair Display",serif;
+  color:#222;
+  margin-bottom:8px;
+}
+.service p{
+  color:#555;
+  font-size:.95rem;
+}
+.cta{
+  text-align:center;
+  margin-top:40px;
+}
+.cta a{
+  background:var(--rose);
+  color:#fff;
+  text-decoration:none;
+  padding:14px 36px;
+  border-radius:40px;
+  font-family:"Playfair Display",serif;
+  font-size:1.1rem;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
+  transition:.3s;
+}
+.cta a:hover{
+  background:#d6a9a0;
+}
+footer{
+  text-align:center;
+  color:#666;
+  font-size:.8rem;
+  margin:40px 0 20px;
+}
+</style>
+</head>
+
+<body>
+  <div class="main-section">
+    <div class="hero">
+      <img src="jamie.png" alt="Attorney Jamie Feltus" />
+      <h1>Meet Attorney Jamie Feltus</h1>
+      <p>
+        Jamie Feltus is an accomplished family law attorney and founder of <strong>The Legal Suite</strong> — 
+        a modern platform providing clients with accessible, tech-enabled legal support.
+        With over a decade of experience in family and civil law, Jamie blends compassion with efficiency to deliver trusted legal guidance.
+      </p>
+    </div>
+
+    <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Practice Areas & Services</h2>
+    <p style="color:#555;margin-bottom:20px;">
+      The Legal Suite connects you directly with professional legal services through a single, secure online portal.
+      Whether you need document preparation, consultations, or ongoing legal access, each service below can be managed directly within your client account.
+    </p>
+
+    <div class="services">
+      <div class="service">
+        <h3>Divorce Representation</h3>
+        <p>
+          Compassionate and strategic guidance through contested and uncontested divorce cases,
+          including custody, support, and property division.
+        </p>
+      </div>
+      <div class="service">
+        <h3>Child Support & Custody</h3>
+        <p>
+          Establish, enforce, or modify child support and custody orders with the help of a dedicated legal team.
+        </p>
+      </div>
+      <div class="service">
+        <h3>Enforcement Actions</h3>
+        <p>
+          Hold parties accountable for violating court orders — from unpaid support to visitation issues — swiftly and effectively.
+        </p>
+      </div>
+      <div class="service">
+        <h3>Wills & Estate Planning</h3>
+        <p>
+          Secure your legacy with carefully drafted wills, trusts, and estate plans tailored to your family’s needs.
+        </p>
+      </div>
+      <div class="service">
+        <h3>Consultations & Document Review</h3>
+        <p>
+          Schedule virtual or in-person consultations and upload your legal documents for professional review within The Legal Suite.
+        </p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <p style="color:#555;margin-bottom:10px;">Ready to get started?</p>
+      <a href="login.html">Access The Legal Suite</a>
+    </div>
+  </div>
+
+  <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+</body>
+</html>
