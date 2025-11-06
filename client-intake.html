@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Client Intake · The Legal Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css" />
+<script defer src="transition.js"></script>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="title">Client Intake Form</div>
+  <div class="user"><a href="dashboard.html" style="text-decoration:none;color:#333;">← Back to Dashboard</a></div>
+</header>
+
+<main class="main">
+  <div class="panel" style="max-width:800px;margin:auto;">
+    <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">New Client Information</h2>
+    <p style="color:#555;margin-bottom:20px;">Please complete the intake form to begin your onboarding process.</p>
+
+    <form id="intakeForm">
+      <label>Full Name:</label>
+      <input type="text" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+
+      <label>Email Address:</label>
+      <input type="email" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+
+      <label>Phone Number:</label>
+      <input type="tel" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+
+      <label>Preferred Contact Method:</label>
+      <select style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+        <option>Email</option><option>Phone</option><option>Text</option>
+      </select>
+
+      <label>Case Type:</label>
+      <select style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+        <option>Divorce</option><option>Child Support</option><option>Will / Estate</option><option>Enforcement</option><option>Other</option>
+      </select>
+
+      <label>Brief Case Description:</label>
+      <textarea rows="4" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;"></textarea>
+
+      <label>Have any documents to upload?</label><br>
+      <input type="file" multiple style="margin-bottom:20px;">
+
+      <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:12px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Submit Intake Form</button>
+    </form>
+    <p id="msg" style="margin-top:15px;color:green;font-weight:600;display:none;">Form submitted! Redirecting…</p>
+  </div>
+</main>
+</div>
+
+<script>
+document.getElementById('intakeForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('msg').style.display='block';
+  setTimeout(()=>window.location.href='thank-you-form.html',1500);
+});
+</script>
+</body>
+</html>
