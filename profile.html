@@ -1,41 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Profile · The Legal Suite</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Profile · The Legal Suite</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css" />
 <script defer src="transition.js"></script>
 </head>
+
 <body>
 <div class="app">
   <header class="header">
-    <div class="title">Profile</div>
+    <div class="title">My Profile & Membership</div>
     <div class="user"><a href="dashboard.html" style="text-decoration:none;color:#333;">← Back to Dashboard</a></div>
   </header>
 
   <aside class="sidebar">
     <div class="brand"><img src="logo-transparent.png" alt="Logo"></div>
     <nav class="nav">
-      <a href="dashboard.html" data-short="Home"><span class="ico">🏠</span> Back to Dashboard</a>
-      <a href="cases.html" target="_blank" rel="noopener" data-short="Cases"><span class="ico">📁</span> My Cases</a>
-      <a href="vault.html" target="_blank" rel="noopener" data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
-      <a href="consult.html" target="_blank" rel="noopener" data-short="Consult"><span class="ico">📅</span> Consultations</a>
-      <a href="services.html" target="_blank" rel="noopener" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
-      <a href="ai.html" target="_blank" rel="noopener" data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
-      <a href="messages.html" target="_blank" rel="noopener" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
-      <a href="payment.html" target="_blank" rel="noopener" data-short="Pay"><span class="ico">💳</span> Payments</a>
-      <a class="active" href="profile.html" target="_blank" rel="noopener" data-short="Profile"><span class="ico">👤</span> Profile</a>
+      <a href="dashboard.html"><span class="ico">🏠</span> Dashboard</a>
+      <a href="cases.html" target="_blank"><span class="ico">📁</span> My Cases</a>
+      <a href="vault-library.html" target="_blank"><span class="ico">🗄️</span> Vault Library</a>
+      <a href="consult.html" target="_blank"><span class="ico">📅</span> Consultations</a>
+      <a href="services.html" target="_blank"><span class="ico">⚖️</span> Legal Services</a>
+      <a href="ai.html" target="_blank"><span class="ico">🤖</span> AI Assistant</a>
+      <a href="messages.html" target="_blank"><span class="ico">✉️</span> Messages</a>
+      <a href="subscription.html" target="_blank"><span class="ico">💼</span> Legal Access</a>
+      <a class="active" href="profile.html" target="_blank"><span class="ico">👤</span> Profile</a>
     </nav>
   </aside>
 
   <main class="main">
-    <div class="panel placeholder">
-      <h2>Profile — Module Under Construction</h2>
-      <p>Add user details, settings, and preferences here.</p>
+    <div class="panel" style="max-width:650px;margin:auto;">
+      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Account Details</h2>
+
+      <form id="profileForm">
+        <label>Full Name:</label>
+        <input type="text" value="Jamie Feltus" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+
+        <label>Email:</label>
+        <input type="email" value="jamie@legalsuite.com" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+
+        <label>Phone:</label>
+        <input type="tel" value="(555) 123-4567" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+
+        <label>Address:</label>
+        <input type="text" value="123 Main Street, Dallas, TX" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+
+        <label>Profile Picture:</label>
+        <input type="file" accept="image/*" style="margin-bottom:20px;">
+
+        <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:12px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Save Changes</button>
+      </form>
+      <p id="saveMsg" style="margin-top:15px;color:green;font-weight:600;display:none;">Profile saved successfully.</p>
     </div>
+
+    <!-- Membership Card -->
+    <div class="panel" style="max-width:650px;margin:30px auto 0;text-align:center;">
+      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Current Membership Plan</h2>
+
+      <div style="background:#fafafa;padding:20px;border-radius:12px;box-shadow:var(--shadow);margin-bottom:15px;">
+        <h3 style="font-family:'Playfair Display',serif;margin-bottom:5px;">Legal Access Plus</h3>
+        <p style="color:#555;margin-bottom:10px;">Unlimited consultations, AI drafting tools, and vault access.</p>
+        <p style="color:#777;">Next Renewal: <strong>April 15, 2025</strong></p>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:15px;flex-wrap:wrap;">
+          <a href="subscription.html" class="pay-btn" style="padding:10px 24px;">Upgrade Plan</a>
+          <button id="cancelBtn" style="background:#999;color:#fff;border:none;padding:10px 24px;border-radius:40px;font-family:'Playfair Display',serif;cursor:pointer;">Cancel</button>
+          <button id="renewBtn" style="background:var(--rose);color:#fff;border:none;padding:10px 24px;border-radius:40px;font-family:'Playfair Display',serif;cursor:pointer;">Renew</button>
+        </div>
+      </div>
+      <p id="membershipMsg" style="margin-top:10px;color:green;font-weight:600;display:none;">Action successful.</p>
+    </div>
+
     <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
   </main>
 </div>
+
+<script>
+document.getElementById('profileForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('saveMsg').style.display='block';
+});
+
+// Mock cancel & renew actions
+document.getElementById('cancelBtn').addEventListener('click',()=>{
+  if(confirm('Are you sure you want to cancel your Legal Access Membership?')){
+    document.getElementById('membershipMsg').innerText='Your membership has been cancelled.';
+    document.getElementById('membershipMsg').style.display='block';
+  }
+});
+
+document.getElementById('renewBtn').addEventListener('click',()=>{
+  document.getElementById('membershipMsg').innerText='Your membership has been renewed successfully!';
+  document.getElementById('membershipMsg').style.display='block';
+});
+</script>
 </body>
 </html>
