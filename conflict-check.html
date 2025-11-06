@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Conflict Check · The Legal Suite</title>
+<link rel="stylesheet" href="style.css" />
+<script defer src="transition.js"></script>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="title">Conflict Check Form</div>
+  <div class="user"><a href="dashboard.html" style="text-decoration:none;color:#333;">← Back</a></div>
+</header>
+
+<main class="main">
+  <div class="panel" style="max-width:650px;margin:auto;">
+    <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Conflict Screening</h2>
+    <p style="color:#555;margin-bottom:20px;">Before representation, please provide the names of all opposing parties to ensure there are no conflicts of interest.</p>
+
+    <form id="conflictForm">
+      <label>Your Full Name:</label>
+      <input type="text" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+      <label>Opposing Party Name(s):</label>
+      <textarea rows="3" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;"></textarea>
+      <label>Case Type:</label>
+      <select style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:20px;">
+        <option>Divorce</option><option>Child Support</option><option>Estate</option><option>Other</option>
+      </select>
+      <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:12px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Submit</button>
+    </form>
+    <p id="msg" style="margin-top:15px;color:green;font-weight:600;display:none;">Conflict check received.</p>
+  </div>
+</main>
+</div>
+
+<script>
+document.getElementById('conflictForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('msg').style.display='block';
+});
+</script>
+</body>
+</html>
