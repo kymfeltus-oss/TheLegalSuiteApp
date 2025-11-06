@@ -1,48 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Law Office of Jamie Feltus</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Legal Suite — Welcome</title>
 
-  <body>
-    <div class="hero-section">
-      <header>
-        <img
-          src="logo.png"
-          alt="The Law Office of Jamie Feltus Logo"
-          class="logo"
-        />
-        <h1 class="title">The Legal Suite</h1>
-        <p class="tagline">Your Boutique Legal Experience</p>
-      </header>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
-      <main>
-        <div class="buttons">
-          <!-- Login required notice -->
-          <button class="btn disabled" disabled>
-            Enter Legal Suite (Login Required)
-          </button>
+<style>
+:root {
+  --rose:#E0BFB8;
+  --lilac:#EEE6F2;
+  --ivory:#F8F5F2;
+  --ink:#1C1C1C;
+  --shadow:0 6px 14px rgba(0,0,0,0.1);
+}
 
-          <!-- Still active: Create Account -->
-          <a href="signup.html" class="btn active">Create Account</a>
-        </div>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  height:100%;
+  width:100%;
+  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
+  font-family:"Poppins",sans-serif;
+  color:var(--ink);
+  overflow:hidden;
+  position:relative;
+}
 
-        <p class="note">
-          *Access temporarily restricted — please create an account or log in to
-          continue.*
-        </p>
-      </main>
+/* ---------- Jamie Background ---------- */
+body::before{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  height:120%;               /* avoids leg cutoff */
+  background:url('jamie.png') no-repeat center bottom;
+  background-size:50%;       /* perfect Jamie scale */
+  opacity:1;
+  z-index:0;
+  pointer-events:none;
+}
 
-      <footer>
-        <p>© 2025 The Law Office of Jamie Feltus. All rights reserved.</p>
-      </footer>
+/* ---------- Content Wrapper ---------- */
+.wrapper{
+  position:relative;
+  z-index:2;
+  height:calc(100vh - 40px);
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  text-align:center;
+}
+
+/* ---------- Logo ---------- */
+.logo{
+  width:520px;
+  max-width:95%;
+  margin-top:8%;
+  margin-bottom:20px;
+}
+
+/* ---------- Tagline ---------- */
+.tagline{
+  font-family:"Playfair Display",serif;
+  font-size:1.5rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#444;
+  margin-bottom:50px;
+}
+
+/* ---------- Button ---------- */
+.button-container{
+  position:absolute;
+  bottom:13%;                /* adjusts lower */
+  left:50%;
+  transform:translateX(-50%);
+}
+.btn{
+  font-family:"Playfair Display",serif;
+  font-size:1.5rem;
+  background:var(--rose);
+  color:#fff;
+  border:none;
+  border-radius:50px;
+  padding:16px 56px;
+  font-weight:500;
+  text-decoration:none;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
+  transition:all .3s ease;
+}
+.btn:hover{
+  background:#d6a9a0;
+  transform:translateY(-3px);
+}
+
+/* ---------- Footer ---------- */
+footer{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  color:#666;
+  font-size:.75rem;
+  width:100%;
+  z-index:3;
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  body::before{
+    background-size:55%;
+    height:125%;
+  }
+  .logo{width:440px;margin-top:10%;}
+  .tagline{font-size:1.3rem;margin-bottom:40px;}
+  .btn{font-size:1.4rem;padding:14px 50px;}
+  .button-container{bottom:14%;}
+}
+@media(max-width:700px){
+  body::before{
+    background-size:60%;
+    height:130%;
+  }
+  .logo{width:340px;margin-top:12%;}
+  .tagline{font-size:1.15rem;margin-bottom:36px;}
+  .btn{font-size:1.3rem;padding:13px 46px;}
+  .button-container{bottom:15%;}
+}
+</style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
+    <p class="tagline">Your Boutique Legal Experience</p>
+
+    <div class="button-container">
+      <a href="login.html" class="btn">Enter The Legal Suite</a>
     </div>
-  </body>
+  </div>
+
+  <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+</body>
 </html>
