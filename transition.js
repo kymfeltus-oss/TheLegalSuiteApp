@@ -1,16 +1,18 @@
-document.body.style.opacity = 0;
-window.addEventListener("load", () => {
-  document.body.style.transition = "opacity 0.8s ease";
-  document.body.style.opacity = 1;
+// Simple page fade-in on load
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.style.opacity = 0;
+  document.body.style.transition = "opacity .6s ease";
+  requestAnimationFrame(() => (document.body.style.opacity = 1));
 });
 
-document.querySelectorAll("a, button").forEach(el => {
-  el.addEventListener("click", e => {
-    const href = el.getAttribute("href");
-    if (href && href.endsWith(".html")) {
-      e.preventDefault();
-      document.body.style.opacity = 0;
-      setTimeout(() => { window.location.href = href; }, 500);
-    }
+// Optional fade-out on internal .html links (same-origin)
+document.querySelectorAll('a[href$=".html"]').forEach(a=>{
+  a.addEventListener("click", (e)=>{
+    // let target open in new tab if set
+    if (a.target === "_blank") return;
+    e.preventDefault();
+    const href = a.getAttribute("href");
+    document.body.style.opacity = 0;
+    setTimeout(()=> window.location.href = href, 300);
   });
 });
