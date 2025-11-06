@@ -18,7 +18,13 @@
 
 /* Reset + base */
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;width:100%;font-family:"Poppins",sans-serif;background:linear-gradient(180deg,var(--lilac)0%,var(--ivory)100%);color:var(--ink);}
+html,body{
+  height:100%;
+  width:100%;
+  font-family:"Poppins",sans-serif;
+  background:linear-gradient(180deg,var(--lilac)0%,var(--ivory)100%);
+  color:var(--ink);
+}
 
 /* Layout */
 body{
@@ -31,13 +37,13 @@ body{
   overflow:hidden;
 }
 
-/* --- Background (Jamie) --- */
+/* --- Background (Jamie image) --- */
 body::before{
   content:"";
   position:absolute;
   inset:0;
   background:url("jamie.png") no-repeat center bottom/contain;
-  opacity:0.12; /* ⬅️ Adjust transparency here (0.1 = faint, 0.2 = slightly darker) */
+  opacity:0.12; /* faint image visibility */
   z-index:0;
   pointer-events:none;
 }
@@ -115,7 +121,7 @@ footer{
   <div class="container">
     <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo" />
     <p class="tagline">Your Boutique Legal Experience</p>
-    <a href="login.html" class="btn">Enter The Legal Suite</a>
+    <a href="about-jamie.html" class="btn">Meet Jamie Feltus</a>
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
