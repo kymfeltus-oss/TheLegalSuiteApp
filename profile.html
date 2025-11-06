@@ -36,23 +36,17 @@
     <!-- Account Details -->
     <div class="panel" style="max-width:650px;margin:auto;">
       <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Account Details</h2>
-
       <form id="profileForm">
         <label>Full Name:</label>
         <input type="text" value="Jamie Feltus" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
-
         <label>Email:</label>
         <input type="email" value="jamie@legalsuite.com" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
-
         <label>Phone:</label>
         <input type="tel" value="(555) 123-4567" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
-
         <label>Address:</label>
-        <input type="text" value="123 Main Street, Dallas, TX" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
-
+        <input type="text" value="123 Main Street, Dallas TX" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
         <label>Profile Picture:</label>
         <input type="file" accept="image/*" style="margin-bottom:20px;">
-
         <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:12px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Save Changes</button>
       </form>
       <p id="saveMsg" style="margin-top:15px;color:green;font-weight:600;display:none;">Profile saved successfully.</p>
@@ -61,7 +55,6 @@
     <!-- Membership Card -->
     <div class="panel" style="max-width:650px;margin:30px auto 0;text-align:center;">
       <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Current Membership Plan</h2>
-
       <div style="background:#fafafa;padding:20px;border-radius:12px;box-shadow:var(--shadow);margin-bottom:15px;">
         <h3 style="font-family:'Playfair Display',serif;margin-bottom:5px;">Legal Access Plus</h3>
         <p style="color:#555;margin-bottom:10px;">Unlimited consultations, AI drafting tools, and vault access.</p>
@@ -78,7 +71,6 @@
     <!-- Billing History -->
     <div class="panel" style="max-width:800px;margin:30px auto;">
       <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Billing History & Invoices</h2>
-
       <div style="overflow-x:auto;">
         <table style="width:100%;border-collapse:collapse;font-size:.95rem;">
           <thead>
@@ -90,7 +82,7 @@
               <th style="padding:10px;text-align:left;">Invoice</th>
             </tr>
           </thead>
-          <tbody id="billingTable">
+          <tbody>
             <tr style="background:#fafafa;">
               <td style="padding:10px;">March 15, 2025</td>
               <td style="padding:10px;">Legal Access Plus — Monthly Renewal</td>
@@ -115,9 +107,20 @@
           </tbody>
         </table>
       </div>
-
       <div style="text-align:right;margin-top:10px;">
         <button id="downloadAllInvoices" style="background:var(--rose);color:#fff;border:none;padding:10px 24px;border-radius:40px;font-family:'Playfair Display',serif;cursor:pointer;">⬇️ Download All Invoices</button>
+      </div>
+    </div>
+
+    <!-- Next Consultation -->
+    <div class="panel" style="max-width:650px;margin:30px auto;text-align:center;">
+      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Next Consultation</h2>
+      <div style="background:#fafafa;padding:20px;border-radius:12px;box-shadow:var(--shadow);">
+        <h3 style="font-family:'Playfair Display',serif;margin-bottom:5px;">Consultation with Attorney Feltus</h3>
+        <p style="color:#555;margin-bottom:8px;">Date: <strong>March 10, 2025</strong></p>
+        <p style="color:#555;margin-bottom:15px;">Time: <strong>10:00 AM CST</strong></p>
+        <p style="color:#777;margin-bottom:15px;">Meeting ID: <strong>LS-A-10345</strong></p>
+        <a href="#" style="background:var(--rose);color:#fff;padding:12px 30px;border-radius:40px;text-decoration:none;font-family:'Playfair Display',serif;font-size:1rem;">Join Meeting</a>
       </div>
     </div>
 
@@ -130,20 +133,16 @@ document.getElementById('profileForm').addEventListener('submit',e=>{
   e.preventDefault();
   document.getElementById('saveMsg').style.display='block';
 });
-
 document.getElementById('cancelBtn').addEventListener('click',()=>{
   if(confirm('Are you sure you want to cancel your Legal Access Membership?')){
     document.getElementById('membershipMsg').innerText='Your membership has been cancelled.';
     document.getElementById('membershipMsg').style.display='block';
   }
 });
-
 document.getElementById('renewBtn').addEventListener('click',()=>{
   document.getElementById('membershipMsg').innerText='Your membership has been renewed successfully!';
   document.getElementById('membershipMsg').style.display='block';
 });
-
-// Mock download
 document.getElementById('downloadAllInvoices').addEventListener('click',()=>{
   alert('Preparing ZIP of invoices (demo).');
 });
