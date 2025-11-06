@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Legal Suite · Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -15,99 +15,98 @@
   --ink:#1C1C1C;
   --shadow:0 6px 14px rgba(0,0,0,0.1);
   --card:#ffffff;
+  --header-h:64px;
 }
 
 /* Reset */
 *{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
 body{
   font-family:"Poppins",sans-serif;
   background:var(--ivory);
   color:var(--ink);
+}
+
+/* ===== App Grid (fixes “cut off” sidebar) ===== */
+.app{
   min-height:100vh;
-  display:flex;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  grid-template-rows:auto 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
 }
 
-/* ===== Layout ===== */
-.sidebar{
-  width:260px;
-  background:#fff;
-  border-right:3px solid var(--lilac);
-  box-shadow:var(--shadow);
-  position:sticky;
-  top:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-.brand{
-  padding:18px 16px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  border-bottom:2px solid var(--lilac);
-  background:linear-gradient(90deg,var(--rose),var(--lilac));
-}
-.brand img{width:150px; height:auto; filter:brightness(0) invert(1);}
-.brand h1{
-  display:none;
-  color:#fff;
-  font-family:"Playfair Display",serif;
-  font-size:1.1rem;
-}
-
-.nav{
-  padding:14px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  overflow-y:auto;
-}
-.nav a{
-  display:block;
-  text-decoration:none;
-  padding:10px 14px;
-  border-radius:10px;
-  color:#333;
-  background:#fff;
-  border:1px solid #eee;
-  transition:all .25s ease;
-  font-weight:500;
-}
-.nav a:hover{transform:translateX(4px); box-shadow:var(--shadow);}
-.nav a.active{background:var(--rose); color:#fff; border-color:transparent;}
-
-.main{
-  flex:1;
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-}
-
-/* Header */
+/* Header spans full width */
 .header{
+  grid-area:header;
+  height:var(--header-h);
   background:#fff;
   border-bottom:3px solid var(--lilac);
-  padding:14px 20px;
+  padding:12px 20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   position:sticky; top:0; z-index:5;
 }
 .header .title{
   font-family:"Playfair Display",serif;
-  font-size:1.2rem;
+  font-size:1.3rem;
   color:#333;
 }
-.header .user{
-  font-size:.9rem; color:#666;
-}
+.header .user{font-size:.95rem;color:#666}
 
-/* Content wrapper */
-.content{
-  padding:22px;
+/* Sidebar flows UNDER the header — no clipping */
+.sidebar{
+  grid-area:sidebar;
+  background:#fff;
+  border-right:3px solid var(--lilac);
+  box-shadow:var(--shadow);
+  padding:0 12px 16px;
+  /* make it fill the viewport BELOW the header cleanly */
+  position:sticky; 
+  top:var(--header-h);
+  align-self:start;
+  height:calc(100vh - var(--header-h));
+  overflow:auto;
 }
+.brand{
+  display:flex; align-items:center; gap:10px;
+  padding:14px 6px 12px;
+  border-bottom:2px solid var(--lilac);
+  position:sticky; top:0; background:#fff; z-index:2;
+}
+.brand img{width:150px; height:auto;}
+.brand h1{display:none;}
 
-/* Card / panels */
+/* Sidebar nav — compact, no giant pills */
+.nav{
+  padding:12px 2px;
+  display:flex; flex-direction:column; gap:8px;
+}
+.nav a{
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none;
+  color:#333;
+  background:#fff;
+  border:1px solid #eee;
+  padding:10px 12px;
+  border-radius:12px;
+  transition:all .25s ease;
+  font-weight:500;
+  white-space:nowrap;
+}
+.nav a:hover{transform:translateX(4px); box-shadow:var(--shadow);}
+.nav a.active{background:var(--rose); color:#fff; border-color:transparent;}
+.nav .ico{width:1.25rem; display:inline-block; text-align:center}
+
+/* Main area */
+.main{
+  grid-area:main;
+  padding:18px;
+  min-width:0;
+}
 .panel{
   background:var(--card);
   border-radius:14px;
@@ -170,11 +169,9 @@ body{
 .service a{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;padding:8px 16px;border-radius:30px;font-size:.95rem;}
 .service a:hover{background:#d6a9a0;}
 
-/* AI Assistant */
+/* AI */
 .ai-wrap{display:flex;flex-direction:column;height:65vh;max-height:75vh;}
-.ai-log{
-  flex:1; overflow:auto; background:#fafafa; border-radius:12px; padding:14px; margin-bottom:12px; border:1px solid #eee;
-}
+.ai-log{flex:1; overflow:auto; background:#fafafa; border-radius:12px; padding:14px; margin-bottom:12px; border:1px solid #eee;}
 .msg{margin-bottom:10px;}
 .msg .bubble{display:inline-block;padding:10px 12px;border-radius:12px;max-width:85%;}
 .msg.user .bubble{background:#e8f0ff;}
@@ -195,52 +192,67 @@ body{
 .compose button{justify-self:start;background:var(--rose);color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;}
 .compose button:hover{background:#d6a9a0;}
 
-/* Responsive: collapse sidebar */
-@media(max-width:900px){
-  .sidebar{width:74px;}
-  .brand{justify-content:center;}
-  .brand img{width:44px; filter:none;}
-  .nav a{font-size:0; padding:12px; text-align:center;}
-  .nav a::after{
-    content: attr(data-short);
-    font-size:.8rem;
-    display:block;
-    color:#555;
+/* ===== Responsive fixes (phone) ===== */
+@media (max-width:900px){
+  .app{
+    grid-template-columns:88px 1fr;   /* skinny sidebar */
   }
+  .brand{justify-content:center;}
+  .brand img{width:44px;}
+
+  /* compact links: icon + short label via data-short */
+  .nav a{
+    padding:10px 8px;
+    justify-content:center;
+    font-size:0;                      /* hide long text */
+  }
+  .nav a .ico{font-size:1.05rem;}
+  .nav a::after{
+    content:attr(data-short);
+    font-size:.72rem;
+    color:#555;
+    margin-left:0;
+    display:block;
+  }
+}
+
+@media (max-width:480px){
+  .header{padding:10px 12px;}
+  .header .title{font-size:1.15rem;}
+  .main{padding:12px;}
 }
 </style>
 </head>
 
 <body>
-  <!-- ===== Sidebar ===== -->
-  <aside class="sidebar">
-    <div class="brand">
-      <img src="logo-transparent.png" alt="The Legal Suite Logo" />
-      <h1>The Legal Suite</h1>
-    </div>
-    <nav class="nav">
-      <a href="#home"        class="active" data-short="Home">🏠 Home</a>
-      <a href="#cases"       data-short="Cases">📁 My Cases</a>
-      <a href="#vault"       data-short="Vault">🗄️ JF Legal Vault</a>
-      <a href="#consult"     data-short="Consult">📅 Consultations</a>
-      <a href="#services"    data-short="Services">⚖️ Legal Services</a>
-      <a href="#ai"          data-short="AI">🤖 AI Assistant</a>
-      <a href="#messages"    data-short="Msgs">✉️ Messages</a>
-      <a href="payment.html" data-short="Pay">💳 Payments</a>
-      <a href="profile.html" data-short="Profile">👤 Profile</a>
-    </nav>
-  </aside>
-
-  <!-- ===== Main ===== -->
-  <main class="main">
-    <div class="header">
+  <div class="app">
+    <!-- Header (full width) -->
+    <header class="header">
       <div class="title">Dashboard</div>
       <div class="user">Signed in as: <strong>User</strong></div>
-    </div>
+    </header>
 
-    <div class="content">
+    <!-- Sidebar (flows under header, not cut off) -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="logo-transparent.png" alt="The Legal Suite Logo" />
+        <h1>The Legal Suite</h1>
+      </div>
+      <nav class="nav">
+        <a href="#home"     class="active" data-short="Home"><span class="ico">🏠</span> Home</a>
+        <a href="#cases"    data-short="Cases"><span class="ico">📁</span> My Cases</a>
+        <a href="#vault"    data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
+        <a href="#consult"  data-short="Consult"><span class="ico">📅</span> Consultations</a>
+        <a href="#services" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
+        <a href="#ai"       data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
+        <a href="#messages" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
+        <a href="payment.html" data-short="Pay"><span class="ico">💳</span> Payments</a>
+        <a href="profile.html" data-short="Profile"><span class="ico">👤</span> Profile</a>
+      </nav>
+    </aside>
 
-      <!-- HOME / FEED -->
+    <!-- Main -->
+    <main class="main">
       <section id="home" class="panel feed">
         <h2>Hi User — Your Paralegal Assistant’s Updates</h2>
         <p class="sub">Here’s what’s been happening with your case:</p>
@@ -263,7 +275,6 @@ body{
         </div>
       </section>
 
-      <!-- CASES -->
       <section id="cases" class="panel" style="display:none;">
         <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">My Cases</h2>
         <div class="timeline" style="margin-top:12px;">
@@ -274,10 +285,8 @@ body{
         <p style="margin-top:14px;color:#555;">Next Step: Await court scheduling notice.</p>
       </section>
 
-      <!-- VAULT -->
       <section id="vault" class="panel" style="display:none;">
         <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">JF Legal Vault</h2>
-
         <div class="upload-area">
           <form id="uploadForm">
             <label><strong>Upload a file:</strong></label><br>
@@ -285,7 +294,6 @@ body{
             <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Upload File</button>
           </form>
         </div>
-
         <div class="files" id="fileList">
           <div class="file-card">
             <h4>Sample Document</h4>
@@ -295,7 +303,6 @@ body{
         </div>
       </section>
 
-      <!-- CONSULTATIONS -->
       <section id="consult" class="panel" style="display:none;">
         <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Consultations</h2>
         <p style="color:#555;font-size:.95rem;margin-bottom:14px;">
@@ -307,7 +314,6 @@ body{
         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
       </section>
 
-      <!-- SERVICES -->
       <section id="services" class="panel" style="display:none;">
         <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Legal Services</h2>
         <div class="services" style="margin-top:8px;">
@@ -329,34 +335,27 @@ body{
         </div>
       </section>
 
-      <!-- AI ASSISTANT -->
       <section id="ai" class="panel" style="display:none;">
         <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">AI Assistant</h2>
         <div class="ai-wrap">
-          <div class="ai-log" id="aiLog">
-            <!-- messages appear here -->
-          </div>
+          <div class="ai-log" id="aiLog"></div>
           <div class="ai-input">
             <textarea id="aiText" placeholder="Ask a question about your case, deadlines, documents…"></textarea>
             <button id="aiSend">Send</button>
           </div>
         </div>
         <small style="color:#777;display:block;margin-top:8px;">
-          (Demo only — this placeholder answers locally. Hook this to your backend or OpenAI for real replies.)
+          (Demo only — hook this to your backend/OpenAI for real replies.)
         </small>
       </section>
 
-      <!-- MESSAGES (Inbox/Outbox) -->
       <section id="messages" class="panel" style="display:none;">
         <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Messages</h2>
-
         <div class="tabs">
           <button class="tab-btn active" data-box="inbox">Inbox</button>
           <button class="tab-btn" data-box="outbox">Outbox</button>
         </div>
-
         <div class="m-list" id="msgList"></div>
-
         <div class="compose">
           <h3 style="font-family:'Playfair Display',serif;">Compose</h3>
           <input id="toInput" placeholder="To (email)" />
@@ -366,180 +365,118 @@ body{
         </div>
       </section>
 
-    </div>
-
-    <footer style="text-align:center;color:#666;font-size:.75rem;margin:10px 0 20px;">
-      © 2025 The Law Office of Jamie Feltus · The Legal Suite
-    </footer>
-  </main>
+      <footer style="text-align:center;color:#666;font-size:.75rem;margin:14px 0 4px;">
+        © 2025 The Law Office of Jamie Feltus · The Legal Suite
+      </footer>
+    </main>
+  </div>
 
 <script>
-/* ---------- Simple view router for the sidebar ---------- */
-const routes = Array.from(document.querySelectorAll('.nav a')).filter(a => a.getAttribute('href').startsWith('#'));
-const panels = Array.from(document.querySelectorAll('section[id]'));
+/* ---------- Simple in-app routing ---------- */
+const routes=[...document.querySelectorAll('.nav a')].filter(a=>a.getAttribute('href').startsWith('#'));
+const panels=[...document.querySelectorAll('main section[id]')];
 
 function showPanel(id){
-  panels.forEach(p => p.style.display = (p.id === id)? 'block' : 'none');
-  routes.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+id));
-  const title = document.querySelector('.header .title');
-  title.textContent = id === 'home' ? 'Dashboard' : id.charAt(0).toUpperCase()+id.slice(1);
-  if(id === 'services'){
-    // turn "Upload Contract" link into in-app navigation to Vault
-    document.querySelectorAll('.link-to-vault').forEach(el => {
-      el.addEventListener('click', (e)=>{ e.preventDefault(); showPanel('vault'); history.pushState(null,'','#vault'); });
+  panels.forEach(p=>p.style.display=(p.id===id)?'block':'none');
+  routes.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+  document.querySelector('.title').textContent = id==='home'?'Dashboard':id.charAt(0).toUpperCase()+id.slice(1);
+  if(id==='services'){
+    document.querySelectorAll('.link-to-vault').forEach(el=>{
+      el.onclick=(e)=>{ e.preventDefault(); showPanel('vault'); history.pushState(null,'','#vault'); };
     });
   }
 }
-
 routes.forEach(a=>{
-  a.addEventListener('click', (e)=>{
-    const href = a.getAttribute('href');
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
     if(href && href.startsWith('#')){
       e.preventDefault();
-      const id = href.substring(1);
+      const id=href.slice(1);
       showPanel(id);
       history.pushState(null,'',href);
     }
   });
 });
-
-window.addEventListener('load', ()=>{
-  const initial = location.hash.replace('#','') || 'home';
-  showPanel(initial);
-});
-window.addEventListener('popstate', ()=>{
-  const id = location.hash.replace('#','') || 'home';
-  showPanel(id);
-});
+window.addEventListener('load',()=>{ showPanel(location.hash.replace('#','')||'home'); });
+window.addEventListener('popstate',()=>{ showPanel(location.hash.replace('#','')||'home'); });
 
 /* ---------- Vault upload (simulated) ---------- */
-const uploadForm = document.getElementById("uploadForm");
-const fileList = document.getElementById("fileList");
+const uploadForm=document.getElementById("uploadForm");
+const fileList=document.getElementById("fileList");
 if(uploadForm){
   uploadForm.addEventListener("submit",(e)=>{
     e.preventDefault();
-    const file = uploadForm.querySelector('input[type="file"]').files[0];
-    if(!file){ alert("Please select a file first."); return; }
-    const card = document.createElement("div");
-    card.className = "file-card";
-    card.innerHTML = `
-      <h4>${file.name}</h4>
-      <small>Uploaded: ${new Date().toLocaleDateString()}</small>
-      <a href="#">Download</a>
-    `;
+    const file=uploadForm.querySelector('input[type="file"]').files[0];
+    if(!file){alert("Please select a file first.");return;}
+    const card=document.createElement("div");
+    card.className="file-card";
+    card.innerHTML=`<h4>${file.name}</h4><small>Uploaded: ${new Date().toLocaleDateString()}</small><a href="#">Download</a>`;
     fileList.prepend(card);
     uploadForm.reset();
   });
 }
 
-/* ---------- AI Assistant (local demo) ---------- */
-const aiLog = document.getElementById('aiLog');
-const aiText = document.getElementById('aiText');
-const aiSend = document.getElementById('aiSend');
-
-function addMsg(sender, text){
-  const div = document.createElement('div');
-  div.className = 'msg ' + (sender === 'user' ? 'user' : 'ai');
-  div.innerHTML = `<div class="bubble"><strong>${sender === 'user' ? 'You' : 'Assistant'}:</strong> ${text}</div>`;
-  aiLog.appendChild(div);
-  aiLog.scrollTop = aiLog.scrollHeight;
+/* ---------- AI demo ---------- */
+const aiLog=document.getElementById('aiLog');
+const aiText=document.getElementById('aiText');
+const aiSend=document.getElementById('aiSend');
+function addMsg(sender,text){
+  const div=document.createElement('div');
+  div.className='msg '+(sender==='user'?'user':'ai');
+  div.innerHTML=`<div class="bubble"><strong>${sender==='user'?'You':'Assistant'}:</strong> ${text}</div>`;
+  aiLog.appendChild(div); aiLog.scrollTop=aiLog.scrollHeight;
 }
-
-function aiReply(text){
-  // ultra-simple placeholder logic
-  const lower = text.toLowerCase();
-  if(lower.includes('consult') || lower.includes('book')){
-    return 'To book, open Consultations in the sidebar and pick an available time. A $250 fee confirms your slot.';
-  }
-  if(lower.includes('upload') || lower.includes('document') || lower.includes('vault')){
-    return 'You can upload documents in the JF Legal Vault. I’ll notify the team once a file is added.';
-  }
-  if(lower.includes('retainer') || lower.includes('payment')){
-    return 'Retainer and payments are handled on the Payments page. Select your tier and proceed securely.';
-  }
-  return "Thanks! I’ve noted that. If it’s about your case, I can route it to your paralegal. (Connect this widget to your backend/OpenAI for real answers.)";
+function aiReply(t){
+  const s=t.toLowerCase();
+  if(s.includes('consult')) return 'Open Consultations to book. A $250 fee confirms your slot.';
+  if(s.includes('upload')||s.includes('vault')) return 'Upload documents under JF Legal Vault.';
+  if(s.includes('retainer')||s.includes('payment')) return 'Go to Payments to complete your retainer.';
+  return 'Noted. I can route this to your paralegal. Connect this to your backend for real answers.';
 }
-
 if(aiSend){
-  aiSend.addEventListener('click', ()=>{
-    const txt = aiText.value.trim();
+  aiSend.addEventListener('click',()=>{
+    const txt=(aiText.value||'').trim();
     if(!txt) return;
-    addMsg('user', txt);
-    aiText.value = '';
-    setTimeout(()=> addMsg('ai', aiReply(txt)), 300);
+    addMsg('user',txt);
+    aiText.value='';
+    setTimeout(()=>addMsg('ai',aiReply(txt)),250);
   });
 }
 
-/* ---------- Messages (Inbox/Outbox) using localStorage ---------- */
-const inboxKey = 'tl_inbox';
-const outboxKey = 'tl_outbox';
-const msgList = document.getElementById('msgList');
-const tabBtns = document.querySelectorAll('.tab-btn');
-let currentBox = 'inbox';
-
+/* ---------- Messages (localStorage) ---------- */
+const inboxKey='tl_inbox', outboxKey='tl_outbox';
+const msgList=document.getElementById('msgList');
+const tabBtns=document.querySelectorAll('.tab-btn');
+let currentBox='inbox';
 function loadBox(){
-  const store = JSON.parse(localStorage.getItem(currentBox === 'inbox' ? inboxKey : outboxKey) || '[]');
-  msgList.innerHTML = '';
-  if(store.length === 0){
-    const empty = document.createElement('div');
-    empty.className = 'm-item';
-    empty.textContent = 'No messages.';
-    msgList.appendChild(empty);
-    return;
-  }
-  store.slice().reverse().forEach(m=>{
-    const item = document.createElement('div');
-    item.className='m-item';
-    item.innerHTML = `<strong>${m.subject}</strong><div style="color:#777;font-size:.9rem;margin:4px 0;">From: ${m.from || 'you'} · To: ${m.to}</div><div>${m.body}</div>`;
-    msgList.appendChild(item);
+  const arr=JSON.parse(localStorage.getItem(currentBox==='inbox'?inboxKey:outboxKey)||'[]');
+  msgList.innerHTML='';
+  if(!arr.length){ const e=document.createElement('div'); e.className='m-item'; e.textContent='No messages.'; msgList.appendChild(e); return;}
+  arr.slice().reverse().forEach(m=>{
+    const d=document.createElement('div');
+    d.className='m-item';
+    d.innerHTML=`<strong>${m.subject}</strong><div style="color:#777;font-size:.9rem;margin:4px 0;">From: ${m.from||'you'} · To: ${m.to}</div><div>${m.body}</div>`;
+    msgList.appendChild(d);
   });
 }
-
 tabBtns.forEach(b=>{
-  b.addEventListener('click', ()=>{
-    tabBtns.forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    currentBox = b.dataset.box;
-    loadBox();
-  });
+  b.addEventListener('click',()=>{ tabBtns.forEach(x=>x.classList.remove('active')); b.classList.add('active'); currentBox=b.dataset.box; loadBox(); });
 });
-
-const toInput = document.getElementById('toInput');
-const subjectInput = document.getElementById('subjectInput');
-const bodyInput = document.getElementById('bodyInput');
-const sendBtn = document.getElementById('sendMsg');
-
+const toInput=document.getElementById('toInput');
+const subjectInput=document.getElementById('subjectInput');
+const bodyInput=document.getElementById('bodyInput');
+const sendBtn=document.getElementById('sendMsg');
 if(sendBtn){
-  sendBtn.addEventListener('click', ()=>{
-    const to = (toInput.value||'').trim();
-    const subject = (subjectInput.value||'').trim();
-    const body = (bodyInput.value||'').trim();
-    if(!to || !subject || !body){ alert('Please fill To, Subject and Body.'); return; }
-
-    const out = JSON.parse(localStorage.getItem(outboxKey) || '[]');
-    out.push({to, subject, body, date: Date.now()});
-    localStorage.setItem(outboxKey, JSON.stringify(out));
-
-    // also simulate inbox copy
-    const inbox = JSON.parse(localStorage.getItem(inboxKey) || '[]');
-    inbox.push({from:'User', to:'Office', subject:subject + ' (copy)', body, date: Date.now()});
-    localStorage.setItem(inboxKey, JSON.stringify(inbox));
-
-    toInput.value = subjectInput.value = bodyInput.value = '';
-    if(currentBox === 'outbox') loadBox();
-    alert('Message sent!');
+  sendBtn.addEventListener('click',()=>{
+    const to=(toInput.value||'').trim(), sub=(subjectInput.value||'').trim(), body=(bodyInput.value||'').trim();
+    if(!to||!sub||!body){ alert('Please fill To, Subject and Body.'); return; }
+    const out=JSON.parse(localStorage.getItem(outboxKey)||'[]'); out.push({to:to,subject:sub,body:body,date:Date.now()}); localStorage.setItem(outboxKey,JSON.stringify(out));
+    const inbox=JSON.parse(localStorage.getItem(inboxKey)||'[]'); inbox.push({from:'User',to:'Office',subject:sub+' (copy)',body:body,date:Date.now()}); localStorage.setItem(inboxKey,JSON.stringify(inbox));
+    toInput.value=subjectInput.value=bodyInput.value=''; if(currentBox==='outbox') loadBox(); alert('Message sent!');
   });
 }
-
-// initialize default messages (one-time)
-if(!localStorage.getItem(inboxKey)){
-  localStorage.setItem(inboxKey, JSON.stringify([
-    {from:'Paralegal', to:'User', subject:'Welcome to The Legal Suite', body:'Your account is active. Let us know if you need help with the intake.', date: Date.now()-86400000}
-  ]));
-}
-if(!localStorage.getItem(outboxKey)){
-  localStorage.setItem(outboxKey, JSON.stringify([]));
-}
+if(!localStorage.getItem(inboxKey)){ localStorage.setItem(inboxKey, JSON.stringify([{from:'Paralegal',to:'User',subject:'Welcome to The Legal Suite',body:'Your account is active. Let us know if you need help with the intake.',date:Date.now()-86400000}])); }
+if(!localStorage.getItem(outboxKey)){ localStorage.setItem(outboxKey, JSON.stringify([])); }
 if(document.getElementById('messages')) loadBox();
 </script>
 </body>
