@@ -17,59 +17,103 @@
   <aside class="sidebar">
     <div class="brand"><img src="logo-transparent.png" alt="Logo"></div>
     <nav class="nav">
-      <a href="dashboard.html" data-short="Home"><span class="ico">🏠</span> Back to Dashboard</a>
-      <a class="active" href="vault.html" target="_blank" rel="noopener" data-short="Vault"><span class="ico">🗄️</span> JF Legal Vault</a>
-      <a href="cases.html" target="_blank" rel="noopener" data-short="Cases"><span class="ico">📁</span> My Cases</a>
-      <a href="consult.html" target="_blank" rel="noopener" data-short="Consult"><span class="ico">📅</span> Consultations</a>
-      <a href="services.html" target="_blank" rel="noopener" data-short="Services"><span class="ico">⚖️</span> Legal Services</a>
-      <a href="ai.html" target="_blank" rel="noopener" data-short="AI"><span class="ico">🤖</span> AI Assistant</a>
-      <a href="messages.html" target="_blank" rel="noopener" data-short="Msgs"><span class="ico">✉️</span> Messages</a>
-      <a href="payment.html" target="_blank" rel="noopener" data-short="Pay"><span class="ico">💳</span> Payments</a>
-      <a href="profile.html" target="_blank" rel="noopener" data-short="Profile"><span class="ico">👤</span> Profile</a>
+      <a href="dashboard.html"><span class="ico">🏠</span> Back to Dashboard</a>
+      <a class="active" href="vault.html" target="_blank"><span class="ico">🗄️</span> JF Legal Vault</a>
+      <a href="cases.html" target="_blank"><span class="ico">📁</span> My Cases</a>
+      <a href="consult.html" target="_blank"><span class="ico">📅</span> Consultations</a>
+      <a href="services.html" target="_blank"><span class="ico">⚖️</span> Legal Services</a>
+      <a href="ai.html" target="_blank"><span class="ico">🤖</span> AI Assistant</a>
+      <a href="messages.html" target="_blank"><span class="ico">✉️</span> Messages</a>
+      <a href="payment.html" target="_blank"><span class="ico">💳</span> Payments</a>
+      <a href="profile.html" target="_blank"><span class="ico">👤</span> Profile</a>
     </nav>
   </aside>
 
   <main class="main">
     <div class="panel">
-      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">JF Legal Vault</h2>
-      <p style="color:#555;margin-bottom:20px;">Securely upload, view, and download your legal documents.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:10px;">
+        <h2 style="font-family:'Playfair Display',serif;color:#333;">Document Library</h2>
+        <button id="downloadAll" style="background:var(--rose);color:#fff;border:none;padding:10px 24px;border-radius:40px;cursor:pointer;">⬇️ Download All</button>
+      </div>
 
+      <!-- Upload new -->
       <div class="upload-area">
         <form id="uploadForm">
-          <label><strong>Upload a file:</strong></label><br>
-          <input type="file" name="document" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
-          <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Upload File</button>
+          <label><strong>Upload New File:</strong></label><br>
+          <input type="file" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
+          <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;">Upload</button>
         </form>
       </div>
 
-      <div class="files" id="fileList">
-        <div class="file-card">
-          <h4>Sample Document</h4>
-          <small>Uploaded: March 1, 2025</small>
-          <a href="#">Download</a>
+      <!-- Library Tabs -->
+      <div class="tabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="tab active" data-section="signed">Signed Docs</button>
+        <button class="tab" data-section="filed">Court-Filed Docs</button>
+        <button class="tab" data-section="pending">Pending Docs</button>
+        <button class="tab" data-section="review">Docs in Review</button>
+      </div>
+
+      <!-- Library Sections -->
+      <div id="library">
+        <div id="signed" class="lib-section">
+          <h3 style="font-family:'Playfair Display',serif;color:#333;">Signed Documents</h3>
+          <div class="files">
+            <div class="file-card"><h4>Client Retainer Agreement</h4><small>Signed March 2, 2025</small><a href="#">Download</a></div>
+            <div class="file-card"><h4>Child Support Modification Form</h4><small>Signed March 5, 2025</small><a href="#">Download</a></div>
+          </div>
+        </div>
+
+        <div id="filed" class="lib-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;color:#333;">Court-Filed Documents</h3>
+          <div class="files">
+            <div class="file-card"><h4>Petition for Divorce</h4><small>Filed Feb 10, 2025</small><a href="#">Download</a></div>
+            <div class="file-card"><h4>Order for Support</h4><small>Filed Feb 15, 2025</small><a href="#">Download</a></div>
+          </div>
+        </div>
+
+        <div id="pending" class="lib-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;color:#333;">Pending Documents</h3>
+          <div class="files">
+            <div class="file-card"><h4>Financial Affidavit Draft</h4><small>Uploaded Awaiting Review</small><a href="#">Download</a></div>
+            <div class="file-card"><h4>Estate Inventory Worksheet</h4><small>Uploaded Awaiting Attorney Approval</small><a href="#">Download</a></div>
+          </div>
+        </div>
+
+        <div id="review" class="lib-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;color:#333;">Documents in Review</h3>
+          <div class="files">
+            <div class="file-card"><h4>Proposed Settlement Agreement</h4><small>Under Review by Attorney Feltus</small><a href="#">Download</a></div>
+            <div class="file-card"><h4>Updated Will Revision</h4><small>Under Paralegal Review</small><a href="#">Download</a></div>
+          </div>
         </div>
       </div>
     </div>
-
     <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
   </main>
 </div>
 
 <script>
-const uploadForm=document.getElementById("uploadForm");
-const fileList=document.getElementById("fileList");
-if(uploadForm){
-  uploadForm.addEventListener("submit",e=>{
-    e.preventDefault();
-    const file=uploadForm.querySelector('input[type="file"]').files[0];
-    if(!file){alert("Please select a file first.");return;}
-    const card=document.createElement("div");
-    card.className="file-card";
-    card.innerHTML=`<h4>${file.name}</h4><small>Uploaded ${new Date().toLocaleDateString()}</small><a href="#">Download</a>`;
-    fileList.prepend(card);
-    uploadForm.reset();
+// Switch sections
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    const sec=btn.dataset.section;
+    document.querySelectorAll('.lib-section').forEach(s=>s.style.display='none');
+    document.getElementById(sec).style.display='block';
   });
-}
+});
+
+// Upload simulation
+const form=document.getElementById('uploadForm');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  alert('Mock upload complete — document placed in Pending Docs.');
+  form.reset();
+});
+
+// Download all simulation
+document.getElementById('downloadAll').onclick=()=>alert('Preparing ZIP of all documents (demo).');
 </script>
 </body>
 </html>
