@@ -150,13 +150,4 @@ footer {
 .link:hover {
   text-decoration: underline;
 }
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .login-container {
-    width: 90%;
-    padding: 30px 20px;
-  }
-}
-
 }
