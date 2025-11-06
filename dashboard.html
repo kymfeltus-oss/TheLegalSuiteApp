@@ -8,324 +8,539 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-:root {
+:root{
   --rose:#E0BFB8;
   --lilac:#EEE6F2;
   --ivory:#F8F5F2;
   --ink:#1C1C1C;
-  --shadow:0 4px 12px rgba(0,0,0,0.08);
+  --shadow:0 6px 14px rgba(0,0,0,0.1);
+  --card:#ffffff;
 }
 
-* { box-sizing:border-box; margin:0; padding:0; }
-
-body {
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
   font-family:"Poppins",sans-serif;
   background:var(--ivory);
   color:var(--ink);
+  min-height:100vh;
+  display:flex;
+}
+
+/* ===== Layout ===== */
+.sidebar{
+  width:260px;
+  background:#fff;
+  border-right:3px solid var(--lilac);
+  box-shadow:var(--shadow);
+  position:sticky;
+  top:0;
+  height:100vh;
   display:flex;
   flex-direction:column;
-  min-height:100vh;
+}
+.brand{
+  padding:18px 16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border-bottom:2px solid var(--lilac);
+  background:linear-gradient(90deg,var(--rose),var(--lilac));
+}
+.brand img{width:150px; height:auto; filter:brightness(0) invert(1);}
+.brand h1{
+  display:none;
+  color:#fff;
+  font-family:"Playfair Display",serif;
+  font-size:1.1rem;
+}
+
+.nav{
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  overflow-y:auto;
+}
+.nav a{
+  display:block;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:10px;
+  color:#333;
+  background:#fff;
+  border:1px solid #eee;
+  transition:all .25s ease;
+  font-weight:500;
+}
+.nav a:hover{transform:translateX(4px); box-shadow:var(--shadow);}
+.nav a.active{background:var(--rose); color:#fff; border-color:transparent;}
+
+.main{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
 }
 
 /* Header */
-.header {
-  background:linear-gradient(90deg,var(--rose),var(--lilac));
-  padding:16px 24px;
+.header{
+  background:#fff;
+  border-bottom:3px solid var(--lilac);
+  padding:14px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  box-shadow:var(--shadow);
+  position:sticky; top:0; z-index:5;
 }
-.header img { width:180px; }
-.header h1 {
-  font-family:"Playfair Display",serif;
-  font-size:1.4rem;
-  color:#fff;
-}
-
-/* Top Navigation Buttons */
-.top-buttons {
-  display:flex;
-  justify-content:space-evenly;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-  background:#fff;
-  box-shadow:var(--shadow);
-  padding:14px 10px;
-  border-bottom:3px solid var(--rose);
-}
-.top-buttons a {
-  background:var(--rose);
-  color:#fff;
-  text-decoration:none;
-  padding:10px 20px;
-  border-radius:30px;
-  font-family:"Playfair Display",serif;
-  font-size:1rem;
-  transition:all .3s ease;
-}
-.top-buttons a:hover {
-  background:#d6a9a0;
-  transform:translateY(-2px);
-}
-
-/* Feed Section */
-.feed {
-  width:90%;
-  max-width:900px;
-  background:#fff;
-  margin:30px auto 10px;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:var(--shadow);
-}
-.feed h2 {
+.header .title{
   font-family:"Playfair Display",serif;
   font-size:1.2rem;
+  color:#333;
+}
+.header .user{
+  font-size:.9rem; color:#666;
+}
+
+/* Content wrapper */
+.content{
+  padding:22px;
+}
+
+/* Card / panels */
+.panel{
+  background:var(--card);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:20px;
+}
+
+/* Feed (Home) */
+.feed h2{
+  font-family:"Playfair Display",serif;
+  font-size:1.25rem;
   color:#333;
   border-bottom:2px solid var(--rose);
   padding-bottom:6px;
   margin-bottom:8px;
 }
-.feed p.sub {
-  font-size:.95rem;
-  color:#555;
-  margin-bottom:12px;
-}
-.feed-item {
-  padding:12px 10px;
+.feed p.sub{font-size:.95rem;color:#555;margin-bottom:12px;}
+.feed-item{
+  padding:14px 12px;
   border-left:4px solid var(--rose);
   background:#fafafa;
   margin-bottom:10px;
-  border-radius:6px;
+  border-radius:8px;
 }
-.feed-item strong { color:#222; }
-.feed-item small { display:block; color:#777; margin-top:4px; font-size:.8rem; }
+.feed-item strong{color:#222;}
+.feed-item small{display:block;color:#777;margin-top:4px;font-size:.85rem;}
 
-/* Footer */
-footer {
+/* Cases */
+.timeline{border-left:3px solid var(--rose); padding-left:15px; margin-top:10px;}
+.step{margin-bottom:12px;}
+.step strong{color:#222;}
+.step span{display:block; font-size:.9rem; color:#777;}
+
+/* Vault */
+.upload-area{
+  background:#fff;
+  border:2px dashed var(--rose);
+  border-radius:16px;
+  padding:20px;
   text-align:center;
   color:#666;
-  font-size:.75rem;
-  margin:30px 0 10px;
+  font-size:1rem;
+  box-shadow:var(--shadow);
+  transition:background .3s ease;
+  margin-bottom:16px;
 }
-
-/* --- Modal (shared) --- */
-.modal {
-  position:fixed; top:0; right:-100%;
-  width:100%; max-width:700px; height:100vh;
-  background:#fff; box-shadow:-5px 0 20px rgba(0,0,0,0.2);
-  transition:right .6s ease; z-index:99;
-  display:flex; flex-direction:column;
-}
-.modal.show { right:0; }
-
-.modal-header {
-  background:linear-gradient(90deg,var(--rose),var(--lilac));
-  padding:14px 20px;
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.modal-header h2 {
-  font-family:"Playfair Display",serif;
-  font-size:1.3rem;
-}
-.modal-header button {
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:1.5rem;
-  cursor:pointer;
-}
-.modal-content {
-  padding:20px;
-  flex:1;
-  overflow-y:auto;
-}
-
-/* Case timeline */
-.timeline {
-  border-left:3px solid var(--rose);
-  padding-left:15px;
-  margin-top:15px;
-}
-.step { margin-bottom:12px; }
-.step strong { color:#222; }
-.step span { display:block; font-size:.9rem; color:#777; }
+.upload-area:hover{background:#fdf8f8;}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+.file-card{background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:14px;}
+.file-card h4{font-family:"Playfair Display",serif;font-size:1.05rem;color:#222;margin-bottom:6px;}
+.file-card small{color:#777;display:block;margin-bottom:8px;}
+.file-card a{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-size:.9rem;}
+.file-card a:hover{background:#d6a9a0;}
 
 /* Services */
-.services {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-.service {
-  background:#fdfdfd;
-  border:1px solid #eee;
-  border-radius:12px;
-  padding:20px;
-  text-align:left;
-  box-shadow:var(--shadow);
-}
-.service h4 {
-  font-family:"Playfair Display",serif;
-  color:#222;
-  margin-bottom:6px;
-}
-.service p {
-  font-size:.9rem;
-  color:#555;
-  margin-bottom:10px;
-}
-.service a {
-  display:inline-block;
-  background:var(--rose);
-  color:#fff;
-  text-decoration:none;
-  padding:8px 16px;
-  border-radius:30px;
-  font-family:"Playfair Display",serif;
-  font-size:.9rem;
-}
-.service a:hover { background:#d6a9a0; }
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+.service{background:#fff;border:1px solid #eee;border-radius:12px;padding:18px;box-shadow:var(--shadow);}
+.service h4{font-family:"Playfair Display",serif;color:#222;margin-bottom:8px;}
+.service p{font-size:.95rem;color:#555;margin-bottom:10px;}
+.service a{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;padding:8px 16px;border-radius:30px;font-size:.95rem;}
+.service a:hover{background:#d6a9a0;}
 
-/* Responsive */
-@media(max-width:700px) {
-  .header img { width:140px; }
-  .header h1 { font-size:1.1rem; }
-  .top-buttons a {
-    font-size:.9rem;
-    padding:8px 14px;
+/* AI Assistant */
+.ai-wrap{display:flex;flex-direction:column;height:65vh;max-height:75vh;}
+.ai-log{
+  flex:1; overflow:auto; background:#fafafa; border-radius:12px; padding:14px; margin-bottom:12px; border:1px solid #eee;
+}
+.msg{margin-bottom:10px;}
+.msg .bubble{display:inline-block;padding:10px 12px;border-radius:12px;max-width:85%;}
+.msg.user .bubble{background:#e8f0ff;}
+.msg.ai .bubble{background:#ffeef0;}
+.ai-input{display:flex; gap:8px;}
+.ai-input textarea{flex:1; padding:12px;border-radius:10px;border:1px solid #ccc; resize:none; height:60px;}
+.ai-input button{background:var(--rose); color:#fff; border:none; padding:12px 18px; border-radius:10px; cursor:pointer; font-weight:600;}
+.ai-input button:hover{background:#d6a9a0;}
+
+/* Messages */
+.tabs{display:flex; gap:8px; margin-bottom:12px;}
+.tab-btn{padding:8px 14px;border-radius:10px;border:1px solid #ddd;background:#fff;cursor:pointer;font-weight:600;}
+.tab-btn.active{background:var(--rose);color:#fff;border-color:transparent;}
+.m-list{display:grid;grid-template-columns:1fr;gap:10px;}
+.m-item{background:#fff;border-radius:10px;box-shadow:var(--shadow);padding:12px;border-left:4px solid var(--rose);}
+.compose{margin-top:14px;display:grid;gap:8px;}
+.compose input,.compose textarea{padding:10px;border-radius:8px;border:1px solid #ccc;}
+.compose button{justify-self:start;background:var(--rose);color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;}
+.compose button:hover{background:#d6a9a0;}
+
+/* Responsive: collapse sidebar */
+@media(max-width:900px){
+  .sidebar{width:74px;}
+  .brand{justify-content:center;}
+  .brand img{width:44px; filter:none;}
+  .nav a{font-size:0; padding:12px; text-align:center;}
+  .nav a::after{
+    content: attr(data-short);
+    font-size:.8rem;
+    display:block;
+    color:#555;
   }
 }
 </style>
 </head>
 
 <body>
-  <div class="header">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo">
-    <h1>Your Paralegal Assistant</h1>
-  </div>
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="logo-transparent.png" alt="The Legal Suite Logo" />
+      <h1>The Legal Suite</h1>
+    </div>
+    <nav class="nav">
+      <a href="#home"        class="active" data-short="Home">🏠 Home</a>
+      <a href="#cases"       data-short="Cases">📁 My Cases</a>
+      <a href="#vault"       data-short="Vault">🗄️ JF Legal Vault</a>
+      <a href="#consult"     data-short="Consult">📅 Consultations</a>
+      <a href="#services"    data-short="Services">⚖️ Legal Services</a>
+      <a href="#ai"          data-short="AI">🤖 AI Assistant</a>
+      <a href="#messages"    data-short="Msgs">✉️ Messages</a>
+      <a href="payment.html" data-short="Pay">💳 Payments</a>
+      <a href="profile.html" data-short="Profile">👤 Profile</a>
+    </nav>
+  </aside>
 
-  <!-- Top Navigation Buttons -->
-  <div class="top-buttons">
-    <a href="#" id="openCases">My Cases</a>
-    <a href="#" id="openVault">JF Legal Vault</a>
-    <a href="#" id="openConsult">Consultations</a>
-    <a href="#" id="openServices">Legal Services</a>
-  </div>
+  <!-- ===== Main ===== -->
+  <main class="main">
+    <div class="header">
+      <div class="title">Dashboard</div>
+      <div class="user">Signed in as: <strong>User</strong></div>
+    </div>
 
-  <!-- Feed Section -->
-  <div class="feed">
-    <h2>Hi Jamie — Your Paralegal Assistant’s Updates</h2>
-    <p class="sub">Here’s what’s been happening with your case:</p>
+    <div class="content">
 
-    <div class="feed-item">
-      <strong>Retainer Signed</strong>
-      <small>Your retainer agreement was received and filed on March 3, 2025.</small>
-    </div>
-    <div class="feed-item">
-      <strong>Consultation Scheduled</strong>
-      <small>Your consultation with Attorney Feltus is confirmed for March 10th at 10 AM CST.</small>
-    </div>
-    <div class="feed-item">
-      <strong>Vault Update</strong>
-      <small>Your uploaded petition has been categorized under “Court Documents.”</small>
-    </div>
-    <div class="feed-item">
-      <strong>Next Step</strong>
-      <small>Please upload your financial affidavit when ready.</small>
-    </div>
-  </div>
+      <!-- HOME / FEED -->
+      <section id="home" class="panel feed">
+        <h2>Hi User — Your Paralegal Assistant’s Updates</h2>
+        <p class="sub">Here’s what’s been happening with your case:</p>
 
-  <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
-
-  <!-- My Cases Modal -->
-  <div class="modal" id="caseModal">
-    <div class="modal-header">
-      <h2>My Cases</h2>
-      <button id="closeCases">&times;</button>
-    </div>
-    <div class="modal-content">
-      <h3 style="font-family:'Playfair Display',serif;color:#333;">Custody of Minor Child</h3>
-      <div class="timeline">
-        <div class="step"><strong>Retainer Signed</strong><span>March 3, 2025</span></div>
-        <div class="step"><strong>Petition Filed</strong><span>March 5, 2025</span></div>
-        <div class="step"><strong>Awaiting Hearing Date</strong><span>Expected March 15, 2025</span></div>
-      </div>
-      <p style="margin-top:15px;color:#555;">Next Step: Await court scheduling notice.</p>
-    </div>
-  </div>
-
-  <!-- Vault Modal -->
-  <div class="modal" id="vaultModal">
-    <div class="modal-header">
-      <h2>JF Legal Vault</h2>
-      <button id="closeVault">&times;</button>
-    </div>
-    <div class="modal-content">
-      <p style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Your Files</p>
-      <div class="upload-area">
-        <form id="uploadForm">
-          <input type="file" required><br><br>
-          <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;">Upload</button>
-        </form>
-      </div>
-      <div id="fileList"></div>
-    </div>
-  </div>
-
-  <!-- Consultations Modal -->
-  <div class="modal" id="consultModal">
-    <div class="modal-header">
-      <h2>Consultations</h2>
-      <button id="closeConsult">&times;</button>
-    </div>
-    <div class="modal-content" style="text-align:center;">
-      <p style="color:#555;font-size:.9rem;margin-bottom:20px;">
-        Please note: A <strong>$250 consultation fee</strong> is required to confirm your booking.
-      </p>
-      <div class="calendly-inline-widget"
-           data-url="https://calendly.com/kymfeltus/consultation"
-           style="min-width:320px;height:600px;">
-      </div>
-      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    </div>
-  </div>
-
-  <!-- Legal Services Modal -->
-  <div class="modal" id="servicesModal">
-    <div class="modal-header">
-      <h2>Legal Services</h2>
-      <button id="closeServices">&times;</button>
-    </div>
-    <div class="modal-content">
-      <p style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Recommended for You:</p>
-      <div class="services">
-        <div class="service">
-          <h4>Estate Planning</h4>
-          <p>Prepare your will or living trust — recommended for clients with ongoing custody cases.</p>
-          <a href="intake.html">Request Assistance</a>
+        <div class="feed-item">
+          <strong>Retainer Signed</strong>
+          <small>Your retainer agreement was received and filed on March 3, 2025.</small>
         </div>
-        <div class="service">
-          <h4>Contract Review</h4>
-          <p>Need to review an agreement? Upload it in your Vault for a professional review.</p>
-          <a href="#" id="openVaultLink">Upload Contract</a>
+        <div class="feed-item">
+          <strong>Consultation Scheduled</strong>
+          <small>Your consultation with Attorney Feltus is confirmed for March 10th at 10 AM CST.</small>
         </div>
-        <div class="service">
-          <h4>Modification / Enforcement</h4>
-          <p>Modify an existing custody or support order with paralegal assistance.</p>
-          <a href="intake.html">Start Request</a>
+        <div class="feed-item">
+          <strong>Vault Update</strong>
+          <small>Your uploaded petition has been categorized under “Court Documents.”</small>
         </div>
-      </div>
+        <div class="feed-item">
+          <strong>Next Step</strong>
+          <small>Please upload your financial affidavit when ready.</small>
+        </div>
+      </section>
+
+      <!-- CASES -->
+      <section id="cases" class="panel" style="display:none;">
+        <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">My Cases</h2>
+        <div class="timeline" style="margin-top:12px;">
+          <div class="step"><strong>Retainer Signed</strong><span>March 3, 2025</span></div>
+          <div class="step"><strong>Petition Filed</strong><span>March 5, 2025</span></div>
+          <div class="step"><strong>Awaiting Hearing Date</strong><span>Expected March 15, 2025</span></div>
+        </div>
+        <p style="margin-top:14px;color:#555;">Next Step: Await court scheduling notice.</p>
+      </section>
+
+      <!-- VAULT -->
+      <section id="vault" class="panel" style="display:none;">
+        <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">JF Legal Vault</h2>
+
+        <div class="upload-area">
+          <form id="uploadForm">
+            <label><strong>Upload a file:</strong></label><br>
+            <input type="file" accept=".pdf,.doc,.docx,.jpg,.png" required><br><br>
+            <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:10px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Upload File</button>
+          </form>
+        </div>
+
+        <div class="files" id="fileList">
+          <div class="file-card">
+            <h4>Sample Document</h4>
+            <small>Uploaded: March 1, 2025</small>
+            <a href="#">Download</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONSULTATIONS -->
+      <section id="consult" class="panel" style="display:none;">
+        <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Consultations</h2>
+        <p style="color:#555;font-size:.95rem;margin-bottom:14px;">
+          Please note: A <strong>$250 consultation fee</strong> is required to confirm your booking.
+        </p>
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/kymfeltus/consultation"
+             style="min-width:320px;height:600px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services" class="panel" style="display:none;">
+        <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Legal Services</h2>
+        <div class="services" style="margin-top:8px;">
+          <div class="service">
+            <h4>Estate Planning</h4>
+            <p>Prepare your will or living trust — recommended for clients with ongoing custody cases.</p>
+            <a href="intake.html">Request Assistance</a>
+          </div>
+          <div class="service">
+            <h4>Contract Review</h4>
+            <p>Need to review an agreement? Upload it in your Vault for a professional review.</p>
+            <a href="#vault" class="link-to-vault">Upload Contract</a>
+          </div>
+          <div class="service">
+            <h4>Modification / Enforcement</h4>
+            <p>Modify an existing custody or support order with paralegal assistance.</p>
+            <a href="intake.html">Start Request</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI ASSISTANT -->
+      <section id="ai" class="panel" style="display:none;">
+        <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">AI Assistant</h2>
+        <div class="ai-wrap">
+          <div class="ai-log" id="aiLog">
+            <!-- messages appear here -->
+          </div>
+          <div class="ai-input">
+            <textarea id="aiText" placeholder="Ask a question about your case, deadlines, documents…"></textarea>
+            <button id="aiSend">Send</button>
+          </div>
+        </div>
+        <small style="color:#777;display:block;margin-top:8px;">
+          (Demo only — this placeholder answers locally. Hook this to your backend or OpenAI for real replies.)
+        </small>
+      </section>
+
+      <!-- MESSAGES (Inbox/Outbox) -->
+      <section id="messages" class="panel" style="display:none;">
+        <h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Messages</h2>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-box="inbox">Inbox</button>
+          <button class="tab-btn" data-box="outbox">Outbox</button>
+        </div>
+
+        <div class="m-list" id="msgList"></div>
+
+        <div class="compose">
+          <h3 style="font-family:'Playfair Display',serif;">Compose</h3>
+          <input id="toInput" placeholder="To (email)" />
+          <input id="subjectInput" placeholder="Subject" />
+          <textarea id="bodyInput" rows="4" placeholder="Write your message…"></textarea>
+          <button id="sendMsg">Send</button>
+        </div>
+      </section>
+
     </div>
-  </div>
+
+    <footer style="text-align:center;color:#666;font-size:.75rem;margin:10px 0 20px;">
+      © 2025 The Law Office of Jamie Feltus · The Legal Suite
+    </footer>
+  </main>
 
 <script>
-/* Modal open/close */
-const modals = [
-  {openId:"openCases", modalId:"caseModal", closeId:"closeCases"},
-  {openI
+/* ---------- Simple view router for the sidebar ---------- */
+const routes = Array.from(document.querySelectorAll('.nav a')).filter(a => a.getAttribute('href').startsWith('#'));
+const panels = Array.from(document.querySelectorAll('section[id]'));
+
+function showPanel(id){
+  panels.forEach(p => p.style.display = (p.id === id)? 'block' : 'none');
+  routes.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+id));
+  const title = document.querySelector('.header .title');
+  title.textContent = id === 'home' ? 'Dashboard' : id.charAt(0).toUpperCase()+id.slice(1);
+  if(id === 'services'){
+    // turn "Upload Contract" link into in-app navigation to Vault
+    document.querySelectorAll('.link-to-vault').forEach(el => {
+      el.addEventListener('click', (e)=>{ e.preventDefault(); showPanel('vault'); history.pushState(null,'','#vault'); });
+    });
+  }
+}
+
+routes.forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    const href = a.getAttribute('href');
+    if(href && href.startsWith('#')){
+      e.preventDefault();
+      const id = href.substring(1);
+      showPanel(id);
+      history.pushState(null,'',href);
+    }
+  });
+});
+
+window.addEventListener('load', ()=>{
+  const initial = location.hash.replace('#','') || 'home';
+  showPanel(initial);
+});
+window.addEventListener('popstate', ()=>{
+  const id = location.hash.replace('#','') || 'home';
+  showPanel(id);
+});
+
+/* ---------- Vault upload (simulated) ---------- */
+const uploadForm = document.getElementById("uploadForm");
+const fileList = document.getElementById("fileList");
+if(uploadForm){
+  uploadForm.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const file = uploadForm.querySelector('input[type="file"]').files[0];
+    if(!file){ alert("Please select a file first."); return; }
+    const card = document.createElement("div");
+    card.className = "file-card";
+    card.innerHTML = `
+      <h4>${file.name}</h4>
+      <small>Uploaded: ${new Date().toLocaleDateString()}</small>
+      <a href="#">Download</a>
+    `;
+    fileList.prepend(card);
+    uploadForm.reset();
+  });
+}
+
+/* ---------- AI Assistant (local demo) ---------- */
+const aiLog = document.getElementById('aiLog');
+const aiText = document.getElementById('aiText');
+const aiSend = document.getElementById('aiSend');
+
+function addMsg(sender, text){
+  const div = document.createElement('div');
+  div.className = 'msg ' + (sender === 'user' ? 'user' : 'ai');
+  div.innerHTML = `<div class="bubble"><strong>${sender === 'user' ? 'You' : 'Assistant'}:</strong> ${text}</div>`;
+  aiLog.appendChild(div);
+  aiLog.scrollTop = aiLog.scrollHeight;
+}
+
+function aiReply(text){
+  // ultra-simple placeholder logic
+  const lower = text.toLowerCase();
+  if(lower.includes('consult') || lower.includes('book')){
+    return 'To book, open Consultations in the sidebar and pick an available time. A $250 fee confirms your slot.';
+  }
+  if(lower.includes('upload') || lower.includes('document') || lower.includes('vault')){
+    return 'You can upload documents in the JF Legal Vault. I’ll notify the team once a file is added.';
+  }
+  if(lower.includes('retainer') || lower.includes('payment')){
+    return 'Retainer and payments are handled on the Payments page. Select your tier and proceed securely.';
+  }
+  return "Thanks! I’ve noted that. If it’s about your case, I can route it to your paralegal. (Connect this widget to your backend/OpenAI for real answers.)";
+}
+
+if(aiSend){
+  aiSend.addEventListener('click', ()=>{
+    const txt = aiText.value.trim();
+    if(!txt) return;
+    addMsg('user', txt);
+    aiText.value = '';
+    setTimeout(()=> addMsg('ai', aiReply(txt)), 300);
+  });
+}
+
+/* ---------- Messages (Inbox/Outbox) using localStorage ---------- */
+const inboxKey = 'tl_inbox';
+const outboxKey = 'tl_outbox';
+const msgList = document.getElementById('msgList');
+const tabBtns = document.querySelectorAll('.tab-btn');
+let currentBox = 'inbox';
+
+function loadBox(){
+  const store = JSON.parse(localStorage.getItem(currentBox === 'inbox' ? inboxKey : outboxKey) || '[]');
+  msgList.innerHTML = '';
+  if(store.length === 0){
+    const empty = document.createElement('div');
+    empty.className = 'm-item';
+    empty.textContent = 'No messages.';
+    msgList.appendChild(empty);
+    return;
+  }
+  store.slice().reverse().forEach(m=>{
+    const item = document.createElement('div');
+    item.className='m-item';
+    item.innerHTML = `<strong>${m.subject}</strong><div style="color:#777;font-size:.9rem;margin:4px 0;">From: ${m.from || 'you'} · To: ${m.to}</div><div>${m.body}</div>`;
+    msgList.appendChild(item);
+  });
+}
+
+tabBtns.forEach(b=>{
+  b.addEventListener('click', ()=>{
+    tabBtns.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    currentBox = b.dataset.box;
+    loadBox();
+  });
+});
+
+const toInput = document.getElementById('toInput');
+const subjectInput = document.getElementById('subjectInput');
+const bodyInput = document.getElementById('bodyInput');
+const sendBtn = document.getElementById('sendMsg');
+
+if(sendBtn){
+  sendBtn.addEventListener('click', ()=>{
+    const to = (toInput.value||'').trim();
+    const subject = (subjectInput.value||'').trim();
+    const body = (bodyInput.value||'').trim();
+    if(!to || !subject || !body){ alert('Please fill To, Subject and Body.'); return; }
+
+    const out = JSON.parse(localStorage.getItem(outboxKey) || '[]');
+    out.push({to, subject, body, date: Date.now()});
+    localStorage.setItem(outboxKey, JSON.stringify(out));
+
+    // also simulate inbox copy
+    const inbox = JSON.parse(localStorage.getItem(inboxKey) || '[]');
+    inbox.push({from:'User', to:'Office', subject:subject + ' (copy)', body, date: Date.now()});
+    localStorage.setItem(inboxKey, JSON.stringify(inbox));
+
+    toInput.value = subjectInput.value = bodyInput.value = '';
+    if(currentBox === 'outbox') loadBox();
+    alert('Message sent!');
+  });
+}
+
+// initialize default messages (one-time)
+if(!localStorage.getItem(inboxKey)){
+  localStorage.setItem(inboxKey, JSON.stringify([
+    {from:'Paralegal', to:'User', subject:'Welcome to The Legal Suite', body:'Your account is active. Let us know if you need help with the intake.', date: Date.now()-86400000}
+  ]));
+}
+if(!localStorage.getItem(outboxKey)){
+  localStorage.setItem(outboxKey, JSON.stringify([]));
+}
+if(document.getElementById('messages')) loadBox();
+</script>
+</body>
+</html>
