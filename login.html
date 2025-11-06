@@ -1,161 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Login · The Legal Suite</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | The Legal Suite</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <body>
+    <div class="login-container">
+      <header>
+        <img
+          src="logo.png"
+          alt="The Law Office of Jamie Feltus Logo"
+          class="logo"
+        />
+        <h1 class="title">The Legal Suite</h1>
+        <p class="tagline">Login to Your Account</p>
+      </header>
 
-<style>
-:root {
-  --rose:#E0BFB8;
-  --lilac:#EEE6F2;
-  --ivory:#F8F5F2;
-  --ink:#1C1C1C;
-  --shadow:0 6px 14px rgba(0,0,0,0.1);
-}
+      <form class="login-form" onsubmit="handleLogin(event)">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email Address"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <button type="submit" class="btn active">Log In</button>
+      </form>
 
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{
-  height:100%;
-  width:100%;
-  background:linear-gradient(180deg, var(--lilac) 0%, var(--ivory) 100%);
-  font-family:"Poppins",sans-serif;
-  color:var(--ink);
-  overflow:hidden;
-  position:relative;
-}
+      <p class="note">
+        Don’t have an account?
+        <a href="signup.html" class="link">Create one here</a>.
+      </p>
 
-/* Background (Jamie faded) */
-body::before{
-  content:"";
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  height:110%;
-  background:url('jamie.png') no-repeat center bottom;
-  background-size:45%;
-  opacity:0.25;
-  pointer-events:none;
-  z-index:0;
-}
-
-/* Container */
-.container{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 5%;
-}
-
-/* Logo & Title */
-.logo{
-  width:420px;
-  max-width:95%;
-  margin-bottom:10px;
-}
-h2{
-  font-family:"Playfair Display",serif;
-  font-size:1.4rem;
-  color:#444;
-  letter-spacing:.04em;
-  margin-bottom:30px;
-}
-
-/* Form */
-.form-box{
-  background:#fff;
-  padding:35px 45px;
-  border-radius:20px;
-  box-shadow:0 8px 18px rgba(0,0,0,0.1);
-  width:100%;
-  max-width:400px;
-  margin-bottom:25px;
-}
-
-input{
-  width:100%;
-  padding:12px 14px;
-  margin-bottom:18px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:1rem;
-  outline:none;
-  transition:border-color .2s ease;
-}
-input:focus{ border-color:var(--rose); }
-
-/* Button */
-button{
-  display:block;
-  width:100%;
-  background:var(--rose);
-  color:white;
-  border:none;
-  padding:14px;
-  border-radius:40px;
-  font-family:"Playfair Display",serif;
-  font-size:1.25rem;
-  cursor:pointer;
-  transition:all .3s ease;
-  text-decoration:none;
-}
-button:hover{ background:#d6a9a0; transform:translateY(-2px); }
-
-/* Options */
-.options{
-  margin-top:15px;
-}
-.options a{
-  color:var(--rose);
-  font-weight:500;
-  text-decoration:none;
-  transition:color .3s ease;
-  font-family:"Playfair Display",serif;
-}
-.options a:hover{ color:#b88e85; }
-
-/* Footer */
-footer{
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-  color:#666;
-  font-size:.75rem;
-  text-align:center;
-}
-</style>
-</head>
-
-<body>
-  <div class="container">
-    <img src="logo-transparent.png" alt="The Legal Suite Logo" class="logo">
-    <h2>Welcome Back</h2>
-
-    <div class="form-box">
-      <input type="email" placeholder="Email Address" />
-      <input type="password" placeholder="Password" />
-
-      <!-- This button now goes to the dashboard -->
-      <a href="dashboard.html">
-        <button type="button">Login</button>
-      </a>
+      <footer>
+        <p>© 2025 The Law Office of Jamie Feltus. All rights reserved.</p>
+      </footer>
     </div>
 
-    <div class="options">
-      <p>Don’t have an account? <a href="create-account.html">Create Account</a></p>
-    </div>
-  </div>
-
-  <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
-</body>
+    <script>
+      // TEMPORARY placeholder login logic
+      function handleLogin(event) {
+        event.preventDefault();
+        alert("Login temporarily disabled. Please create an account instead.");
+      }
+    </script>
+  </body>
 </html>
