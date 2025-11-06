@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Retainer Agreement · The Legal Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css" />
+<script defer src="transition.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="title">Retainer Fee Agreement</div>
+    <div class="user"><a href="dashboard.html" style="text-decoration:none;color:#333;">← Back to Dashboard</a></div>
+  </header>
+
+  <main class="main">
+    <div class="panel" style="max-width:800px;margin:auto;">
+      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:10px;">Retainer Fee Agreement</h2>
+      <p style="color:#555;margin-bottom:20px;">
+        Please review and complete the following retainer agreement. By submitting this form, you acknowledge that you have read and understood the terms of representation with The Law Office of Jamie Feltus.
+      </p>
+
+      <form id="retainerForm">
+        <label>Client Name:</label>
+        <input type="text" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+
+        <label>Email:</label>
+        <input type="email" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+
+        <label>Case Type:</label>
+        <select required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+          <option value="">Select</option>
+          <option>Divorce</option>
+          <option>Child Support</option>
+          <option>Will / Estate</option>
+          <option>Enforcement</option>
+          <option>Other</option>
+        </select>
+
+        <label>Agreed Retainer Amount ($):</label>
+        <input type="number" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+
+        <label>Scope of Representation:</label>
+        <textarea rows="4" placeholder="Describe the scope of legal services…" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;"></textarea>
+
+        <div style="background:#fafafa;border-radius:12px;padding:15px;margin-bottom:15px;">
+          <h4 style="font-family:'Playfair Display',serif;margin-bottom:8px;">Agreement Summary</h4>
+          <ul style="text-align:left;color:#555;font-size:.9rem;line-height:1.5;">
+            <li>All services are billed against the retainer balance.</li>
+            <li>Unused retainer funds are refundable upon completion or termination of representation.</li>
+            <li>Client authorizes electronic communication for case updates and billing.</li>
+          </ul>
+        </div>
+
+        <label><input type="checkbox" required> I have read and agree to the above terms.</label><br><br>
+        <label>Signature (typed full name):</label>
+        <input type="text" placeholder="Type your name as signature" required style="width:100%;padding:10px;margin-bottom:20px;border-radius:8px;border:1px solid #ccc;">
+
+        <button type="submit" style="background:var(--rose);color:#fff;border:none;padding:12px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Submit Agreement</button>
+      </form>
+      <p id="msg" style="margin-top:15px;color:green;font-weight:600;display:none;">Agreement submitted! Redirecting…</p>
+    </div>
+  </main>
+</div>
+
+<script>
+document.getElementById('retainerForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('msg').style.display='block';
+  setTimeout(()=>window.location.href='thank-you-form.html',1500);
+});
+</script>
+</body>
+</html>
