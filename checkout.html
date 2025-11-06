@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Checkout · The Legal Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css" />
+<script defer src="transition.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="title">Checkout</div>
+    <div class="user"><a href="services.html" style="text-decoration:none;color:#333;">← Back to Services</a></div>
+  </header>
+
+  <main class="main">
+    <div class="panel" style="max-width:600px;margin:auto;">
+      <h2 style="font-family:'Playfair Display',serif;color:#333;margin-bottom:15px;">Review Your Selection</h2>
+      <p style="color:#555;margin-bottom:25px;">Confirm your chosen service and complete payment below.</p>
+
+      <form id="checkoutForm">
+        <label style="font-weight:600;">Selected Service:</label>
+        <select id="serviceSelect" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+          <option value="">Select a Service</option>
+          <option>Divorce Representation — $1,500</option>
+          <option>Child Support — $750</option>
+          <option>Enforcement Action — $1,000</option>
+          <option>Wills & Estate Planning — $500</option>
+        </select>
+
+        <label style="font-weight:600;">Payment Method:</label>
+        <input type="text" placeholder="Cardholder Name" required>
+        <input type="text" placeholder="Card Number" required>
+        <div style="display:flex;gap:10px;">
+          <input type="text" placeholder="MM/YY" required style="flex:1;">
+          <input type="text" placeholder="CVC" required style="flex:1;">
+        </div>
+
+        <button type="submit" style="margin-top:15px;background:var(--rose);color:#fff;border:none;padding:12px 30px;border-radius:40px;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;">Submit Payment</button>
+      </form>
+
+      <p id="confirmation" style="color:green;margin-top:15px;display:none;font-weight:600;">Payment successful! Your case manager will contact you shortly.</p>
+    </div>
+    <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+  </main>
+</div>
+
+<script>
+const form=document.getElementById('checkoutForm');
+const confirmation=document.getElementById('confirmation');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  confirmation.style.display='block';
+  setTimeout(()=>alert('Mock payment processed successfully!'),800);
+});
+</script>
+</body>
+</html>
