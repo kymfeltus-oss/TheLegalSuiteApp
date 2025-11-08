@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Login · The Legal Suite</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
 
 <style>
 :root{
@@ -17,100 +17,35 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{
-  height:100%;
-  width:100%;
+  height:100%;width:100%;
   font-family:"Poppins",sans-serif;
   background:linear-gradient(180deg,var(--lilac)0%,var(--ivory)100%);
   color:var(--ink);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  position:relative;
-  overflow:hidden;
+  display:flex;justify-content:center;align-items:center;flex-direction:column;
+  position:relative;overflow:hidden;
 }
-
-/* faint background image */
 body::before{
-  content:"";
-  position:absolute;
-  inset:0;
+  content:"";position:absolute;inset:0;
   background:url("jamie.png") no-repeat center bottom/contain;
-  opacity:0.12;
-  z-index:0;
-  pointer-events:none;
+  opacity:0.12;z-index:0;pointer-events:none;
 }
-
-/* main login card */
 .login-box{
-  position:relative;
-  z-index:2;
-  background:#fff;
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  padding:40px 35px;
-  width:100%;
-  max-width:420px;
-  text-align:center;
+  position:relative;z-index:2;background:#fff;border-radius:16px;
+  box-shadow:var(--shadow);padding:40px 35px;width:100%;max-width:420px;text-align:center;
 }
-.login-box img{
-  width:200px;
-  max-width:80%;
-  margin-bottom:15px;
-}
-.login-box h1{
-  font-family:"Playfair Display",serif;
-  font-size:1.6rem;
-  color:#333;
-  margin-bottom:25px;
-}
-
-/* form */
-form{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-input[type="email"], input[type="password"]{
-  padding:12px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:1rem;
-}
+.login-box img{width:200px;max-width:80%;margin-bottom:15px;}
+.login-box h1{font-family:"Playfair Display",serif;font-size:1.6rem;color:#333;margin-bottom:25px;}
+form{display:flex;flex-direction:column;gap:12px;}
+input[type="email"],input[type="password"]{padding:12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;}
 button{
-  background:var(--rose);
-  color:#fff;
-  border:none;
-  border-radius:40px;
-  padding:12px 30px;
-  font-family:"Playfair Display",serif;
-  font-size:1rem;
-  cursor:pointer;
-  margin-top:10px;
-  transition:.3s;
+  background:var(--rose);color:#fff;border:none;border-radius:40px;
+  padding:12px 30px;font-family:"Playfair Display",serif;font-size:1rem;cursor:pointer;margin-top:10px;transition:.3s;
 }
 button:hover{background:#d6a9a0;}
-a{
-  color:var(--rose);
-  text-decoration:none;
-  font-size:.9rem;
-}
+a{color:var(--rose);text-decoration:none;font-size:.9rem;}
 a:hover{text-decoration:underline;}
-
-footer{
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:.75rem;
-  color:#666;
-}
-
-/* responsive */
-@media(max-width:600px){
-  .login-box{padding:30px 25px;}
-  .login-box h1{font-size:1.4rem;}
-}
+footer{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:.75rem;color:#666;}
+@media(max-width:600px){.login-box{padding:30px 25px;}.login-box h1{font-size:1.4rem;}}
 </style>
 </head>
 
@@ -118,18 +53,30 @@ footer{
   <div class="login-box">
     <img src="logo-transparent.png" alt="The Legal Suite Logo" />
     <h1>Client Portal Login</h1>
-    <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
-      <input type="email" placeholder="Email Address" required />
-      <input type="password" placeholder="Password" required />
+
+    <!-- DEMO LOGIN (works even without Firebase) -->
+    <form id="loginForm">
+      <input id="email" type="email" placeholder="Email Address" required />
+      <input id="password" type="password" placeholder="Password" required />
       <button type="submit">Sign In</button>
     </form>
 
     <p style="margin-top:15px;font-size:.9rem;color:#555;">
-      Don’t have an account? <a href="#">Request Access</a>
+      Don’t have an account? <a href="signup.html">Request Access</a>
     </p>
     <p style="margin-top:5px;font-size:.9rem;"><a href="#">Forgot Password?</a></p>
   </div>
 
   <footer>© 2025 The Law Office of Jamie Feltus · The Legal Suite</footer>
+
+<script>
+/* --- TEMPORARY DEMO LOGIN --- */
+document.getElementById("loginForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  // show quick message then redirect
+  alert("Login successful! Redirecting to your client portal...");
+  window.location.href="dashboard.html";
+});
+</script>
 </body>
 </html>
